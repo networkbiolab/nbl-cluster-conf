@@ -18,7 +18,7 @@ apt-install:
 	virtualbox curl gir1.2-gtop-2.0 gir1.2-networkmanager-1.0 \
 	gir1.2-clutter-1.0 rar libreoffice r-base rename pandoc aptitude \
 	sra-toolkit libxm4 pdfshuffler ttf-mscorefonts-installer openssh-server \
-	nfs-common nfs-kernel-server ghostscript"
+	nfs-common nfs-kernel-server ghostscript libcurl4-openssl-dev"
 
 	for apt in $$APTS; do sudo apt -y install $$apt; done
 
