@@ -18,7 +18,8 @@ apt-install:
 	virtualbox curl gir1.2-gtop-2.0 gir1.2-networkmanager-1.0 \
 	gir1.2-clutter-1.0 rar libreoffice r-base rename pandoc aptitude \
 	sra-toolkit libxm4 pdfshuffler ttf-mscorefonts-installer openssh-server \
-	nfs-common nfs-kernel-server ghostscript libcurl4-openssl-dev"
+	nfs-common nfs-kernel-server ghostscript libcurl4-openssl-dev \
+	openjdk-11-jdk-headless"
 
 	for apt in $$APTS; do sudo apt -y install $$apt; done
 
@@ -46,8 +47,8 @@ export CUDA_PYTHON3_PACKAGES=pycuda pygpu scikit-cuda \
 
 export JUPYTER_PACKAGES=jupyter jupyterlab ipykernel nbopen rise
 
-export PERL_PACKAGES="JSON Math::CDF HTML::Template XML::Compile::SOAP11 \
-	XML::Compile::WSDL11 XML::Compile::Transport::SOAPHTTP"
+export PERL_PACKAGES=JSON Math::CDF HTML::Template XML::Compile::SOAP11 \
+	XML::Compile::WSDL11 XML::Compile::Transport::SOAPHTTP
 
 system-perl-packages-install:
 	sudo cpan $$PERL_PACKAGES
