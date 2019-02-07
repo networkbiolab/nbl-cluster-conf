@@ -18,7 +18,7 @@ apt-install:
 	virtualbox curl gir1.2-gtop-2.0 gir1.2-networkmanager-1.0 \
 	gir1.2-clutter-1.0 rar libreoffice r-base rename pandoc aptitude \
 	sra-toolkit libxm4 pdfshuffler ttf-mscorefonts-installer openssh-server \
-	nfs-common nfs-kernel-server"
+	nfs-common nfs-kernel-server ghostscript"
 
 	for apt in $$APTS; do sudo apt -y install $$apt; done
 
@@ -28,6 +28,8 @@ apt-install:
 
 latex-install:
 	sudo apt-get -y install texstudio texlive-full
+
+export D1="/shared/D1"
 
 export PYTHON3_PACKAGES=numpy pandas nose python-libsbml \
 	cobra escher seaborn pillow bokeh dnaplotlib pysb \
@@ -44,9 +46,15 @@ export CUDA_PYTHON3_PACKAGES=pycuda pygpu scikit-cuda \
 
 export JUPYTER_PACKAGES=jupyter jupyterlab ipykernel nbopen rise
 
+export PERL_PACKAGES="JSON Math::CDF HTML::Template XML::Compile::SOAP11 \
+	XML::Compile::WSDL11 XML::Compile::Transport::SOAPHTTP"
+
+system-perl-packages-install:
+	sudo cpan $$PERL_PACKAGES
+
 local-python-packages-install:
 	D1="/shared/D1"
-	$(D1)/bin/pip3 install $$PYTHON3_PACKAGES --upgrade
+	$$D1/bin/pip3 install $$PYTHON3_PACKAGES --upgrade
 
 system-python-packages-install:
 	sudo apt-get -y install python3-pip python3-tk python3-h5py
@@ -100,9 +108,7 @@ jupyter-install:
 # 	sudo jupyter-serverextension enable --sys-prefix --py ipyparallel
 
 kernels-jupyter:
-	D1="/shared/D1"
-
-	$(D1)/bin/R -e "install.packages(c('crayon', 'pbdZMQ', 'devtools'), \
+	$$D1/bin/R -e "install.packages(c('crayon', 'pbdZMQ', 'devtools'), \
 	repos = 'https://cloud.r-project.org/', dependencies = TRUE); \
 	library(devtools); \
 	devtools::install('/opt/github-repositories/IRkernel.IRkernel/R'); \
@@ -118,9 +124,7 @@ kernels-jupyter:
 
 .ONESHELL:
 python3.6.5-compile:
-	D1="/shared/D1"
-
-	mkdir -p $(D1)/opt/ubuntu-software
+	mkdir -p $$D1/opt/ubuntu-software
 
 	sudo apt-get install build-essential checkinstall
 	sudo apt-get install libssl-dev zlib1g-dev libncurses5-dev \
@@ -128,20 +132,19 @@ python3.6.5-compile:
 	libdb5.3-dev libbz2-dev libexpat1-dev liblzma-dev tk-dev
 
 	wget https://www.python.org/ftp/python/3.6.5/Python-3.6.5.tgz \
-	-O $(D1)/opt/ubuntu-software/Python-3.6.5.tgz
-	if [ -d $(D1)/opt/Python-3.6.5 ]; then rm -rf $(D1)/opt/Python-3.6.5; fi
-	tar xvzf $(D1)/opt/ubuntu-software/Python-3.6.5.tgz -C $(D1)/opt
-	cd $(D1)/opt/Python-3.6.5
+	-O $$D1/opt/ubuntu-software/Python-3.6.5.tgz
+	if [ -d $$D1/opt/Python-3.6.5 ]; then rm -rf $$D1/opt/Python-3.6.5; fi
+	tar xvzf $$D1/opt/ubuntu-software/Python-3.6.5.tgz -C $$D1/opt
+	cd $$D1/opt/Python-3.6.5
 	if [ -f Makefile ]; then make clean; fi
-	if [ -d $(D1)/opt/python-3.6.5 ]; then rm -rf $(D1)/opt/python-3.6.5; fi
-	./configure --prefix=$(D1)/opt/python-3.6.5 --enable-optimizations
+	if [ -d $$D1/opt/python-3.6.5 ]; then rm -rf $$D1/opt/python-3.6.5; fi
+	./configure --prefix=$$D1/opt/python-3.6.5 --enable-optimizations
 	make
 	make install
 
 .ONESHELL:
 python3.7.0-compile:
-	D1="/shared/D1"
-	mkdir -p $(D1)/opt/ubuntu-software
+	mkdir -p $$D1/opt/ubuntu-software
 
 	sudo apt-get install build-essential checkinstall
 	sudo apt-get install libssl-dev zlib1g-dev libncurses5-dev \
@@ -149,37 +152,35 @@ python3.7.0-compile:
 	libdb5.3-dev libbz2-dev libexpat1-dev liblzma-dev tk-dev uuid-dev
 
 	wget https://www.python.org/ftp/python/3.7.0/Python-3.7.0.tgz \
-	-O $(D1)/opt/ubuntu-software/Python-3.7.0.tgz
-	if [ -d $(D1)/opt/Python-3.7.0 ]; then rm -rf $(D1)/opt/Python-3.7.0; fi
-	tar xvzf $(D1)/opt/ubuntu-software/Python-3.7.0.tgz -C $(D1)/opt
-	cd $(D1)/opt/Python-3.7.0
+	-O $$D1/opt/ubuntu-software/Python-3.7.0.tgz
+	if [ -d $$D1/opt/Python-3.7.0 ]; then rm -rf $$D1/opt/Python-3.7.0; fi
+	tar xvzf $$D1/opt/ubuntu-software/Python-3.7.0.tgz -C $$D1/opt
+	cd $$D1/opt/Python-3.7.0
 	if [ -f Makefile ]; then make clean; fi
-	if [ -d $(D1)/opt/python-3.7.0 ]; then rm -rf $(D1)/opt/python-3.7.0; fi
-	./configure --prefix=$(D1)/opt/python-3.7.0 --enable-optimizations
+	if [ -d $$D1/opt/python-3.7.0 ]; then rm -rf $$D1/opt/python-3.7.0; fi
+	./configure --prefix=$$D1/opt/python-3.7.0 --enable-optimizations
 	make
 	make install
 
 .ONESHELL:
 r-3.5.0-compile:
-	D1="/shared/D1"
-	mkdir -p $(D1)/opt/ubuntu-software
+	mkdir -p $$D1/opt/ubuntu-software
 
 	sudo apt-get install libcairo2-dev libxt-dev libtiff5-dev libssh2-1-dev libxml2 libxml2-dev
 
 	wget https://cloud.r-project.org/bin/linux/ubuntu/bionic-cran35/r-base_3.5.0.orig.tar.gz \
-	-O $(D1)/opt/ubuntu-software/R-3.5.0.tgz
-	if [ -d $(D1)/opt/R-3.5.0 ]; then rm -rf $(D1)/opt/R-3.5.0; fi
-	tar xvzf $(D1)/opt/ubuntu-software/R-3.5.0.tgz -C $(D1)/opt
-	cd $(D1)/opt/R-3.5.0
+	-O $$D1/opt/ubuntu-software/R-3.5.0.tgz
+	if [ -d $$D1/opt/R-3.5.0 ]; then rm -rf $$D1/opt/R-3.5.0; fi
+	tar xvzf $$D1/opt/ubuntu-software/R-3.5.0.tgz -C $$D1/opt
+	cd $$D1/opt/R-3.5.0
 	if [ -f Makefile ]; then make clean; fi
-	if [ -d $(D1)/opt/r-3.5.0 ]; then rm -rf $(D1)/opt/r-3.5.0; fi
-	./configure --prefix=$(D1)/opt/r-3.5.0 --enable-R-shlib --with-blas --with-lapack
+	if [ -d $$D1/opt/r-3.5.0 ]; then rm -rf $$D1/opt/r-3.5.0; fi
+	./configure --prefix=$$D1/opt/r-3.5.0 --enable-R-shlib --with-blas --with-lapack
 	make
 	make install
 
 local-r-packages-install:
-	D1="/shared/D1"
-	$(D1)/bin/R -e "install.packages('tidyverse', \
+	$$D1/bin/R -e "install.packages('tidyverse', \
 	dependencies = TRUE, repos = 'https://cloud.r-project.org/'); \
 			install.packages('knitr', \
 	dependencies = TRUE, repos = 'https://cloud.r-project.org/'); \
@@ -207,7 +208,7 @@ local-r-packages-install:
 	dependencies = TRUE, repos = 'https://cloud.r-project.org/');"
 
 	# install bioConductor packages
-	$(D1)/bin/R -e "source('https://bioconductor.org/biocLite.R'); \
+	$$D1/bin/R -e "source('https://bioconductor.org/biocLite.R'); \
 	biocLite(); \
 	biocLite('dada2'); \
 	biocLite('edgeR'); \
