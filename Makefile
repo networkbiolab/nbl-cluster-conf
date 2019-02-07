@@ -217,7 +217,8 @@ local-r-packages-install:
 	biocLite('microbiome'); \
 	biocLite('metagenomeSeq')"
 
-slurm-conf:
+.ONESHELL:
+slurm-install:
 	sudo rm -rf /var/lib/slurm-llnl /var/run/slurm-llnl /var/log/slurm-llnl
 	sudo apt-get -y remove --purge slurm-wlm slurmdbd
 	sudo apt-get -y autoremove
