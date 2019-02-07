@@ -62,9 +62,6 @@ export PERL_PACKAGES=JSON Math::CDF HTML::Template XML::Compile::SOAP11 \
 system-perl-packages-install:
 	sudo cpan $$PERL_PACKAGES
 
-local-python-packages-install:
-	$$D1/bin/pip3 install $$PYTHON3_PACKAGES --upgrade
-
 system-python-packages-install:
 	sudo -H pip3 install $$PYTHON3_PACKAGES --upgrade
 	sudo -H pip2 install $$PYTHON2_PACKAGES --upgrade
@@ -116,7 +113,7 @@ jupyter-install:
 # 	sudo jupyter-serverextension enable --sys-prefix --py ipyparallel
 
 kernels-jupyter:
-	$$D1/bin/R -e "install.packages(c('crayon', 'pbdZMQ', 'devtools'), \
+	$$D1/opt/r-3.5.0/R -e "install.packages(c('crayon', 'pbdZMQ', 'devtools'), \
 	repos = 'https://cloud.r-project.org/', dependencies = TRUE); \
 	library(devtools); \
 	devtools::install('/opt/github-repositories/IRkernel.IRkernel/R'); \
@@ -175,8 +172,12 @@ r-3.5.0-compile:
 	make
 	make install
 
+local-python-packages-install:
+	$$D1/opt/python-3.6.5/bin/pip3 install $$PYTHON3_PACKAGES --upgrade
+	$$D1/opt/python-3.7.0/bin/pip3 install $$PYTHON3_PACKAGES --upgrade
+
 local-r-packages-install:
-	$$D1/bin/R -e "install.packages('tidyverse', \
+	$$D1/opt/r-3.5.0/bin/R -e "install.packages('tidyverse', \
 	dependencies = TRUE, repos = 'https://cloud.r-project.org/'); \
 			install.packages('knitr', \
 	dependencies = TRUE, repos = 'https://cloud.r-project.org/'); \
@@ -204,14 +205,10 @@ local-r-packages-install:
 	dependencies = TRUE, repos = 'https://cloud.r-project.org/');"
 
 	# install bioConductor packages
-	$$D1/bin/R -e "source('https://bioconductor.org/biocLite.R'); \
-	biocLite(); \
-	biocLite('dada2'); \
-	biocLite('edgeR'); \
-	biocLite('phyloseq'); \
-	biocLite('DESeq'); \
-	biocLite('DESeq2'); \
-	biocLite('microbiome'); \
+	$$D1/opt/r-3.5.0/bin/R -e \
+	"source('https://bioconductor.org/biocLite.R'); biocLite(); \
+	biocLite('dada2'); biocLite('edgeR'); biocLite('phyloseq'); \
+	biocLite('DESeq'); biocLite('DESeq2'); biocLite('microbiome'); \
 	biocLite('metagenomeSeq')"
 
 .ONESHELL:
