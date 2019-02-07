@@ -39,7 +39,7 @@ apt-install:
 latex-install:
 	sudo apt-get -y install texstudio texlive-full
 
-export D1="/shared/D1"
+export D1=/shared/D1
 
 export PYTHON3_PACKAGES=numpy pandas nose python-libsbml \
 	cobra escher seaborn pillow bokeh dnaplotlib pysb \
