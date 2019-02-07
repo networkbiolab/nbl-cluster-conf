@@ -81,6 +81,8 @@ cuda-and-python-packages-install:
 	cuda-compiler-10-0 cuda-libraries-10-0 cuda-libraries-dev-10-0 cuda-drivers \
 	nvidia-cuda-toolkit"
 	for apt in $$CUDA_APTS; do sudo apt -y install $$apt; done
+	sudo dpkg -i libcudnn7_7.3.1.20-1+cuda10.0_amd64.deb \
+	libcudnn7-dev_7.3.1.20-1+cuda10.0_amd64.deb libcudnn7-doc_7.3.1.20-1+cuda10.0_amd64.deb
 
 	sudo -H pip3 install http://download.pytorch.org/whl/cu100/torch-1.0.0-cp36-cp36m-linux_x86_64.whl
 	sudo -H pip3 install $$CUDA_PYTHON3_PACKAGES --upgrade
