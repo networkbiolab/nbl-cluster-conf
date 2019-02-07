@@ -260,7 +260,7 @@ slurm-conf:
 
 .ONESHELL:
 install-others:
-	cd /opt/ubuntu-software/
+	cd $$D1/opt/ubuntu-software/
 
 	sh Anaconda3-5.3.0-Linux-x86_64.sh
 	sh cplex_studio128.linux-x86-64.bin
@@ -269,5 +269,5 @@ install-others:
 	PTOOLS="pathway-tools-21.5-linux-64-tier1-install"
 	chmod u+x $(PTOOLS); ./$(PTOOLS); chmod u-x $(PTOOLS)
 
-	tar xvzf COPASI-4.24.197-Linux-64bit.tar.gz -C /opt
-	tar xvzf gurobi8.0.1_linux64.tar.gz -C /opt
+	tar xvzf COPASI-4.24.197-Linux-64bit.tar.gz -C $$D1/opt
+	tar xvzf gurobi8.0.1_linux64.tar.gz -C $$D1/opt
