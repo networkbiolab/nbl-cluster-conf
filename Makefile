@@ -21,7 +21,16 @@ apt-install:
 	nfs-common nfs-kernel-server ghostscript libcurl4-openssl-dev \
 	openjdk-11-jdk-headless"
 
+	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
+	checkinstall libssl-dev zlib1g-dev libncurses5-dev \
+	libncursesw5-dev libreadline-dev libsqlite3-dev libgdbm-dev \
+	libdb5.3-dev libbz2-dev libexpat1-dev liblzma-dev tk-dev uuid-dev"
+
+	R_DEPS="libcairo2-dev libxt-dev libtiff5-dev libssh2-1-dev libxml2 libxml2-dev"
+
 	for apt in $$APTS; do sudo apt -y install $$apt; done
+	for apt in $$PYTHON3_DEPS; do sudo apt -y install $$apt; done
+	for apt in $$R_DEPS; do sudo apt -y install $$apt; done
 
 	sudo apt -y autoremove
 	sudo apt -y autoclean
@@ -54,28 +63,24 @@ system-perl-packages-install:
 	sudo cpan $$PERL_PACKAGES
 
 local-python-packages-install:
-	D1="/shared/D1"
 	$$D1/bin/pip3 install $$PYTHON3_PACKAGES --upgrade
 
 system-python-packages-install:
-	sudo apt-get -y install python3-pip python3-tk python3-h5py
-
 	sudo -H pip3 install $$PYTHON3_PACKAGES --upgrade
 	sudo -H pip2 install $$PYTHON2_PACKAGES --upgrade
 
-	# cython makes jupyter to crush; also weave (?)
-
 cuda-and-python-packages-install:
-	cd /opt/ubuntu-software
+	cd $$D1/opt/ubuntu-software
 
 	sudo apt -y install linux-headers-$(uname -r)
 	sudo dpkg -i cuda-repo-ubuntu1804-10-0-local-10.0.130-410.48_1.0-1_amd64.deb
 	sudo apt-key add /var/cuda-repo-10-0-local-10.0.130-410.48/7fa2af80.pub
 	sudo apt update
 	sudo apt -y install cuda
-	sudo apt -y install cuda-toolkit-10-0 cuda-tools-10-0 cuda-runtime-10-0 \
+	CUDA_APTS="cuda-toolkit-10-0 cuda-tools-10-0 cuda-runtime-10-0 \
 	cuda-compiler-10-0 cuda-libraries-10-0 cuda-libraries-dev-10-0 cuda-drivers \
-	nvidia-cuda-toolkit
+	nvidia-cuda-toolkit"
+	for apt in $$CUDA_APTS; do sudo apt -y install $$apt; done
 
 	sudo -H pip3 install http://download.pytorch.org/whl/cu100/torch-1.0.0-cp36-cp36m-linux_x86_64.whl
 	sudo -H pip3 install $$CUDA_PYTHON3_PACKAGES --upgrade
@@ -127,11 +132,6 @@ kernels-jupyter:
 python3.6.5-compile:
 	mkdir -p $$D1/opt/ubuntu-software
 
-	sudo apt-get install build-essential checkinstall
-	sudo apt-get install libssl-dev zlib1g-dev libncurses5-dev \
-	libncursesw5-dev libreadline-dev libsqlite3-dev libgdbm-dev \
-	libdb5.3-dev libbz2-dev libexpat1-dev liblzma-dev tk-dev
-
 	wget https://www.python.org/ftp/python/3.6.5/Python-3.6.5.tgz \
 	-O $$D1/opt/ubuntu-software/Python-3.6.5.tgz
 	if [ -d $$D1/opt/Python-3.6.5 ]; then rm -rf $$D1/opt/Python-3.6.5; fi
@@ -147,11 +147,6 @@ python3.6.5-compile:
 python3.7.0-compile:
 	mkdir -p $$D1/opt/ubuntu-software
 
-	sudo apt-get install build-essential checkinstall
-	sudo apt-get install libssl-dev zlib1g-dev libncurses5-dev \
-	libncursesw5-dev libreadline-dev libsqlite3-dev libgdbm-dev \
-	libdb5.3-dev libbz2-dev libexpat1-dev liblzma-dev tk-dev uuid-dev
-
 	wget https://www.python.org/ftp/python/3.7.0/Python-3.7.0.tgz \
 	-O $$D1/opt/ubuntu-software/Python-3.7.0.tgz
 	if [ -d $$D1/opt/Python-3.7.0 ]; then rm -rf $$D1/opt/Python-3.7.0; fi
@@ -166,8 +161,6 @@ python3.7.0-compile:
 .ONESHELL:
 r-3.5.0-compile:
 	mkdir -p $$D1/opt/ubuntu-software
-
-	sudo apt-get install libcairo2-dev libxt-dev libtiff5-dev libssh2-1-dev libxml2 libxml2-dev
 
 	wget https://cloud.r-project.org/bin/linux/ubuntu/bionic-cran35/r-base_3.5.0.orig.tar.gz \
 	-O $$D1/opt/ubuntu-software/R-3.5.0.tgz
