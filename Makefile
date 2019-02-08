@@ -19,7 +19,7 @@ apt-install:
 	gir1.2-clutter-1.0 rar libreoffice r-base rename pandoc aptitude \
 	sra-toolkit libxm4 pdfshuffler ttf-mscorefonts-installer openssh-server \
 	nfs-common nfs-kernel-server ghostscript libcurl4-openssl-dev \
-	openjdk-11-jdk-headless"
+	openjdk-11-jdk-headless python-pip"
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
 	checkinstall libssl-dev zlib1g-dev libncurses5-dev \
@@ -51,7 +51,7 @@ export PYTHON2_PACKAGES=qiime
 export DEV_PACKAGES=testresources twine sphinx sphinx-autobuild \
 	sphinx_rtd_theme versioneer pylint autopep8
 
-export CUDA_PYTHON3_PACKAGES=pycuda pygpu scikit-cuda \
+export CUDA_PYTHON3_PACKAGES=pycuda scikit-cuda \
 	torchvision tensorflow-gpu theano cntk-gpu
 
 export JUPYTER_PACKAGES=jupyter jupyterlab ipykernel nbopen rise
@@ -62,9 +62,12 @@ export PERL_PACKAGES=JSON Math::CDF HTML::Template XML::Compile::SOAP11 \
 system-perl-packages-install:
 	sudo cpan $$PERL_PACKAGES
 
-system-python-packages-install:
-	sudo -H pip3 install $$PYTHON3_PACKAGES --upgrade
-	sudo -H pip2 install $$PYTHON2_PACKAGES --upgrade
+local-python-packages-install:
+	$$D1/opt/python-3.6.5/bin/pip3 install $$PYTHON3_PACKAGES $$DEV_PACKAGES --upgrade
+	$$D1/opt/python-3.7.0/bin/pip3 install $$PYTHON3_PACKAGES $$DEV_PACKAGES --upgrade
+
+system-python3-packages-install:
+	sudo -H pip3 install $$PYTHON3_PACKAGES $$DEV_PACKAGES --upgrade
 
 cuda-and-python-packages-install:
 	cd $$D1/opt/ubuntu-software
@@ -81,51 +84,27 @@ cuda-and-python-packages-install:
 	sudo dpkg -i libcudnn7_7.3.1.20-1+cuda10.0_amd64.deb \
 	libcudnn7-dev_7.3.1.20-1+cuda10.0_amd64.deb libcudnn7-doc_7.3.1.20-1+cuda10.0_amd64.deb
 
-	sudo -H pip3 install http://download.pytorch.org/whl/cu100/torch-1.0.0-cp36-cp36m-linux_x86_64.whl
-	sudo -H pip3 install $$CUDA_PYTHON3_PACKAGES --upgrade
+	$$D1/opt/python-3.6.5/bin/pip3 install http://download.pytorch.org/whl/cu100/torch-1.0.0-cp36-cp36m-linux_x86_64.whl
+	$$D1/opt/python-3.6.5/bin/pip3 install $$CUDA_PYTHON3_PACKAGES --upgrade
 
-devtools-python-packages-install:
-	sudo -H pip3 install $$DEV_PACKAGES --upgrade
-	sudo -H pip2 install $$DEV_PACKAGES --upgrade
+	$$D1/opt/python-3.7.0/bin/pip3 install http://download.pytorch.org/whl/cu100/torch-1.0.0-cp36-cp36m-linux_x86_64.whl
+	$$D1/opt/python-3.7.0/bin/pip3 install $$CUDA_PYTHON3_PACKAGES --upgrade
 
 jupyter-install:
-	sudo -H pip3 install $$JUPYTER_PACKAGES --upgrade
+	$$D1/opt/python-3.6.5/bin/pip3 install $$JUPYTER_PACKAGES --upgrade
+	$$D1/opt/python-3.7.0/bin/pip3 install $$JUPYTER_PACKAGES --upgrade
 
 	# install python3 kernel
-	python3 -m ipykernel install --user
-	python3 -m nbopen.install_xdg
+	$$D1/opt/python-3.6.5/bin/python3 -m ipykernel install --user
+	$$D1/opt/python-3.6.5/bin/python3 -m nbopen.install_xdg
+
+	# install python3 kernel
+	$$D1/opt/python-3.7.0/bin/python3 -m ipykernel install --user
+	$$D1/opt/python-3.7.0/bin/python3 -m nbopen.install_xdg
 
 	# install and enable rise
 	sudo jupyter-nbextension install rise --py --sys-prefix
 	sudo jupyter-nbextension enable rise --py --sys-prefix
-
-# 	# install and enable contrib_nbextensions
-# 	sudo jupyter-nbextension install jupyter_contrib_nbextensions --py --sys-prefix
-# 	sudo jupyter-nbextension enable jupyter_contrib_nbextensions --py --sys-prefix
-#
-# 	# install and enable nbextensions_configurator
-# 	sudo jupyter-nbextension install jupyter_nbextensions_configurator --py --sys-prefix
-# 	sudo jupyter-nbextension enable jupyter_nbextensions_configurator --py --sys-prefix
-#
-# 	# install and enable ipyparallel
-# 	sudo jupyter-nbextension install --sys-prefix --py ipyparallel
-# 	sudo jupyter-nbextension enable --sys-prefix --py ipyparallel
-# 	sudo jupyter-serverextension enable --sys-prefix --py ipyparallel
-
-kernels-jupyter:
-	$$D1/opt/r-3.5.0/R -e "install.packages(c('crayon', 'pbdZMQ', 'devtools'), \
-	repos = 'https://cloud.r-project.org/', dependencies = TRUE); \
-	library(devtools); \
-	devtools::install('/opt/github-repositories/IRkernel.IRkernel/R'); \
-	library(IRkernel); \
-	IRkernel::installspec(name = 'cran')"
-
-	sudo R -e "install.packages(c('crayon', 'pbdZMQ', 'devtools'), \
-	repos = 'https://cloud.r-project.org/', dependencies = TRUE); \
-	library(devtools); \
-	devtools::install('/opt/github-repositories/IRkernel.IRkernel/R'); \
-	library(IRkernel); \
-	IRkernel::installspec(name = 'ir')"
 
 .ONESHELL:
 python3.6.5-compile:
@@ -172,10 +151,6 @@ r-3.5.0-compile:
 	make
 	make install
 
-local-python-packages-install:
-	$$D1/opt/python-3.6.5/bin/pip3 install $$PYTHON3_PACKAGES --upgrade
-	$$D1/opt/python-3.7.0/bin/pip3 install $$PYTHON3_PACKAGES --upgrade
-
 local-r-packages-install:
 	$$D1/opt/r-3.5.0/bin/R -e "install.packages('tidyverse', \
 	dependencies = TRUE, repos = 'https://cloud.r-project.org/'); \
@@ -210,6 +185,22 @@ local-r-packages-install:
 	biocLite('dada2'); biocLite('edgeR'); biocLite('phyloseq'); \
 	biocLite('DESeq'); biocLite('DESeq2'); biocLite('microbiome'); \
 	biocLite('metagenomeSeq')"
+
+.ONESHELL:
+r-kernels-jupyter:
+	$$D1/opt/r-3.5.0/R -e "install.packages(c('crayon', 'pbdZMQ', 'devtools'), \
+	repos = 'https://cloud.r-project.org/', dependencies = TRUE); \
+	library(devtools); \
+	devtools::install('/opt/github-repositories/IRkernel.IRkernel/R'); \
+	library(IRkernel); \
+	IRkernel::installspec(name = 'cran')"
+
+	sudo R -e "install.packages(c('crayon', 'pbdZMQ', 'devtools'), \
+	repos = 'https://cloud.r-project.org/', dependencies = TRUE); \
+	library(devtools); \
+	devtools::install('/opt/github-repositories/IRkernel.IRkernel/R'); \
+	library(IRkernel); \
+	IRkernel::installspec(name = 'ir')"
 
 .ONESHELL:
 slurm-install:
