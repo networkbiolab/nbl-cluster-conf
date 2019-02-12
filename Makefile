@@ -1,7 +1,34 @@
+SHELL := /bin/bash
+HOST=$(shell hostname)
+
+export D1=/shared/D1
+
+export PYTHON3_PACKAGES=pip numpy pandas nose python-libsbml \
+	cobra escher seaborn pillow bokeh dnaplotlib pysb \
+	biopython openpyxl xlrd fastcluster scikit-bio \
+	scikit-learn rpy2 tzlocal
+
+export PYTHON2_PACKAGES=pip qiime
+
+export DEV_PYTHON_PACKAGES=testresources twine sphinx sphinx-autobuild \
+	sphinx_rtd_theme versioneer pylint autopep8
+
+export CUDA_PYTHON3_PACKAGES=pycuda scikit-cuda \
+	torchvision tensorflow-gpu theano cntk-gpu
+
+export JUPYTER_PACKAGES=jupyter jupyterlab ipykernel nbopen rise
+
+export PERL_PACKAGES=JSON Math::CDF HTML::Template XML::Compile::SOAP11 \
+	XML::Compile::WSDL11 XML::Compile::Transport::SOAPHTTP
+
+export BIOCONDUCTOR=dada2 edgeR phyloseq DESeq DESeq2 microbiome \
+	BiocVersion ggtree graph hypergraph treeio metagenomeSeq
+
 .ONESHELL:
 test:
 	echo $(HOME)
 	echo $$(which pip3)
+	echo $(HOST)
 
 .ONESHELL:
 apt-install:
@@ -39,37 +66,28 @@ apt-install:
 latex-install:
 	sudo apt-get -y install texstudio texlive-full
 
-export D1=/shared/D1
-
-export PYTHON3_PACKAGES=numpy pandas nose python-libsbml \
-	cobra escher seaborn pillow bokeh dnaplotlib pysb \
-	biopython openpyxl xlrd fastcluster scikit-bio \
-	scikit-learn rpy2 tzlocal
-
-export PYTHON2_PACKAGES=qiime
-
-export DEV_PACKAGES=testresources twine sphinx sphinx-autobuild \
-	sphinx_rtd_theme versioneer pylint autopep8
-
-export CUDA_PYTHON3_PACKAGES=pycuda scikit-cuda \
-	torchvision tensorflow-gpu theano cntk-gpu
-
-export JUPYTER_PACKAGES=jupyter jupyterlab ipykernel nbopen rise
-
-export PERL_PACKAGES=JSON Math::CDF HTML::Template XML::Compile::SOAP11 \
-	XML::Compile::WSDL11 XML::Compile::Transport::SOAPHTTP
-
 system-perl-packages-install:
 	sudo cpan $$PERL_PACKAGES
 
-local-python-packages-install:
-	$$D1/opt/python-3.6.5/bin/pip3 install $$PYTHON3_PACKAGES $$DEV_PACKAGES --upgrade
-	$$D1/opt/python-3.7.0/bin/pip3 install $$PYTHON3_PACKAGES $$DEV_PACKAGES --upgrade
+system-pip3-install:
+	for package in $$PYTHON3_PACKAGES; do \
+		sudo -H pip3 install $$package --upgrade;
+		sudo -H pip3 install $$package --upgrade; done
 
-system-python3-packages-install:
-	sudo -H pip3 install $$PYTHON3_PACKAGES $$DEV_PACKAGES --upgrade
+	for package in $$DEV_PACKAGES; do \
+		sudo -H pip3 install $$package --upgrade;
+		sudo -H pip3 install $$package --upgrade; done
 
-cuda-and-python-packages-install:
+local-pip3-install:
+	for package in $$PYTHON3_PACKAGES; do \
+		$$D1/opt/python-3.6.5/bin/pip3 install $$package --upgrade;
+		$$D1/opt/python-3.7.0/bin/pip3 install $$package --upgrade; done
+
+	for package in $$DEV_PACKAGES; do \
+		$$D1/opt/python-3.6.5/bin/pip3 install $$package --upgrade;
+		$$D1/opt/python-3.7.0/bin/pip3 install $$package --upgrade; done
+
+cuda-install:
 	cd $$D1/opt/ubuntu-software
 
 	sudo apt -y install linux-headers-$(uname -r)
@@ -78,33 +96,32 @@ cuda-and-python-packages-install:
 	sudo apt update
 	sudo apt -y install cuda
 	CUDA_APTS="cuda-toolkit-10-0 cuda-tools-10-0 cuda-runtime-10-0 \
-	cuda-compiler-10-0 cuda-libraries-10-0 cuda-libraries-dev-10-0 cuda-drivers \
-	nvidia-cuda-toolkit"
+	cuda-compiler-10-0 cuda-libraries-10-0 cuda-libraries-dev-10-0 \
+	cuda-drivers nvidia-cuda-toolkit"
 	for apt in $$CUDA_APTS; do sudo apt -y install $$apt; done
 	sudo dpkg -i libcudnn7_7.3.1.20-1+cuda10.0_amd64.deb \
 	libcudnn7-dev_7.3.1.20-1+cuda10.0_amd64.deb libcudnn7-doc_7.3.1.20-1+cuda10.0_amd64.deb
 
-	$$D1/opt/python-3.6.5/bin/pip3 install http://download.pytorch.org/whl/cu100/torch-1.0.0-cp36-cp36m-linux_x86_64.whl
-	$$D1/opt/python-3.6.5/bin/pip3 install $$CUDA_PYTHON3_PACKAGES --upgrade
+local-cuda-pip3-install:
+	$$D1/opt/python-3.6.5/bin/pip3 install https://download.pytorch.org/whl/cu100/torch-1.0.1.post2-cp36-cp36m-linux_x86_64.whl
+	$$D1/opt/python-3.7.0/bin/pip3 install https://download.pytorch.org/whl/cu100/torch-1.0.1.post2-cp37-cp37m-linux_x86_64.whl
 
-	$$D1/opt/python-3.7.0/bin/pip3 install http://download.pytorch.org/whl/cu100/torch-1.0.0-cp36-cp36m-linux_x86_64.whl
-	$$D1/opt/python-3.7.0/bin/pip3 install $$CUDA_PYTHON3_PACKAGES --upgrade
+	for package in $$CUDA_PYTHON3_PACKAGES; do \
+		$$D1/opt/python-3.6.5/bin/pip3 install $$package --upgrade;
+		$$D1/opt/python-3.7.0/bin/pip3 install $$package --upgrade; done
 
-jupyter-install:
-	$$D1/opt/python-3.6.5/bin/pip3 install $$JUPYTER_PACKAGES --upgrade
-	$$D1/opt/python-3.7.0/bin/pip3 install $$JUPYTER_PACKAGES --upgrade
+local-jupyter-install:
+	for package in $$JUPYTER_PACKAGES; do \
+		$$D1/opt/python-3.6.5/bin/pip3 install $$package --upgrade;
+		$$D1/opt/python-3.7.0/bin/pip3 install $$package --upgrade; done
 
-	# install python3 kernel
+	# install python3.6.5 kernel
 	$$D1/opt/python-3.6.5/bin/python3 -m ipykernel install --user
 	$$D1/opt/python-3.6.5/bin/python3 -m nbopen.install_xdg
 
-	# install python3 kernel
-	$$D1/opt/python-3.7.0/bin/python3 -m ipykernel install --user
-	$$D1/opt/python-3.7.0/bin/python3 -m nbopen.install_xdg
-
 	# install and enable rise
-	sudo jupyter-nbextension install rise --py --sys-prefix
-	sudo jupyter-nbextension enable rise --py --sys-prefix
+	$$D1/opt/python-3.6.5/bin/jupyter-nbextension install rise --py --sys-prefix
+	$$D1/opt/python-3.6.5/bin/jupyter-nbextension enable rise --py --sys-prefix
 
 .ONESHELL:
 python3.6.5-compile:
@@ -151,44 +168,45 @@ r-3.5.0-compile:
 	make
 	make install
 
-local-r-packages-install:
-	$$D1/opt/r-3.5.0/bin/R -e "install.packages('tidyverse', \
-	dependencies = TRUE, repos = 'https://cloud.r-project.org/'); \
-			install.packages('knitr', \
-	dependencies = TRUE, repos = 'https://cloud.r-project.org/'); \
-			install.packages('rmarkdown', \
-	dependencies = TRUE, repos = 'https://cloud.r-project.org/'); \
-			install.packages('gridExtra', \
-	dependencies = TRUE, repos = 'https://cloud.r-project.org/'); \
-			install.packages('plotly', \
-	dependencies = TRUE, repos = 'https://cloud.r-project.org/'); \
-			install.packages('Cairo', \
-	dependencies = TRUE, repos = 'https://cloud.r-project.org/'); \
-			install.packages('ggpubr', \
-	dependencies = TRUE, repos = 'https://cloud.r-project.org/'); \
-			install.packages('ape', \
-	dependencies = TRUE, repos = 'https://cloud.r-project.org/'); \
-			install.packages('biom', \
-	dependencies = TRUE, repos = 'https://cloud.r-project.org/'); \
-			install.packages('optparse', \
-	dependencies = TRUE, repos = 'https://cloud.r-project.org/'); \
-			install.packages('RColorBrewer', \
-	dependencies = TRUE, repos = 'https://cloud.r-project.org/'); \
-			install.packages('randomForest', \
-	dependencies = TRUE, repos = 'https://cloud.r-project.org/'); \
-			install.packages('vegan', \
-	dependencies = TRUE, repos = 'https://cloud.r-project.org/');"
+.ONESHELL:
+r-3.5.2-compile:
+	mkdir -p $$D1/opt/ubuntu-software
 
-	# install bioConductor packages
-	$$D1/opt/r-3.5.0/bin/R -e \
-	"source('https://bioconductor.org/biocLite.R'); biocLite(); \
-	biocLite('dada2'); biocLite('edgeR'); biocLite('phyloseq'); \
-	biocLite('DESeq'); biocLite('DESeq2'); biocLite('microbiome'); \
-	biocLite('metagenomeSeq')"
+	wget https://cloud.r-project.org/bin/linux/ubuntu/bionic-cran35/r-base_3.5.2.orig.tar.gz \
+	-O $$D1/opt/ubuntu-software/R-3.5.2.tgz
+	if [ -d $$D1/opt/R-3.5.2 ]; then rm -rf $$D1/opt/R-3.5.2; fi
+	tar xvzf $$D1/opt/ubuntu-software/R-3.5.2.tgz -C $$D1/opt
+	cd $$D1/opt/R-3.5.2
+	if [ -f Makefile ]; then make clean; fi
+	if [ -d $$D1/opt/r-3.5.2 ]; then rm -rf $$D1/opt/r-3.5.2; fi
+	./configure --prefix=$$D1/opt/r-3.5.2 --enable-R-shlib --with-blas --with-lapack
+	make
+	make install
+
+export BIOCONDUCTOR=dada2 edgeR phyloseq DESeq DESeq2 microbiome \
+	BiocVersion ggtree graph hypergraph treeio metagenomeSeq
+
+export R_PACKAGES=tidyverse knitr rmarkdown gridExtra plotly Cairo ggpubr ape \
+	biom optparse RColorBrewer randomForest vegan apcluster chron compare compute.es \
+	d3heatmap dendextend DEoptimR diptest fastmatch flexmix fpc kernlab mclust mds \
+	modeltools mvtnorm NLP phangorn pheatmap plotrix PMCMR png prabclus \
+	qdapDictionaries qdapRegex quadprog rafalib reports robustbase rvcheck segmented \
+	seqinr slam tidytree  trimcluster UpSetR wordcloud
+
+local-r-libraries-install:
+	# install R packages
+	for package in $$BIOCONDUCTOR; do $$D1/bin/R -e \
+		"install.packages('$$package', dependencies = TRUE, repos = 'https://cloud.r-project.org/')"; done
+
+	# install Bioconductor packages
+	$$D1/bin/R -e \
+		"if (!requireNamespace(\"BiocManager\", quietly = TRUE)) \
+		install.packages(\"BiocManager\", dependencies = TRUE, repos = 'https://cloud.r-project.org/')"
+	for package in $$BIOCONDUCTOR; do $$D1/bin/R -e "BiocManager::install(\"$$package\", version = \"3.8\")"; done
 
 .ONESHELL:
 r-kernels-jupyter:
-	$$D1/opt/r-3.5.0/R -e "install.packages(c('crayon', 'pbdZMQ', 'devtools'), \
+	$$D1/bin/R -e "install.packages(c('crayon', 'pbdZMQ', 'devtools'), \
 	repos = 'https://cloud.r-project.org/', dependencies = TRUE); \
 	library(devtools); \
 	devtools::install('/opt/github-repositories/IRkernel.IRkernel/R'); \
@@ -204,10 +222,18 @@ r-kernels-jupyter:
 
 .ONESHELL:
 slurm-install:
-	sudo rm -rf /var/lib/slurm-llnl /var/run/slurm-llnl /var/log/slurm-llnl
-	sudo apt-get -y remove --purge slurm-wlm slurmdbd
+	sudo apt-get -y remove --purge munge slurm-wlm slurmdbd
 	sudo apt-get -y autoremove
-	sudo apt-get -y install slurm-wlm slurmdbd
+	sudo apt-get -y install munge slurm-wlm slurmdbd
+
+.ONESHELL:
+slurm-conf:
+	sudo systemctl stop munge
+	sudo systemctl stop slurmd
+	sudo systemctl stop slurmctld
+	sudo systemctl stop slurmdbd
+
+	sudo rm -rf /var/lib/slurm-llnl /var/run/slurm-llnl /var/log/slurm-llnl
 
 	sudo mkdir -p /var/spool/slurmd
 	sudo mkdir -p /var/lib/slurm-llnl
@@ -215,9 +241,6 @@ slurm-install:
 	sudo mkdir -p /var/lib/slurm-llnl/slurmctld
 	sudo mkdir -p /var/run/slurm-llnl
 	sudo mkdir -p /var/log/slurm-llnl
-
-	sudo touch /var/log/slurm-llnl/slurmd.log
-	sudo touch /var/log/slurm-llnl/slurmctld.log
 
 	sudo chmod -R 755 /var/spool/slurmd
 	sudo chmod -R 755 /var/lib/slurm-llnl/
@@ -229,27 +252,30 @@ slurm-install:
 	sudo chown -R slurm:slurm /var/run/slurm-llnl/
 	sudo chown -R slurm:slurm /var/log/slurm-llnl/
 
-.ONESHELL:
-slurm-conf:
-	sudo rm /var/log/slurm-llnl/slurmd.log
-	sudo rm /var/log/slurm-llnl/slurmctld.log
 	sudo cp slurm.conf gres.conf /etc/slurm-llnl/
 
-	dd if=/dev/urandom bs=1 count=1024 > munge.key
-	sudo cp munge.key /etc/munge/munge.key
+	sudo rsync -avu -P munge.key /etc/munge/munge.key
 	sudo chown munge:munge /etc/munge/munge.key
 	sudo chmod 400 /etc/munge/munge.key
 	sudo chmod 711 /var/lib/munge/
 	sudo chmod 755 /var/run/munge/
 
-	sudo systemctl restart slurmd
-	sudo systemctl restart slurmctld
+	sudo systemctl restart munge
+	sudo service munge status
 
+	sudo systemctl restart slurmd
 	sudo service slurmd status
-	sudo service slurmctld status
+
+	if [ "$(HOST)" = "spica" ] ; then
+		sudo systemctl restart slurmctld
+		sudo service slurmctld status
+	else
+		sudo systemctl stop slurmctld
+		sudo service slurmctld status
+	fi
 
 .ONESHELL:
-install-others:
+others-install:
 	cd $$D1/opt/ubuntu-software/
 
 	sh Anaconda3-5.3.0-Linux-x86_64.sh
