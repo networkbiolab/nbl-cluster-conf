@@ -266,7 +266,7 @@ slurm-conf:
 	sudo systemctl restart slurmd
 	sudo service slurmd status
 
-	if [ "$(HOST)" = "spica" ] ; then
+	if [ "$(HOST)" = "nbl1" ] ; then
 		sudo systemctl restart slurmctld
 		sudo service slurmctld status
 	else
