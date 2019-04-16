@@ -15,7 +15,8 @@ export DEV_PYTHON_PACKAGES=testresources twine sphinx sphinx-autobuild \
 	sphinx_rtd_theme versioneer pylint autopep8
 
 export CUDA_PYTHON3_PACKAGES=pycuda scikit-cuda \
-	torchvision tensorflow-gpu theano cntk-gpu
+	torchvision tensorflow-gpu theano cntk-gpu keras bottle gevent \
+	h5py paste opencv-python scikit-image
 
 export JUPYTER_PACKAGES=jupyter jupyterlab ipykernel nbopen rise
 
