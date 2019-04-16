@@ -7,7 +7,7 @@ export PYTHON3_PACKAGES=pip numpy pandas nose python-libsbml \
 	cobra escher seaborn pillow bokeh dnaplotlib pysb \
 	biopython openpyxl xlrd fastcluster scikit-bio \
 	scikit-learn rpy2 tzlocal khmer snakemake pyfaidx \
-	pyfasta kneaddata
+	pyfasta kneaddata biom-format
 
 export PYTHON2_PACKAGES=pip qiime
 
@@ -49,7 +49,8 @@ apt-install:
 	nfs-common nfs-kernel-server ghostscript libcurl4-openssl-dev \
 	openjdk-11-jdk-headless python-pip ant openjdk-8-jdk-headless easel \
 	lftp clang cmake-curses-gui valgrind artemis cmake libhdf5-dev \
-	bioperl"
+	bioperl filezilla gnome-system-monitor gnome-logs gnome-characters \
+	gnome-calculator gtk-common-themes libtbb-dev zlib1g-dev autoconf"
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
 	checkinstall libssl-dev zlib1g-dev libncurses5-dev \
