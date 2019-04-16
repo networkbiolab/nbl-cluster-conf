@@ -6,7 +6,8 @@ export D1=/shared/D1
 export PYTHON3_PACKAGES=pip numpy pandas nose python-libsbml \
 	cobra escher seaborn pillow bokeh dnaplotlib pysb \
 	biopython openpyxl xlrd fastcluster scikit-bio \
-	scikit-learn rpy2 tzlocal
+	scikit-learn rpy2 tzlocal khmer snakemake pyfaidx \
+	pyfasta kneaddata
 
 export PYTHON2_PACKAGES=pip qiime
 
@@ -46,7 +47,9 @@ apt-install:
 	gir1.2-clutter-1.0 rar libreoffice r-base rename pandoc aptitude \
 	sra-toolkit libxm4 pdfshuffler ttf-mscorefonts-installer openssh-server \
 	nfs-common nfs-kernel-server ghostscript libcurl4-openssl-dev \
-	openjdk-11-jdk-headless python-pip"
+	openjdk-11-jdk-headless python-pip ant openjdk-8-jdk-headless easel \
+	lftp clang cmake-curses-gui valgrind artemis cmake libhdf5-dev \
+	bioperl"
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
 	checkinstall libssl-dev zlib1g-dev libncurses5-dev \
@@ -58,6 +61,11 @@ apt-install:
 	for apt in $$APTS; do sudo apt -y install $$apt; done
 	for apt in $$PYTHON3_DEPS; do sudo apt -y install $$apt; done
 	for apt in $$R_DEPS; do sudo apt -y install $$apt; done
+
+	sudo snap remove gnome-system-monitor gnome-logs gnome-characters \
+	gnome-calculator gtk-common-themes gnome-3-26-1604
+	sudo apt install -y gnome-system-monitor gnome-logs gnome-characters \
+	gnome-calculator
 
 	sudo apt -y autoremove
 	sudo apt -y autoclean
@@ -71,11 +79,9 @@ system-perl-packages-install:
 
 system-pip3-install:
 	for package in $$PYTHON3_PACKAGES; do \
-		sudo -H pip3 install $$package --upgrade;
 		sudo -H pip3 install $$package --upgrade; done
 
 	for package in $$DEV_PACKAGES; do \
-		sudo -H pip3 install $$package --upgrade;
 		sudo -H pip3 install $$package --upgrade; done
 
 local-pip3-install:
@@ -112,8 +118,7 @@ local-cuda-pip3-install:
 
 local-jupyter-install:
 	for package in $$JUPYTER_PACKAGES; do \
-		$$D1/opt/python-3.6.5/bin/pip3 install $$package --upgrade;
-		$$D1/opt/python-3.7.0/bin/pip3 install $$package --upgrade; done
+		$$D1/opt/python-3.6.5/bin/pip3 install $$package --upgrade; done
 
 	# install python3.6.5 kernel
 	$$D1/opt/python-3.6.5/bin/python3 -m ipykernel install --user
