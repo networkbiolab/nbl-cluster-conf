@@ -89,6 +89,7 @@ system-pip3-install:
 	for package in $$DEV_PACKAGES; do \
 		sudo -H pip3 install $$package --upgrade; done
 
+	sudo -H pip3 install https://download.pytorch.org/whl/cu100/torch-1.0.1.post2-cp36-cp36m-linux_x86_64.whl
 	for package in $$CUDA_PYTHON3_PACKAGES; do \
 		sudo -H pip3 install $$package --upgrade; done
 
