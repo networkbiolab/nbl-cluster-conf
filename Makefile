@@ -89,6 +89,9 @@ system-pip3-install:
 	for package in $$DEV_PACKAGES; do \
 		sudo -H pip3 install $$package --upgrade; done
 
+	for package in $$CUDA_PYTHON3_PACKAGES; do \
+		sudo -H pip3 install $$package --upgrade; done
+
 local-pip3-install:
 	for package in $$PYTHON3_PACKAGES; do \
 		$$D1/opt/python-3.6.5/bin/pip3 install $$package --upgrade;
