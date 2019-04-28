@@ -19,7 +19,7 @@ export CUDA_PYTHON3_PACKAGES=pycuda scikit-cuda \
 export JUPYTER_PACKAGES=jupyter jupyterlab ipykernel nbopen rise
 
 export PERL_PACKAGES=JSON Math::CDF HTML::Template XML::Compile::SOAP11 \
-	XML::Compile::WSDL11 XML::Compile::Transport::SOAPHTTP
+	XML::Compile::WSDL11 XML::Compile::Transport::SOAPHTTP Bio::Perl
 
 export R_PACKAGES=tidyverse knitr rmarkdown gridExtra plotly Cairo ggpubr ape \
     biom optparse RColorBrewer randomForest vegan apcluster chron compare compute.es \
