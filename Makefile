@@ -6,8 +6,7 @@ export D1=/shared/D1
 export PYTHON3_PACKAGES=pip numpy pandas nose python-libsbml \
 	cobra escher seaborn pillow bokeh dnaplotlib pysb \
 	biopython openpyxl xlrd fastcluster scikit-bio \
-	scikit-learn rpy2 tzlocal khmer snakemake pyfaidx \
-	pyfasta kneaddata biom-format
+	scikit-learn rpy2 tzlocal networkx cutadapt
 
 export PYTHON2_PACKAGES=pip qiime
 
@@ -15,16 +14,23 @@ export DEV_PYTHON_PACKAGES=testresources twine sphinx sphinx-autobuild \
 	sphinx_rtd_theme versioneer pylint autopep8
 
 export CUDA_PYTHON3_PACKAGES=pycuda scikit-cuda \
-	torchvision tensorflow-gpu theano cntk-gpu keras bottle gevent \
-	h5py paste opencv-python scikit-image
+	torchvision tensorflow-gpu theano cntk-gpu keras
 
 export JUPYTER_PACKAGES=jupyter jupyterlab ipykernel nbopen rise
 
 export PERL_PACKAGES=JSON Math::CDF HTML::Template XML::Compile::SOAP11 \
 	XML::Compile::WSDL11 XML::Compile::Transport::SOAPHTTP
 
+export R_PACKAGES=tidyverse knitr rmarkdown gridExtra plotly Cairo ggpubr ape \
+    biom optparse RColorBrewer randomForest vegan apcluster chron compare compute.es \
+    d3heatmap dendextend DEoptimR diptest fastmatch flexmix fpc kernlab mclust mds \
+    modeltools mvtnorm NLP phangorn pheatmap plotrix PMCMR png prabclus \
+    qdapDictionaries qdapRegex quadprog rafalib reports robustbase rvcheck segmented \
+    seqinr slam tidytree trimcluster UpSetR wordcloud freetypeharfbuzz
+
 export BIOCONDUCTOR=dada2 edgeR phyloseq DESeq DESeq2 microbiome \
-	BiocVersion ggtree graph hypergraph treeio metagenomeSeq
+	BiocVersion ggtree graph hypergraph treeio metagenomeSeq SIAMCAT \
+	cluster clusterSim
 
 .ONESHELL:
 test:
@@ -48,11 +54,8 @@ apt-install:
 	gir1.2-clutter-1.0 rar libreoffice r-base rename pandoc aptitude \
 	sra-toolkit libxm4 pdfshuffler ttf-mscorefonts-installer openssh-server \
 	nfs-common nfs-kernel-server ghostscript libcurl4-openssl-dev \
-	openjdk-11-jdk-headless python-pip ant openjdk-8-jdk-headless easel \
-	lftp clang cmake-curses-gui valgrind artemis cmake libhdf5-dev \
-	bioperl filezilla gnome-system-monitor gnome-logs gnome-characters \
-	gnome-calculator gtk-common-themes libtbb-dev zlib1g-dev autoconf \
-	docker.io libnuma-dev inxi"
+	openjdk-11-jdk-headless python-pip libmagick++-dev cargo libudunits2-dev \
+	libgdal-dev cd-hit"
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
 	checkinstall libssl-dev zlib1g-dev libncurses5-dev \
@@ -64,11 +67,6 @@ apt-install:
 	for apt in $$APTS; do sudo apt -y install $$apt; done
 	for apt in $$PYTHON3_DEPS; do sudo apt -y install $$apt; done
 	for apt in $$R_DEPS; do sudo apt -y install $$apt; done
-
-	sudo snap remove gnome-system-monitor gnome-logs gnome-characters \
-	gnome-calculator gtk-common-themes gnome-3-26-1604
-	sudo apt install -y gnome-system-monitor gnome-logs gnome-characters \
-	gnome-calculator
 
 	sudo apt -y autoremove
 	sudo apt -y autoclean
@@ -132,6 +130,21 @@ local-jupyter-install:
 	$$D1/opt/python-3.6.5/bin/jupyter-nbextension enable rise --py --sys-prefix
 
 .ONESHELL:
+python2.7.16-compile:
+	mkdir -p $$D1/opt/ubuntu-software
+
+	wget https://www.python.org/ftp/python/2.7.16/Python-2.7.16.tgz \
+	-O $$D1/opt/ubuntu-software/Python-2.7.16.tgz
+	if [ -d $$D1/opt/Python-2.7.16 ]; then rm -rf $$D1/opt/Python-2.7.16; fi
+	tar xvzf $$D1/opt/ubuntu-software/Python-2.7.16.tgz -C $$D1/opt
+	cd $$D1/opt/Python-2.7.16
+	if [ -f Makefile ]; then make clean; fi
+	if [ -d $$D1/opt/python-2.7.16 ]; then rm -rf $$D1/opt/python-2.7.16; fi
+	./configure --prefix=$$D1/opt/python-2.7.16 --enable-optimizations
+	make
+	make install
+
+.ONESHELL:
 python3.6.5-compile:
 	mkdir -p $$D1/opt/ubuntu-software
 
@@ -191,16 +204,6 @@ r-3.5.2-compile:
 	make
 	make install
 
-export BIOCONDUCTOR=dada2 edgeR phyloseq DESeq DESeq2 microbiome \
-	BiocVersion ggtree graph hypergraph treeio metagenomeSeq
-
-export R_PACKAGES=tidyverse knitr rmarkdown gridExtra plotly Cairo ggpubr ape \
-	biom optparse RColorBrewer randomForest vegan apcluster chron compare compute.es \
-	d3heatmap dendextend DEoptimR diptest fastmatch flexmix fpc kernlab mclust mds \
-	modeltools mvtnorm NLP phangorn pheatmap plotrix PMCMR png prabclus \
-	qdapDictionaries qdapRegex quadprog rafalib reports robustbase rvcheck segmented \
-	seqinr slam tidytree  trimcluster UpSetR wordcloud
-
 local-r-libraries-install:
 	# install R packages
 	for package in $$R_PACKAGES; do $$D1/bin/R -e \
@@ -217,16 +220,9 @@ r-kernels-jupyter:
 	$$D1/bin/R -e "install.packages(c('crayon', 'pbdZMQ', 'devtools'), \
 	repos = 'https://cloud.r-project.org/', dependencies = TRUE); \
 	library(devtools); \
-	devtools::install('/opt/github-repositories/IRkernel.IRkernel/R'); \
+	devtools::install('$$D1/opt/github-repositories/IRkernel.IRkernel/R'); \
 	library(IRkernel); \
 	IRkernel::installspec(name = 'cran')"
-
-	sudo R -e "install.packages(c('crayon', 'pbdZMQ', 'devtools'), \
-	repos = 'https://cloud.r-project.org/', dependencies = TRUE); \
-	library(devtools); \
-	devtools::install('/opt/github-repositories/IRkernel.IRkernel/R'); \
-	library(IRkernel); \
-	IRkernel::installspec(name = 'ir')"
 
 .ONESHELL:
 slurm-install:
@@ -238,8 +234,11 @@ slurm-install:
 slurm-conf:
 	sudo systemctl stop munge
 	sudo systemctl stop slurmd
-	sudo systemctl stop slurmctld
-	sudo systemctl stop slurmdbd
+
+	if [[ "$(HOST)" == "nbl1" ]] ; then
+		sudo systemctl stop slurmctld
+		sudo systemctl stop slurmdbd
+	fi
 
 	sudo rm -rf /var/lib/slurm-llnl /var/run/slurm-llnl /var/log/slurm-llnl
 
@@ -262,6 +261,10 @@ slurm-conf:
 
 	sudo cp slurm.conf gres.conf /etc/slurm-llnl/
 
+	if [[ "$(HOST)" == "nbl1" ]] ; then
+		dd if=/dev/urandom bs=1 count=1024 > ./munge.key
+	fi
+
 	sudo rsync -avu -P munge.key /etc/munge/munge.key
 	sudo chown munge:munge /etc/munge/munge.key
 	sudo chmod 400 /etc/munge/munge.key
@@ -274,7 +277,7 @@ slurm-conf:
 	sudo systemctl restart slurmd
 	sudo service slurmd status
 
-	if [ "$(HOST)" = "nbl1" ] ; then
+	if [[ "$(HOST)" == "nbl1" ]] ; then
 		sudo systemctl restart slurmctld
 		sudo service slurmctld status
 	else
