@@ -51,14 +51,14 @@ apt-install:
 	APTS="gnome-tweak-tool gnome-themes-standard htop kate kompare \
 	chrome-gnome-shell opam openjdk-8-jre lm-sensors synaptic gparted gimp \
 	inkscape nautilus-dropbox vlc apt-file autoconf libtool cmake net-tools \
-	sshfs libopenmpi-dev npm libcanberra-gtk-module libcanberra-gtk3-module \
+	sshfs libopenmpi-dev nodejs libcanberra-gtk-module libcanberra-gtk3-module \
 	android-tools-adb android-tools-fastboot libgirepository1.0-dev \
 	virtualbox curl gir1.2-gtop-2.0 gir1.2-networkmanager-1.0 \
 	gir1.2-clutter-1.0 rar libreoffice r-base rename pandoc aptitude \
 	sra-toolkit libxm4 pdfshuffler ttf-mscorefonts-installer openssh-server \
 	nfs-common nfs-kernel-server ghostscript libcurl4-openssl-dev \
 	openjdk-11-jdk-headless python-pip libmagick++-dev cargo libudunits2-dev \
-	libgdal-dev cd-hit"
+	libgdal-dev cd-hit maven ncbi-blast+"
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
 	checkinstall libssl-dev zlib1g-dev libncurses5-dev \
