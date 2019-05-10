@@ -19,7 +19,7 @@ export CUDA_PYTHON3_PACKAGES=pycuda scikit-cuda \
 
 export JUPYTER_PACKAGES=jupyter jupyterlab ipykernel nbopen rise
 
-export PERL_PACKAGES=App::cpanminus
+export PERL_PACKAGES=App::cpanminus CPAN
 
 export PERL_CPANM=App::cpanoutdated \
 	JSON Math::CDF HTML::Template XML::Compile::SOAP11 \
