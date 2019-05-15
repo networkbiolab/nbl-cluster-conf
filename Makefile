@@ -30,7 +30,7 @@ export R_PACKAGES=tidyverse knitr rmarkdown gridExtra plotly Cairo ggpubr ape \
     d3heatmap dendextend DEoptimR diptest fastmatch flexmix fpc kernlab mclust mds \
     modeltools mvtnorm NLP phangorn pheatmap plotrix PMCMR png prabclus \
     qdapDictionaries qdapRegex quadprog rafalib reports robustbase rvcheck segmented \
-    seqinr slam tidytree trimcluster UpSetR wordcloud freetypeharfbuzz
+    seqinr slam tidytree trimcluster UpSetR wordcloud freetypeharfbuzz EQUIVNONINF
 
 export BIOCONDUCTOR=dada2 edgeR phyloseq DESeq DESeq2 microbiome \
 	BiocVersion ggtree graph hypergraph treeio metagenomeSeq SIAMCAT \
