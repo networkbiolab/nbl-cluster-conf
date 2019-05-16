@@ -103,6 +103,18 @@ local-pip3-install:
 		$$D1/opt/python-3.6.5/bin/pip3 install $$package --upgrade;
 		$$D1/opt/python-3.7.0/bin/pip3 install $$package --upgrade; done
 
+system-jupyter-install:
+	for package in $$JUPYTER_PACKAGES; do \
+		sudo -H pip3 install $$package --upgrade; done
+
+	# install python3.6.5 kernel
+	python3 -m ipykernel install --user
+	python3 -m nbopen.install_xdg
+
+	# install and enable rise
+	sudo jupyter-nbextension install rise --py --sys-prefix
+	sudo jupyter-nbextension enable rise --py --sys-prefix
+
 cuda-install:
 	cd $$D1/opt/ubuntu-software
 
