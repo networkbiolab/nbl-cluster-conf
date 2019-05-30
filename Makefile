@@ -59,7 +59,7 @@ apt-install:
 	sra-toolkit libxm4 pdfshuffler ttf-mscorefonts-installer openssh-server \
 	nfs-common nfs-kernel-server ghostscript libcurl4-openssl-dev \
 	openjdk-11-jdk-headless python-pip libmagick++-dev cargo libudunits2-dev \
-	libgdal-dev cd-hit maven ncbi-blast+"
+	libgdal-dev cd-hit maven ncbi-blast+ biom-format-tools"
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
 	checkinstall libssl-dev zlib1g-dev libncurses5-dev \
