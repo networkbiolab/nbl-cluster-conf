@@ -7,9 +7,9 @@ export PYTHON3_PACKAGES=pip numpy pandas nose python-libsbml \
 	cobra escher seaborn pillow bokeh dnaplotlib pysb \
 	biopython openpyxl xlrd fastcluster scikit-bio \
 	scikit-learn rpy2 tzlocal networkx cutadapt \
-	libroadrunner distributed statsmodels
+	libroadrunner distributed statsmodels biom-format
 
-export PYTHON2_PACKAGES=pip qiime
+export PYTHON2_PACKAGES=pip qiime biom-format msgpack
 
 export DEV_PYTHON_PACKAGES=testresources twine sphinx sphinx-autobuild \
 	sphinx_rtd_theme versioneer pylint autopep8
