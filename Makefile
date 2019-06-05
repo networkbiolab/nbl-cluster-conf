@@ -30,7 +30,8 @@ export R_PACKAGES=tidyverse knitr rmarkdown gridExtra plotly Cairo ggpubr ape \
     d3heatmap dendextend DEoptimR diptest fastmatch flexmix fpc kernlab mclust mds \
     modeltools mvtnorm NLP phangorn pheatmap plotrix PMCMR png prabclus \
     qdapDictionaries qdapRegex quadprog rafalib reports robustbase rvcheck segmented \
-    seqinr slam tidytree trimcluster UpSetR wordcloud freetypeharfbuzz EQUIVNONINF
+    seqinr slam tidytree trimcluster UpSetR wordcloud freetypeharfbuzz EQUIVNONINF \
+	ggplot2
 
 export BIOCONDUCTOR=dada2 edgeR phyloseq DESeq DESeq2 microbiome \
 	BiocVersion ggtree graph hypergraph treeio metagenomeSeq SIAMCAT \
@@ -59,7 +60,7 @@ apt-install:
 	sra-toolkit libxm4 pdfshuffler ttf-mscorefonts-installer openssh-server \
 	nfs-common nfs-kernel-server ghostscript libcurl4-openssl-dev \
 	openjdk-11-jdk-headless python-pip libmagick++-dev cargo libudunits2-dev \
-	libgdal-dev cd-hit maven ncbi-blast+"
+	libgdal-dev cd-hit maven ncbi-blast+ ea-utils"
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
 	checkinstall libssl-dev zlib1g-dev libncurses5-dev \
@@ -246,6 +247,12 @@ r-kernels-jupyter:
 	IRkernel::installspec(name = 'cran')"
 
 .ONESHELL:
+slurm-mungekey:
+	if [[ "$(HOST)" == "nbl1" ]] ; then
+		dd if=/dev/urandom bs=1 count=1024 > ./munge.key
+	fi
+
+.ONESHELL:
 slurm-install:
 	sudo apt-get -y remove --purge munge slurm-wlm slurmdbd
 	sudo apt-get -y autoremove
@@ -255,10 +262,10 @@ slurm-install:
 slurm-conf:
 	sudo systemctl stop munge
 	sudo systemctl stop slurmd
+	sudo systemctl stop slurmdbd
 
 	if [[ "$(HOST)" == "nbl1" ]] ; then
 		sudo systemctl stop slurmctld
-		sudo systemctl stop slurmdbd
 	fi
 
 	sudo rm -rf /var/lib/slurm-llnl /var/run/slurm-llnl /var/log/slurm-llnl
@@ -281,10 +288,6 @@ slurm-conf:
 	sudo chown -R slurm:slurm /var/log/slurm-llnl/
 
 	sudo cp slurm.conf gres.conf /etc/slurm-llnl/
-
-	if [[ "$(HOST)" == "nbl1" ]] ; then
-		dd if=/dev/urandom bs=1 count=1024 > ./munge.key
-	fi
 
 	sudo rsync -avu -P munge.key /etc/munge/munge.key
 	sudo chown munge:munge /etc/munge/munge.key
