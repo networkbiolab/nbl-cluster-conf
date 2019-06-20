@@ -7,7 +7,7 @@ export PYTHON3_PACKAGES=pip numpy pandas nose python-libsbml \
 	cobra escher seaborn pillow bokeh dnaplotlib pysb \
 	biopython openpyxl xlrd fastcluster scikit-bio \
 	scikit-learn rpy2 tzlocal networkx cutadapt \
-	libroadrunner distributed statsmodels biom-format \ 
+	libroadrunner distributed statsmodels biom-format \
 	seqmagick pygtrie
 
 export PYTHON2_PACKAGES=pip qiime biom-format msgpack
@@ -61,7 +61,7 @@ apt-install:
 	nfs-common nfs-kernel-server ghostscript libcurl4-openssl-dev \
 	openjdk-11-jdk-headless python-pip libmagick++-dev cargo libudunits2-dev \
 	libgdal-dev cd-hit maven ncbi-blast+ biom-format-tools ocamlbuild \
-	libhpdf-dev infernal"
+	libhpdf-dev infernal flex bison"
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
 	checkinstall libssl-dev zlib1g-dev libncurses5-dev \
