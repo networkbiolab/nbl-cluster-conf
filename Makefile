@@ -7,7 +7,8 @@ export PYTHON3_PACKAGES=pip numpy pandas nose python-libsbml \
 	cobra escher seaborn pillow bokeh dnaplotlib pysb \
 	biopython openpyxl xlrd fastcluster scikit-bio \
 	scikit-learn rpy2 tzlocal networkx cutadapt \
-	libroadrunner distributed statsmodels biom-format
+	libroadrunner distributed statsmodels biom-format \ 
+	seqmagick pygtrie
 
 export PYTHON2_PACKAGES=pip qiime biom-format msgpack
 
