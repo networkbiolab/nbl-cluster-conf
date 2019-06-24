@@ -8,7 +8,7 @@ export PYTHON3_PACKAGES=pip numpy pandas nose python-libsbml \
 	biopython openpyxl xlrd fastcluster scikit-bio \
 	scikit-learn rpy2 tzlocal networkx cutadapt \
 	libroadrunner distributed statsmodels biom-format \
-	seqmagick pygtrie
+	seqmagick pygtrie xgboost
 
 export PYTHON2_PACKAGES=pip qiime biom-format msgpack
 
@@ -31,7 +31,8 @@ export R_PACKAGES=tidyverse knitr rmarkdown gridExtra plotly Cairo ggpubr ape \
     d3heatmap dendextend DEoptimR diptest fastmatch flexmix fpc kernlab mclust mds \
     modeltools mvtnorm NLP phangorn pheatmap plotrix PMCMR png prabclus \
     qdapDictionaries qdapRegex quadprog rafalib reports robustbase rvcheck segmented \
-    seqinr slam tidytree trimcluster UpSetR wordcloud freetypeharfbuzz EQUIVNONINF
+    seqinr slam tidytree trimcluster UpSetR wordcloud freetypeharfbuzz EQUIVNONINF \
+	xgboost
 
 export BIOCONDUCTOR=dada2 edgeR phyloseq DESeq DESeq2 microbiome \
 	BiocVersion ggtree graph hypergraph treeio metagenomeSeq SIAMCAT \
