@@ -63,7 +63,7 @@ apt-install:
 	openjdk-11-jdk-headless python-pip libmagick++-dev cargo libudunits2-dev \
 	libgdal-dev cd-hit maven ncbi-blast+ biom-format-tools ocamlbuild \
 	libhpdf-dev infernal flex bison python-tk dejagnu bowtie kmc libatlas-base-dev\
-	tophat cufflinks"
+	tophat cufflinks libboost-all-dev"
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
 	checkinstall libssl-dev zlib1g-dev libncurses5-dev \
