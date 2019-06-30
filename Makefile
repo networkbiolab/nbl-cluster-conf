@@ -25,7 +25,7 @@ export PERL_PACKAGES=App::cpanminus CPAN
 export PERL_CPANM=App::cpanoutdated \
 	JSON Math::CDF HTML::Template XML::Compile::SOAP11 \
 	XML::Compile::WSDL11 XML::Compile::Transport::SOAPHTTP Bio::Perl \
-	Statistics::R Bio::DB::Taxonomy
+	Statistics::R Bio::DB::Taxonomy XML::LibXML
 
 export R_PACKAGES=tidyverse knitr rmarkdown gridExtra plotly Cairo ggpubr ape \
 	biom optparse RColorBrewer randomForest vegan apcluster chron compare compute.es \
