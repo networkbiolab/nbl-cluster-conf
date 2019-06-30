@@ -24,7 +24,8 @@ export PERL_PACKAGES=App::cpanminus CPAN
 
 export PERL_CPANM=App::cpanoutdated \
 	JSON Math::CDF HTML::Template XML::Compile::SOAP11 \
-	XML::Compile::WSDL11 XML::Compile::Transport::SOAPHTTP Bio::Perl
+	XML::Compile::WSDL11 XML::Compile::Transport::SOAPHTTP Bio::Perl \
+	Statistics::R Bio::DB::Taxonomy
 
 export R_PACKAGES=tidyverse knitr rmarkdown gridExtra plotly Cairo ggpubr ape \
 	biom optparse RColorBrewer randomForest vegan apcluster chron compare compute.es \
@@ -51,7 +52,7 @@ apt-install:
 	sudo apt -y dist-upgrade
 	sudo apt -y remove xul-ext-ubufox gedit
 
-	APTS="ant apt-file aptitude autoconf baobab biom-format-tools bison bowtie bowtie2 cargo  \
+	APTS="ant apt-file aptitude autoconf baobab biom-format-tools bison bowtie bowtie2 cargo \
 		cd-hit chrome-gnome-shell cmake cufflinks curl dejagnu ea-utils fasttree flex  \
 		ghostscript gimp gir1.2-clutter-1.0 gir1.2-gtop-2.0 gir1.2-networkmanager-1.0  \
 		gnome-themes-standard gnome-tweak-tool gparted htop infernal inkscape kate kmc  \
