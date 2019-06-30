@@ -22,7 +22,7 @@ export JUPYTER_PACKAGES=jupyter jupyterlab ipykernel nbopen rise
 
 export PERL_PACKAGES=App::cpanminus CPAN
 
-export PERL_CPANM=App::cpanoutdated \
+export PERL_CPANM=App::cpanoutdated Test::Pod::Coverage \
 	JSON Math::CDF HTML::Template XML::Compile::SOAP11 \
 	XML::Compile::WSDL11 XML::Compile::Transport::SOAPHTTP Bio::Perl \
 	Statistics::R Bio::DB::Taxonomy XML::LibXML
