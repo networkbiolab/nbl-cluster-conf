@@ -8,9 +8,9 @@ export PYTHON3_PACKAGES=pip numpy pandas nose python-libsbml \
 	biopython openpyxl xlrd fastcluster scikit-bio \
 	scikit-learn rpy2 tzlocal networkx cutadapt \
 	libroadrunner distributed statsmodels biom-format \
-	seqmagick pygtrie xgboost kneaddata
+	seqmagick pygtrie xgboost kneaddata humann2
 
-export PYTHON2_PACKAGES=pip qiime biom-format msgpack xgboost kneaddata
+export PYTHON2_PACKAGES=pip qiime biom-format msgpack xgboost kneaddata humann2
 
 export DEV_PYTHON_PACKAGES=testresources twine sphinx sphinx-autobuild \
 	sphinx_rtd_theme versioneer pylint autopep8
