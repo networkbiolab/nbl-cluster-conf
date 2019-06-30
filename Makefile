@@ -32,7 +32,7 @@ export R_PACKAGES=tidyverse knitr rmarkdown gridExtra plotly Cairo ggpubr ape \
 	modeltools mvtnorm NLP phangorn pheatmap plotrix PMCMR png prabclus \
 	qdapDictionaries qdapRegex quadprog rafalib reports robustbase rvcheck segmented \
 	seqinr slam tidytree trimcluster UpSetR wordcloud freetypeharfbuzz EQUIVNONINF \
-	xgboost
+	xgboost ROCR
 
 export BIOCONDUCTOR=dada2 edgeR phyloseq DESeq DESeq2 microbiome \
 	BiocVersion ggtree graph hypergraph treeio metagenomeSeq SIAMCAT \
@@ -51,7 +51,7 @@ apt-install:
 	sudo apt -y dist-upgrade
 	sudo apt -y remove xul-ext-ubufox gedit
 
-	APTS="ant apt-file aptitude autoconf baobab biom-format-tools bison bowtie cargo  \
+	APTS="ant apt-file aptitude autoconf baobab biom-format-tools bison bowtie bowtie2 cargo  \
 		cd-hit chrome-gnome-shell cmake cufflinks curl dejagnu ea-utils fasttree flex  \
 		ghostscript gimp gir1.2-clutter-1.0 gir1.2-gtop-2.0 gir1.2-networkmanager-1.0  \
 		gnome-themes-standard gnome-tweak-tool gparted htop infernal inkscape kate kmc  \
