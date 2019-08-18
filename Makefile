@@ -67,7 +67,7 @@ apt-install:
 		rename ruby speedtest-cli sra-toolkit sshfs synaptic tophat \
 		ttf-mscorefonts-installer virtualbox vlc emboss bioperl ncbi-blast+ gzip unzip \
 		libjson-perl libtext-csv-perl libfile-slurp-perl liblwp-protocol-https-perl \
-		libwww-perl bcftools bamtools samtools"
+		libwww-perl bcftools bamtools samtools bedtools"
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
 	checkinstall libssl-dev zlib1g-dev libncurses5-dev \
