@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 HOST=$(shell hostname)
 
-export D1=/shared/D1
+export D1=/
 
 export PYTHON3_PACKAGES=pip numpy pandas nose python-libsbml \
 	cobra escher seaborn pillow bokeh dnaplotlib pysb \
@@ -16,16 +16,16 @@ export DEV_PYTHON_PACKAGES=testresources twine sphinx sphinx-autobuild \
 	sphinx_rtd_theme versioneer pylint autopep8
 
 export CUDA_PYTHON3_PACKAGES=pycuda scikit-cuda \
-	torchvision tensorflow-gpu theano cntk-gpu keras
+	torch torchvision tensorflow-gpu theano cntk-gpu keras
 
 export JUPYTER_PACKAGES=jupyter jupyterlab ipykernel nbopen rise
 
 export PERL_PACKAGES=App::cpanminus CPAN
 
-export PERL_CPANM=App::cpanoutdated Test::Pod::Coverage \
-	JSON Math::CDF HTML::Template XML::Compile::SOAP11 \
-	XML::Compile::WSDL11 XML::Compile::Transport::SOAPHTTP Bio::Perl \
-	Statistics::R Bio::DB::Taxonomy XML::LibXML
+export PERL_CPANM=App::cpanoutdated Test::Pod::Coverage JSON Math::CDF HTML::Template \
+	XML::Compile::SOAP11 XML::Compile::WSDL11 XML::Compile::Transport::SOAPHTTP \
+	Bio::Perl Statistics::R Bio::DB::Taxonomy XML::LibXML LWP::Simple Text::CSV \
+	Bio::Perl JSON File::Slurp
 
 export R_PACKAGES=tidyverse knitr rmarkdown gridExtra plotly Cairo ggpubr ape \
 	biom optparse RColorBrewer randomForest vegan apcluster chron compare compute.es \
@@ -52,20 +52,22 @@ apt-install:
 	sudo apt -y dist-upgrade
 	sudo apt -y remove xul-ext-ubufox gedit
 
-	APTS="ant apt-file aptitude autoconf baobab biom-format-tools bison bowtie bowtie2 cargo \
-		cd-hit chrome-gnome-shell cmake cufflinks curl dejagnu ea-utils fasttree flex  \
-		ghostscript gimp gir1.2-clutter-1.0 gir1.2-gtop-2.0 gir1.2-networkmanager-1.0  \
-		gnome-themes-standard gnome-tweak-tool gparted htop infernal inkscape kate kmc  \
-		kompare lftp libatlas-base-dev libboost-all-dev libcanberra-gtk-module  \
-		libcanberra-gtk3-module libcereal-dev libcurl4-openssl-dev libdivsufsort-dev  \
-		libgdal-dev libgirepository1.0-dev libgsl-dev libhpdf-dev libjemalloc-dev  \
-		libkrb5-dev libmagick++-dev libopenmpi-dev libreoffice libstaden-read-dev  \
-		libtbb-dev libtool libudunits2-dev libxm4 lm-sensors mafft maven  \
-		nautilus-dropbox ncbi-blast+ net-tools nfs-common nfs-kernel-server nodejs  \
-		ocamlbuild opam openjdk-11-jdk-headless openjdk-8-jdk openjdk-8-jre  \
-		openssh-server pandoc pdfshuffler python-pip python-tk r-base rar rename ruby  \
-		speedtest-cli sra-toolkit sshfs synaptic tophat ttf-mscorefonts-installer  \
-		virtualbox vlc"
+	APTS="ant apt-file aptitude autoconf baobab biom-format-tools bison bowtie bowtie2 \
+		cargo cd-hit chrome-gnome-shell cmake cufflinks curl dejagnu ea-utils fasttree \
+		flex ghostscript gimp gir1.2-clutter-1.0 gir1.2-gtop-2.0 \
+		gir1.2-networkmanager-1.0 gnome-themes-standard gnome-tweak-tool gparted htop \
+		infernal inkscape kate kmc kompare lftp libatlas-base-dev libboost-all-dev \
+		libcanberra-gtk-module libcanberra-gtk3-module libcereal-dev \
+		libcurl4-openssl-dev libdivsufsort-dev libgdal-dev libgirepository1.0-dev \
+		libgsl-dev libhpdf-dev libjemalloc-dev libkrb5-dev libmagick++-dev \
+		libopenmpi-dev libreoffice libstaden-read-dev libtbb-dev libtool libudunits2-dev \
+		libxm4 lm-sensors mafft maven nautilus-dropbox ncbi-blast+ net-tools nfs-common \
+		nfs-kernel-server nodejs ocamlbuild opam openjdk-11-jdk-headless openjdk-8-jdk \
+		openjdk-8-jre openssh-server pandoc pdfshuffler python-pip python-tk r-base rar \
+		rename ruby speedtest-cli sra-toolkit sshfs synaptic tophat \
+		ttf-mscorefonts-installer virtualbox vlc emboss bioperl ncbi-blast+ gzip unzip \
+		libjson-perl libtext-csv-perl libfile-slurp-perl liblwp-protocol-https-perl \
+		libwww-perl"
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
 	checkinstall libssl-dev zlib1g-dev libncurses5-dev \
@@ -98,7 +100,6 @@ system-pip3-install:
 	for package in $$DEV_PACKAGES; do \
 		sudo -H pip3 install $$package --upgrade; done
 
-	sudo -H pip3 install https://download.pytorch.org/whl/cu100/torch-1.0.1.post2-cp36-cp36m-linux_x86_64.whl
 	for package in $$CUDA_PYTHON3_PACKAGES; do \
 		sudo -H pip3 install $$package --upgrade; done
 
