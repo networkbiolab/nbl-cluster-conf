@@ -58,7 +58,7 @@ apt-install:
 		gir1.2-networkmanager-1.0 gnome-themes-standard gnome-tweak-tool gparted htop \
 		infernal inkscape kate kmc kompare lftp libatlas-base-dev libboost-all-dev \
 		libcanberra-gtk-module libcanberra-gtk3-module libcereal-dev \
-		libcurl4-openssl-dev libdivsufsort-dev libgdal-dev libgirepository1.0-dev \
+		libcurl4-openssl-dev libdivsufsort-dev libgd-dev libgdal-dev libgirepository1.0-dev \
 		libgsl-dev libhpdf-dev libjemalloc-dev libkrb5-dev libmagick++-dev \
 		libopenmpi-dev libreoffice libstaden-read-dev libtbb-dev libtool libudunits2-dev \
 		libxm4 lm-sensors mafft maven nautilus-dropbox ncbi-blast+ net-tools nfs-common \
@@ -91,7 +91,7 @@ latex-install:
 
 system-perl-packages-install:
 	sudo cpan $$PERL_PACKAGES
-	sudo cpanm $$PERL_CPANM
+	sudo cpanm $$PERL_CPANM -n
 
 system-pip3-install:
 	for package in $$PYTHON3_PACKAGES; do \
@@ -132,17 +132,16 @@ cuda-install:
 	sudo apt-key add /var/cuda-repo-10-0-local-10.0.130-410.48/7fa2af80.pub
 	sudo apt update
 	sudo apt -y install cuda
+
 	CUDA_APTS="cuda-toolkit-10-0 cuda-tools-10-0 cuda-runtime-10-0 \
-	cuda-compiler-10-0 cuda-libraries-10-0 cuda-libraries-dev-10-0 \
-	cuda-drivers nvidia-cuda-toolkit"
+		cuda-compiler-10-0 cuda-libraries-10-0 cuda-libraries-dev-10-0 \
+		cuda-drivers nvidia-cuda-toolkit"
+
 	for apt in $$CUDA_APTS; do sudo apt -y install $$apt; done
 	sudo dpkg -i libcudnn7_7.3.1.20-1+cuda10.0_amd64.deb \
-	libcudnn7-dev_7.3.1.20-1+cuda10.0_amd64.deb libcudnn7-doc_7.3.1.20-1+cuda10.0_amd64.deb
+		libcudnn7-dev_7.3.1.20-1+cuda10.0_amd64.deb libcudnn7-doc_7.3.1.20-1+cuda10.0_amd64.deb
 
 local-cuda-pip3-install:
-	$$D1/opt/python-3.6.5/bin/pip3 install https://download.pytorch.org/whl/cu100/torch-1.0.1.post2-cp36-cp36m-linux_x86_64.whl
-	$$D1/opt/python-3.7.0/bin/pip3 install https://download.pytorch.org/whl/cu100/torch-1.0.1.post2-cp37-cp37m-linux_x86_64.whl
-
 	for package in $$CUDA_PYTHON3_PACKAGES; do \
 		$$D1/opt/python-3.6.5/bin/pip3 install $$package --upgrade;
 		$$D1/opt/python-3.7.0/bin/pip3 install $$package --upgrade; done
