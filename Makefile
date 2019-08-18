@@ -25,7 +25,7 @@ export PERL_PACKAGES=App::cpanminus CPAN
 export PERL_CPANM=App::cpanoutdated Test::Pod::Coverage JSON Math::CDF HTML::Template \
 	XML::Compile::SOAP11 XML::Compile::WSDL11 XML::Compile::Transport::SOAPHTTP \
 	Bio::Perl Statistics::R Bio::DB::Taxonomy XML::LibXML LWP::Simple Text::CSV \
-	Bio::Perl JSON File::Slurp
+	Bio::Perl JSON File::Slurp XML::DOM::XPath GD
 
 export R_PACKAGES=tidyverse knitr rmarkdown gridExtra plotly Cairo ggpubr ape \
 	biom optparse RColorBrewer randomForest vegan apcluster chron compare compute.es \
@@ -67,7 +67,7 @@ apt-install:
 		rename ruby speedtest-cli sra-toolkit sshfs synaptic tophat \
 		ttf-mscorefonts-installer virtualbox vlc emboss bioperl ncbi-blast+ gzip unzip \
 		libjson-perl libtext-csv-perl libfile-slurp-perl liblwp-protocol-https-perl \
-		libwww-perl"
+		libwww-perl bcftools bamtools samtools"
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
 	checkinstall libssl-dev zlib1g-dev libncurses5-dev \
