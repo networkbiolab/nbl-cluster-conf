@@ -68,7 +68,7 @@ apt-install:
 		ttf-mscorefonts-installer virtualbox vlc emboss bioperl ncbi-blast+ gzip unzip \
 		libjson-perl libtext-csv-perl libfile-slurp-perl liblwp-protocol-https-perl \
 		libwww-perl bcftools bamtools samtools bedtools barrnap diamond-aligner \
-		capnproto prodigal velvet trimmomatic spades bwa soapdenovo2 sbmltoolbox mash idba libhts-dev fastx-toolkit fastqc artemis"
+		capnproto prodigal velvet trimmomatic spades bwa soapdenovo2 sbmltoolbox mash idba libhts-dev fastx-toolkit fastqc artemis vsearch"
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
 	checkinstall libssl-dev zlib1g-dev libncurses5-dev \
