@@ -52,23 +52,24 @@ apt-install:
 	sudo apt -y dist-upgrade
 	sudo apt -y remove xul-ext-ubufox gedit
 
-	APTS="ant apt-file aptitude autoconf baobab biom-format-tools bison bowtie bowtie2 \
-		cargo cd-hit chrome-gnome-shell cmake cufflinks curl dejagnu ea-utils fasttree \
-		flex ghostscript gimp gir1.2-clutter-1.0 gir1.2-gtop-2.0 \
-		gir1.2-networkmanager-1.0 gnome-themes-standard gnome-tweak-tool gparted htop \
-		infernal inkscape kate kmc kompare lftp libatlas-base-dev libboost-all-dev \
-		libcanberra-gtk-module libcanberra-gtk3-module libcereal-dev \
-		libcurl4-openssl-dev libdivsufsort-dev libgd-dev libgdal-dev libgirepository1.0-dev \
-		libgsl-dev libhpdf-dev libjemalloc-dev libkrb5-dev libmagick++-dev \
-		libopenmpi-dev libreoffice libstaden-read-dev libtbb-dev libtool libudunits2-dev \
-		libxm4 lm-sensors mafft maven nautilus-dropbox ncbi-blast+ net-tools nfs-common \
-		nfs-kernel-server nodejs ocamlbuild opam openjdk-11-jdk-headless openjdk-8-jdk \
-		openjdk-8-jre openssh-server pandoc pdfshuffler python-pip python-tk r-base rar \
-		rename ruby speedtest-cli sra-toolkit sshfs synaptic tophat \
-		ttf-mscorefonts-installer virtualbox vlc emboss bioperl ncbi-blast+ gzip unzip \
-		libjson-perl libtext-csv-perl libfile-slurp-perl liblwp-protocol-https-perl \
-		libwww-perl bcftools bamtools samtools bedtools barrnap diamond-aligner \
-		capnproto prodigal velvet trimmomatic spades bwa soapdenovo2 sbmltoolbox mash idba libhts-dev fastx-toolkit fastqc artemis vsearch"
+	APTS="ant apt-file aptitude artemis autoconf bamtools baobab barrnap bcftools bedtools\
+		biom-format-tools bioperl bison bowtie bowtie2 bwa capnproto cargo cd-hit\
+		chrome-gnome-shell cmake cufflinks curl dejagnu diamond-aligner ea-utils emboss\
+		fastqc fasttree fastx-toolkit flex ghostscript gimp gir1.2-clutter-1.0\
+		gir1.2-gtop-2.0 gir1.2-networkmanager-1.0 gnome-themes-standard gnome-tweak-tool\
+		gparted gzip hisat2 htop idba infernal inkscape kate kmc kompare lftp\
+		libatlas-base-dev libboost-all-dev libcanberra-gtk3-module\
+		libcanberra-gtk-module libcereal-dev libcurl4-openssl-dev libdivsufsort-dev\
+		libfile-slurp-perl libgdal-dev libgd-dev libgirepository1.0-dev libgsl-dev\
+		libhpdf-dev libhts-dev libjemalloc-dev libjson-perl libkrb5-dev\
+		liblwp-protocol-https-perl libmagick++-dev libopenmpi-dev libreoffice\
+		libstaden-read-dev libtbb-dev libtext-csv-perl libtool libudunits2-dev\
+		libwww-perl libxm4 lm-sensors mafft mash maven nautilus-dropbox ncbi-blast+\
+		ncbi-blast+ net-tools nfs-common nfs-kernel-server nodejs ocamlbuild opam\
+		openjdk-11-jdk-headless openjdk-8-jdk openjdk-8-jre openssh-server pandoc\
+		pdfshuffler prodigal python-pip python-tk rar r-base rename ruby salmon samtools\
+		sbmltoolbox soapdenovo2 spades speedtest-cli sra-toolkit sshfs synaptic tophat\
+		trimmomatic ttf-mscorefonts-installer unzip velvet virtualbox vlc vsearch"
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
 	checkinstall libssl-dev zlib1g-dev libncurses5-dev \
