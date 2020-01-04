@@ -92,53 +92,6 @@ apt-install:
 latex-install:
 	sudo apt-get -y install texstudio texlive-full
 
-system-install-perl-packages:
-	sudo cpan $$PERL_PACKAGES
-	sudo cpanm -n $$PERL_CPANM
-
-system-install-pip3-packages:
-	for package in $$PYTHON3_PACKAGES; do \
-		sudo -H pip3 install $$package --upgrade; done
-
-	for package in $$DEV_PACKAGES; do \
-		sudo -H pip3 install $$package --upgrade; done
-
-system-remove-pip3-packages:
-	for package in $$PYTHON3_PACKAGES; do \
-		sudo -H pip3 uninstall $$package; done
-
-	for package in $$DEV_PACKAGES; do \
-		sudo -H pip3 uninstall $$package; done
-
-system-install-cuda-pip3-packages:
-	for package in $$CUDA_PYTHON3_PACKAGES; do \
-		sudo -H pip3 install $$package --upgrade; done
-
-system-remove-cuda-pip3-packages:
-	for package in $$CUDA_PYTHON3_PACKAGES; do \
-		sudo -H pip3 uninstall $$package; done
-
-local-pip3-install:
-	for package in $$PYTHON3_PACKAGES; do \
-		$$D1/opt/python-3.6.5/bin/pip3 install $$package --upgrade;
-		$$D1/opt/python-3.7.0/bin/pip3 install $$package --upgrade; done
-
-	for package in $$DEV_PACKAGES; do \
-		$$D1/opt/python-3.6.5/bin/pip3 install $$package --upgrade;
-		$$D1/opt/python-3.7.0/bin/pip3 install $$package --upgrade; done
-
-system-jupyter-install:
-	for package in $$JUPYTER_PACKAGES; do \
-		sudo -H pip3 install $$package --upgrade; done
-
-	# install python3.6.5 kernel
-	python3 -m ipykernel install --user
-	python3 -m nbopen.install_xdg
-
-	# install and enable rise
-	sudo jupyter-nbextension install rise --py --sys-prefix
-	sudo jupyter-nbextension enable rise --py --sys-prefix
-
 cuda-install:
 	cd $$D1/opt/ubuntu-software
 
@@ -156,16 +109,91 @@ cuda-install:
 	sudo dpkg -i libcudnn7_7.3.1.20-1+cuda10.0_amd64.deb \
 		libcudnn7-dev_7.3.1.20-1+cuda10.0_amd64.deb libcudnn7-doc_7.3.1.20-1+cuda10.0_amd64.deb
 
-local-cuda-pip3-install:
+
+local-rpackages-install:
+	# install R packages
+	for package in $$R_PACKAGES; do $$D1/bin/R -e \
+		"install.packages('$$package', dependencies = TRUE, repos = 'https://cloud.r-project.org/')"; done
+
+	# install Bioconductor packages
+	$$D1/bin/R -e \
+		"if (!requireNamespace(\"BiocManager\", quietly = TRUE)) \
+		install.packages(\"BiocManager\", dependencies = TRUE, repos = 'https://cloud.r-project.org/')"
+	for package in $$BIOCONDUCTOR; do $$D1/bin/R -e "BiocManager::install(\"$$package\", version = \"3.8\")"; done
+
+.ONESHELL:
+r-kernels-jupyter:
+	/usr/bin/R -e "install.packages(c('crayon', 'pbdZMQ', 'devtools'), \
+	repos = 'https://cloud.r-project.org/', dependencies = TRUE); \
+	library(devtools); \
+	devtools::install('$$D1/opt/repositories/git-reps/IRkernel.IRkernel/R'); \
+	library(IRkernel); \
+	IRkernel::installspec(name = 'cran')"
+
+	$$D1/bin/R -e "install.packages(c('crayon', 'pbdZMQ', 'devtools'), \
+	repos = 'https://cloud.r-project.org/', dependencies = TRUE); \
+	library(devtools); \
+	devtools::install('$$D1/opt/repositories/git-reps/IRkernel.IRkernel/R'); \
+	library(IRkernel); \
+	IRkernel::installspec(name = 'local-cran')"
+
+system-install-perl-packages:
+	sudo cpan $$PERL_PACKAGES
+	sudo cpanm -n $$PERL_CPANM
+
+system-install-pip3-packages:
+	for package in $$PYTHON3_PACKAGES; do \
+		sudo -H /usr/local/bin/pip3 install $$package --upgrade; done
+
+	for package in $$DEV_PACKAGES; do \
+		sudo -H /usr/local/bin/pip3 install $$package --upgrade; done
+
+system-remove-pip3-packages:
+	for package in $$PYTHON3_PACKAGES; do \
+		sudo -H /usr/local/bin/pip3 uninstall $$package; done
+
+	for package in $$DEV_PACKAGES; do \
+		sudo -H /usr/local/bin/pip3 uninstall $$package; done
+
+system-install-cuda-pip3-packages:
+	for package in $$CUDA_PYTHON3_PACKAGES; do \
+		sudo -H /usr/local/bin/pip3 install $$package --upgrade; done
+
+system-remove-cuda-pip3-packages:
+	for package in $$CUDA_PYTHON3_PACKAGES; do \
+		sudo -H /usr/local/bin/pip3 uninstall $$package; done
+
+local-install-pip3-packages:
+	for package in $$PYTHON3_PACKAGES; do \
+		$$D1/opt/python-3.6.5/bin/pip3 install $$package --upgrade;
+		$$D1/opt/python-3.7.0/bin/pip3 install $$package --upgrade; done
+
+	for package in $$DEV_PACKAGES; do \
+		$$D1/opt/python-3.6.5/bin/pip3 install $$package --upgrade;
+		$$D1/opt/python-3.7.0/bin/pip3 install $$package --upgrade; done
+
+local-install-cuda-pip3-packages:
 	for package in $$CUDA_PYTHON3_PACKAGES; do \
 		$$D1/opt/python-3.6.5/bin/pip3 install $$package --upgrade;
 		$$D1/opt/python-3.7.0/bin/pip3 install $$package --upgrade; done
 
-local-jupyter-install:
+system-install-jupyter-packages:
+	for package in $$JUPYTER_PACKAGES; do \
+		sudo -H /usr/local/bin/pip3 install $$package --upgrade; done
+
+	# install python kernel
+	/usr/bin/python3 -m ipykernel install --user
+	/usr/bin/python3 -m nbopen.install_xdg
+
+	# install and enable rise
+	sudo /usr/local/bin/jupyter-nbextension install rise --py --sys-prefix
+	sudo /usr/local/bin/jupyter-nbextension enable rise --py --sys-prefix
+
+local-install-jupyter-packages:
 	for package in $$JUPYTER_PACKAGES; do \
 		$$D1/opt/python-3.6.5/bin/pip3 install $$package --upgrade; done
 
-	# install python3.6.5 kernel
+	# install python kernel
 	$$D1/opt/python-3.6.5/bin/python3 -m ipykernel install --user
 	$$D1/opt/python-3.6.5/bin/python3 -m nbopen.install_xdg
 
@@ -173,6 +201,7 @@ local-jupyter-install:
 	$$D1/opt/python-3.6.5/bin/jupyter-nbextension install rise --py --sys-prefix
 	$$D1/opt/python-3.6.5/bin/jupyter-nbextension enable rise --py --sys-prefix
 
+# install from source python and R
 .ONESHELL:
 python2.7.16-compile:
 	mkdir -p $$D1/opt/ubuntu-software
@@ -247,26 +276,6 @@ r-3.5.2-compile:
 	./configure --prefix=$$D1/opt/r-3.5.2 --enable-R-shlib --with-blas --with-lapack
 	make
 	make install
-
-local-rpackages-install:
-	# install R packages
-	for package in $$R_PACKAGES; do $$D1/bin/R -e \
-		"install.packages('$$package', dependencies = TRUE, repos = 'https://cloud.r-project.org/')"; done
-
-	# install Bioconductor packages
-	$$D1/bin/R -e \
-		"if (!requireNamespace(\"BiocManager\", quietly = TRUE)) \
-		install.packages(\"BiocManager\", dependencies = TRUE, repos = 'https://cloud.r-project.org/')"
-	for package in $$BIOCONDUCTOR; do $$D1/bin/R -e "BiocManager::install(\"$$package\", version = \"3.8\")"; done
-
-.ONESHELL:
-r-kernels-jupyter:
-	$$D1/bin/R -e "install.packages(c('crayon', 'pbdZMQ', 'devtools'), \
-	repos = 'https://cloud.r-project.org/', dependencies = TRUE); \
-	library(devtools); \
-	devtools::install('$$D1/opt/repositories/git-reps/IRkernel.IRkernel/R'); \
-	library(IRkernel); \
-	IRkernel::installspec(name = 'cran-local')"
 
 .ONESHELL:
 slurm-install:
