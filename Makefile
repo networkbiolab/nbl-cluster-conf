@@ -4,7 +4,7 @@ HOST=$(shell hostname)
 export D1=/
 export r_version=3.6.2
 export python3_v=3.8.1
-export $$python2_v=2.7.16
+export python2_v=2.7.17
 
 # use virtual environment for anvio
 export PYTHON3_PACKAGES=pip numpy pandas nose python-libsbml \
