@@ -3,12 +3,13 @@ HOST=$(shell hostname)
 
 export D1=/
 
+# use virtual environment for anvio
 export PYTHON3_PACKAGES=pip numpy pandas nose python-libsbml \
 	cobra escher seaborn pillow bokeh dnaplotlib pysb \
 	biopython openpyxl xlrd fastcluster scikit-bio \
 	scikit-learn rpy2 tzlocal networkx cutadapt \
 	libroadrunner distributed statsmodels biom-format \
-	seqmagick pygtrie xgboost kneaddata humann2
+	seqmagick pygtrie xgboost kneaddata humann2 pysundials
 
 export PYTHON2_PACKAGES=pip qiime biom-format msgpack xgboost kneaddata humann2
 
@@ -25,7 +26,7 @@ export PERL_PACKAGES=App::cpanminus CPAN
 export PERL_CPANM=App::cpanoutdated Test::Pod::Coverage JSON Math::CDF HTML::Template \
 	XML::Compile::SOAP11 XML::Compile::WSDL11 XML::Compile::Transport::SOAPHTTP \
 	Bio::Perl Statistics::R Bio::DB::Taxonomy XML::LibXML LWP::Simple Text::CSV \
-	Bio::Perl JSON File::Slurp XML::DOM::XPath GD
+	Bio::Perl JSON File::Slurp XML::DOM::XPath GD App::Cmd::Setup
 
 export R_PACKAGES=tidyverse knitr rmarkdown gridExtra plotly Cairo ggpubr ape \
 	biom optparse RColorBrewer randomForest vegan apcluster chron compare compute.es \
@@ -69,7 +70,9 @@ apt-install:
 		openjdk-11-jdk-headless openjdk-8-jdk openjdk-8-jre openssh-server pandoc\
 		pdfshuffler prodigal python-pip python-tk rar r-base rename ruby salmon samtools\
 		sbmltoolbox soapdenovo2 spades speedtest-cli sra-toolkit sshfs synaptic tophat\
-		trimmomatic ttf-mscorefonts-installer unzip velvet virtualbox vlc vsearch"
+		trimmomatic ttf-mscorefonts-installer unzip velvet virtualbox vlc vsearch\
+		python-numpy cython libblas-dev liblapacke gfortran\
+		libopenblas-dev liblapack-dev zlibc zlib1g-dev zlib1g sqlite sqlite3 libhdf5-serial-dev libsundials-dev"
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
 	checkinstall libssl-dev zlib1g-dev libncurses5-dev \
@@ -77,8 +80,6 @@ apt-install:
 	libdb5.3-dev libbz2-dev libexpat1-dev liblzma-dev tk-dev uuid-dev"
 
 	R_DEPS="libcairo2-dev libxt-dev libtiff5-dev libssh2-1-dev libxml2 libxml2-dev"
-
-	OPAM="yojson"
 
 	for apt in $$APTS; do sudo apt -y install $$apt; done
 	for apt in $$PYTHON3_DEPS; do sudo apt -y install $$apt; done
@@ -102,6 +103,7 @@ system-pip3-install:
 	for package in $$DEV_PACKAGES; do \
 		sudo -H pip3 install $$package --upgrade; done
 
+system-pip3-cuda-install:
 	for package in $$CUDA_PYTHON3_PACKAGES; do \
 		sudo -H pip3 install $$package --upgrade; done
 
