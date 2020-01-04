@@ -92,20 +92,31 @@ apt-install:
 latex-install:
 	sudo apt-get -y install texstudio texlive-full
 
-system-perl-packages-install:
+system-install-perl-packages:
 	sudo cpan $$PERL_PACKAGES
-	sudo cpanm $$PERL_CPANM -n
+	sudo cpanm -n $$PERL_CPANM
 
-system-pip3-install:
+system-install-pip3-packages:
 	for package in $$PYTHON3_PACKAGES; do \
 		sudo -H pip3 install $$package --upgrade; done
 
 	for package in $$DEV_PACKAGES; do \
 		sudo -H pip3 install $$package --upgrade; done
 
-system-pip3-cuda-install:
+system-remove-pip3-packages:
+	for package in $$PYTHON3_PACKAGES; do \
+		sudo -H pip3 uninstall $$package; done
+
+	for package in $$DEV_PACKAGES; do \
+		sudo -H pip3 uninstall $$package; done
+
+system-remove-cuda-pip3-packages:
 	for package in $$CUDA_PYTHON3_PACKAGES; do \
 		sudo -H pip3 install $$package --upgrade; done
+
+system-install-cuda-pip3-packages:
+	for package in $$CUDA_PYTHON3_PACKAGES; do \
+		sudo -H pip3 uninstall $$package; done
 
 local-pip3-install:
 	for package in $$PYTHON3_PACKAGES; do \
@@ -237,7 +248,7 @@ r-3.5.2-compile:
 	make
 	make install
 
-local-r-libraries-install:
+local-rpackages-install:
 	# install R packages
 	for package in $$R_PACKAGES; do $$D1/bin/R -e \
 		"install.packages('$$package', dependencies = TRUE, repos = 'https://cloud.r-project.org/')"; done
@@ -253,9 +264,9 @@ r-kernels-jupyter:
 	$$D1/bin/R -e "install.packages(c('crayon', 'pbdZMQ', 'devtools'), \
 	repos = 'https://cloud.r-project.org/', dependencies = TRUE); \
 	library(devtools); \
-	devtools::install('$$D1/opt/github-repositories/IRkernel.IRkernel/R'); \
+	devtools::install('$$D1/opt/repositories/git-reps/IRkernel.IRkernel/R'); \
 	library(IRkernel); \
-	IRkernel::installspec(name = 'cran')"
+	IRkernel::installspec(name = 'cran-local')"
 
 .ONESHELL:
 slurm-install:
@@ -317,17 +328,3 @@ slurm-conf:
 		sudo systemctl stop slurmctld
 		sudo service slurmctld status
 	fi
-
-.ONESHELL:
-others-install:
-	cd $$D1/opt/ubuntu-software/
-
-	sh Anaconda3-5.3.0-Linux-x86_64.sh
-	sh cplex_studio128.linux-x86-64.bin
-	sh Cytoscape_3_7_0_unix.sh
-
-	PTOOLS="pathway-tools-21.5-linux-64-tier1-install"
-	chmod u+x $(PTOOLS); ./$(PTOOLS); chmod u-x $(PTOOLS)
-
-	tar xvzf COPASI-4.24.197-Linux-64bit.tar.gz -C $$D1/opt
-	tar xvzf gurobi8.0.1_linux64.tar.gz -C $$D1/opt
