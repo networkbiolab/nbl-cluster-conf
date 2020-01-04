@@ -110,11 +110,11 @@ system-remove-pip3-packages:
 	for package in $$DEV_PACKAGES; do \
 		sudo -H pip3 uninstall $$package; done
 
-system-remove-cuda-pip3-packages:
+system-install-cuda-pip3-packages:
 	for package in $$CUDA_PYTHON3_PACKAGES; do \
 		sudo -H pip3 install $$package --upgrade; done
 
-system-install-cuda-pip3-packages:
+system-remove-cuda-pip3-packages:
 	for package in $$CUDA_PYTHON3_PACKAGES; do \
 		sudo -H pip3 uninstall $$package; done
 
