@@ -2,6 +2,9 @@ SHELL := /bin/bash
 HOST=$(shell hostname)
 
 export D1=/
+export r_version=3.6.2
+export python3_v=3.8.1
+export $$python2_v=2.7.18
 
 # use virtual environment for anvio
 export PYTHON3_PACKAGES=pip numpy pandas nose python-libsbml \
@@ -109,7 +112,6 @@ cuda-install:
 	sudo dpkg -i libcudnn7_7.3.1.20-1+cuda10.0_amd64.deb \
 		libcudnn7-dev_7.3.1.20-1+cuda10.0_amd64.deb libcudnn7-doc_7.3.1.20-1+cuda10.0_amd64.deb
 
-
 local-rpackages-install:
 	# install R packages
 	for package in $$R_PACKAGES; do $$D1/bin/R -e \
@@ -165,17 +167,14 @@ system-remove-cuda-pip3-packages:
 
 local-install-pip3-packages:
 	for package in $$PYTHON3_PACKAGES; do \
-		$$D1/opt/python-3.6.5/bin/pip3 install $$package --upgrade;
-		$$D1/opt/python-3.7.0/bin/pip3 install $$package --upgrade; done
+		$$D1/opt/python-$$python3_v/bin/pip3 install $$package --upgrade; done
 
 	for package in $$DEV_PACKAGES; do \
-		$$D1/opt/python-3.6.5/bin/pip3 install $$package --upgrade;
-		$$D1/opt/python-3.7.0/bin/pip3 install $$package --upgrade; done
+		$$D1/opt/python-$$python3_v/bin/pip3 install $$package --upgrade; done
 
 local-install-cuda-pip3-packages:
 	for package in $$CUDA_PYTHON3_PACKAGES; do \
-		$$D1/opt/python-3.6.5/bin/pip3 install $$package --upgrade;
-		$$D1/opt/python-3.7.0/bin/pip3 install $$package --upgrade; done
+		$$D1/opt/python-$$python3_v/bin/pip3 install $$package --upgrade; done
 
 system-install-jupyter-packages:
 	for package in $$JUPYTER_PACKAGES; do \
@@ -191,89 +190,59 @@ system-install-jupyter-packages:
 
 local-install-jupyter-packages:
 	for package in $$JUPYTER_PACKAGES; do \
-		$$D1/opt/python-3.6.5/bin/pip3 install $$package --upgrade; done
+		$$D1/opt/$$python3_v/bin/pip3 install $$package --upgrade; done
 
 	# install python kernel
-	$$D1/opt/python-3.6.5/bin/python3 -m ipykernel install --user
-	$$D1/opt/python-3.6.5/bin/python3 -m nbopen.install_xdg
+	$$D1/opt/$$python3_v/bin/python3 -m ipykernel install --user
+	$$D1/opt/$$python3_v/bin/python3 -m nbopen.install_xdg
 
 	# install and enable rise
-	$$D1/opt/python-3.6.5/bin/jupyter-nbextension install rise --py --sys-prefix
-	$$D1/opt/python-3.6.5/bin/jupyter-nbextension enable rise --py --sys-prefix
+	$$D1/opt/$$python3_v/bin/jupyter-nbextension install rise --py --sys-prefix
+	$$D1/opt/$$python3_v/bin/jupyter-nbextension enable rise --py --sys-prefix
 
 # install from source python and R
 .ONESHELL:
-python2.7.16-compile:
+compile-python2:
 	mkdir -p $$D1/opt/ubuntu-software
 
-	wget https://www.python.org/ftp/python/2.7.16/Python-2.7.16.tgz \
-	-O $$D1/opt/ubuntu-software/Python-2.7.16.tgz
-	if [ -d $$D1/opt/Python-2.7.16 ]; then rm -rf $$D1/opt/Python-2.7.16; fi
-	tar xvzf $$D1/opt/ubuntu-software/Python-2.7.16.tgz -C $$D1/opt
-	cd $$D1/opt/Python-2.7.16
+	wget https://www.python.org/ftp/python/$$python2_v/Python-$$python2_v.tgz \
+	-O $$D1/opt/ubuntu-software/Python-$$python2_v.tgz
+	if [ -d $$D1/opt/Python-$$python2_v ]; then rm -rf $$D1/opt/Python-$$python2_v; fi
+	tar xvzf $$D1/opt/ubuntu-software/Python-$$python2_v.tgz -C $$D1/opt
+	cd $$D1/opt/Python-$$python2_v
 	if [ -f Makefile ]; then make clean; fi
-	if [ -d $$D1/opt/python-2.7.16 ]; then rm -rf $$D1/opt/python-2.7.16; fi
-	./configure --prefix=$$D1/opt/python-2.7.16 --enable-optimizations
+	if [ -d $$D1/opt/python-$$python2_v ]; then rm -rf $$D1/opt/python-$$python2_v; fi
+	./configure --prefix=$$D1/opt/python-$$python2_v --enable-optimizations
 	make
 	make install
 
 .ONESHELL:
-python3.6.5-compile:
+compile-python3:
 	mkdir -p $$D1/opt/ubuntu-software
 
-	wget https://www.python.org/ftp/python/3.6.5/Python-3.6.5.tgz \
-	-O $$D1/opt/ubuntu-software/Python-3.6.5.tgz
-	if [ -d $$D1/opt/Python-3.6.5 ]; then rm -rf $$D1/opt/Python-3.6.5; fi
-	tar xvzf $$D1/opt/ubuntu-software/Python-3.6.5.tgz -C $$D1/opt
-	cd $$D1/opt/Python-3.6.5
+	wget https://www.python.org/ftp/python/$$python3_v/Python-$$python3_v.tgz \
+	-O $$D1/opt/ubuntu-software/Python-$$python3_v.tgz
+	if [ -d $$D1/opt/Python-$$python3_v ]; then rm -rf $$D1/opt/Python-$$python3_v; fi
+	tar xvzf $$D1/opt/ubuntu-software/Python-$$python3_v.tgz -C $$D1/opt
+	cd $$D1/opt/Python-$$python3_v
 	if [ -f Makefile ]; then make clean; fi
-	if [ -d $$D1/opt/python-3.6.5 ]; then rm -rf $$D1/opt/python-3.6.5; fi
-	./configure --prefix=$$D1/opt/python-3.6.5 --enable-optimizations
+	if [ -d $$D1/opt/python-$$python3_v ]; then rm -rf $$D1/opt/python-$$python3_v; fi
+	./configure --prefix=$$D1/opt/python-$$python3_v --enable-optimizations
 	make
 	make install
 
 .ONESHELL:
-python3.7.0-compile:
+compile-r-cran:
 	mkdir -p $$D1/opt/ubuntu-software
 
-	wget https://www.python.org/ftp/python/3.7.0/Python-3.7.0.tgz \
-	-O $$D1/opt/ubuntu-software/Python-3.7.0.tgz
-	if [ -d $$D1/opt/Python-3.7.0 ]; then rm -rf $$D1/opt/Python-3.7.0; fi
-	tar xvzf $$D1/opt/ubuntu-software/Python-3.7.0.tgz -C $$D1/opt
-	cd $$D1/opt/Python-3.7.0
+	wget https://cloud.r-project.org/bin/linux/ubuntu/bionic-cran35/r-base_$$r_version.orig.tar.gz \
+	-O $$D1/opt/ubuntu-software/R-$$r_version.tgz
+	if [ -d $$D1/opt/R-$$r_version ]; then rm -rf $$D1/opt/R-$$r_version; fi
+	tar xvzf $$D1/opt/ubuntu-software/R-$$r_version.tgz -C $$D1/opt
+	cd $$D1/opt/R-$$r_version
 	if [ -f Makefile ]; then make clean; fi
-	if [ -d $$D1/opt/python-3.7.0 ]; then rm -rf $$D1/opt/python-3.7.0; fi
-	./configure --prefix=$$D1/opt/python-3.7.0 --enable-optimizations
-	make
-	make install
-
-.ONESHELL:
-r-3.5.0-compile:
-	mkdir -p $$D1/opt/ubuntu-software
-
-	wget https://cloud.r-project.org/bin/linux/ubuntu/bionic-cran35/r-base_3.5.0.orig.tar.gz \
-	-O $$D1/opt/ubuntu-software/R-3.5.0.tgz
-	if [ -d $$D1/opt/R-3.5.0 ]; then rm -rf $$D1/opt/R-3.5.0; fi
-	tar xvzf $$D1/opt/ubuntu-software/R-3.5.0.tgz -C $$D1/opt
-	cd $$D1/opt/R-3.5.0
-	if [ -f Makefile ]; then make clean; fi
-	if [ -d $$D1/opt/r-3.5.0 ]; then rm -rf $$D1/opt/r-3.5.0; fi
-	./configure --prefix=$$D1/opt/r-3.5.0 --enable-R-shlib --with-blas --with-lapack
-	make
-	make install
-
-.ONESHELL:
-r-3.5.2-compile:
-	mkdir -p $$D1/opt/ubuntu-software
-
-	wget https://cloud.r-project.org/bin/linux/ubuntu/bionic-cran35/r-base_3.5.2.orig.tar.gz \
-	-O $$D1/opt/ubuntu-software/R-3.5.2.tgz
-	if [ -d $$D1/opt/R-3.5.2 ]; then rm -rf $$D1/opt/R-3.5.2; fi
-	tar xvzf $$D1/opt/ubuntu-software/R-3.5.2.tgz -C $$D1/opt
-	cd $$D1/opt/R-3.5.2
-	if [ -f Makefile ]; then make clean; fi
-	if [ -d $$D1/opt/r-3.5.2 ]; then rm -rf $$D1/opt/r-3.5.2; fi
-	./configure --prefix=$$D1/opt/r-3.5.2 --enable-R-shlib --with-blas --with-lapack
+	if [ -d $$D1/opt/r-$$r_version ]; then rm -rf $$D1/opt/r-$$r_version; fi
+	./configure --prefix=$$D1/opt/r-$$r_version --enable-R-shlib --with-blas --with-lapack
 	make
 	make install
 
