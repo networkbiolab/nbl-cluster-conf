@@ -67,7 +67,7 @@ apt-install:
 		libfile-slurp-perl libgdal-dev libgd-dev libgirepository1.0-dev libgsl-dev\
 		libhpdf-dev libhts-dev libjemalloc-dev libjson-perl libkrb5-dev\
 		liblwp-protocol-https-perl libmagick++-dev libopenmpi-dev libreoffice\
-		libstaden-read-dev libtbb-dev libtext-csv-perl libtool libudunits2-dev\
+		libstaden-read-dev libsundials-dev libtbb-dev libtext-csv-perl libtool libudunits2-dev\
 		libwww-perl libxm4 lm-sensors mafft mash maven nautilus-dropbox ncbi-blast+\
 		ncbi-blast+ net-tools nfs-common nfs-kernel-server nodejs ocamlbuild opam\
 		openjdk-11-jdk-headless openjdk-8-jdk openjdk-8-jre openssh-server pandoc\
