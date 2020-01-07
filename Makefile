@@ -12,7 +12,7 @@ export PYTHON3_PACKAGES=pip numpy pandas nose python-libsbml \
 	biopython openpyxl xlrd fastcluster scikit-bio \
 	scikit-learn rpy2 tzlocal networkx cutadapt \
 	libroadrunner distributed statsmodels biom-format \
-	seqmagick pygtrie xgboost kneaddata humann2 pysundials
+	seqmagick pygtrie xgboost kneaddata humann2 pysundials keyrings.alt
 
 export PYTHON2_PACKAGES=pip qiime biom-format msgpack xgboost kneaddata humann2
 
