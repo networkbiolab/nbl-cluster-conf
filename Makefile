@@ -71,7 +71,7 @@ apt-install:
 		libwww-perl libxm4 lm-sensors mafft mash maven nautilus-dropbox ncbi-blast+\
 		ncbi-blast+ net-tools nfs-common nfs-kernel-server nodejs ocamlbuild opam\
 		openjdk-11-jdk-headless openjdk-8-jdk openjdk-8-jre openssh-server pandoc\
-		pdfshuffler prodigal python-pip python-tk rar r-base rename ruby salmon samtools\
+		pdfshuffler prodigal python-pip python-tk python3-pip python3-tk rar r-base rename ruby salmon samtools\
 		sbmltoolbox soapdenovo2 spades speedtest-cli sra-toolkit sshfs synaptic tophat\
 		trimmomatic ttf-mscorefonts-installer unzip velvet virtualbox vlc vsearch\
 		python-numpy cython libblas-dev liblapacke gfortran\
@@ -147,14 +147,14 @@ system-install-pip3-packages:
 	for package in $$PYTHON3_PACKAGES; do \
 		sudo -H /usr/local/bin/pip3 install $$package --upgrade; done
 
-	for package in $$DEV_PACKAGES; do \
+	for package in $$DEV_PYTHON_PACKAGES; do \
 		sudo -H /usr/local/bin/pip3 install $$package --upgrade; done
 
 system-remove-pip3-packages:
 	for package in $$PYTHON3_PACKAGES; do \
 		sudo -H /usr/local/bin/pip3 uninstall $$package; done
 
-	for package in $$DEV_PACKAGES; do \
+	for package in $$DEV_PYTHON_PACKAGES; do \
 		sudo -H /usr/local/bin/pip3 uninstall $$package; done
 
 system-install-cuda-pip3-packages:
@@ -169,7 +169,7 @@ local-install-pip3-packages:
 	for package in $$PYTHON3_PACKAGES; do \
 		$$D1/opt/python-$$python3_v/bin/pip3 install $$package --upgrade; done
 
-	for package in $$DEV_PACKAGES; do \
+	for package in $$DEV_PYTHON_PACKAGES; do \
 		$$D1/opt/python-$$python3_v/bin/pip3 install $$package --upgrade; done
 
 local-install-cuda-pip3-packages:
