@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 HOST=$(shell hostname)
 
-export D1=/
+export D1=/shared/D1
 export r_version=3.6.2
 export python3_v=3.8.1
 export python2_v=2.7.17
@@ -17,7 +17,7 @@ export PYTHON3_PACKAGES=pip numpy pandas nose python-libsbml \
 export PYTHON2_PACKAGES=pip qiime biom-format msgpack xgboost kneaddata humann2
 
 export DEV_PYTHON_PACKAGES=testresources twine sphinx sphinx-autobuild \
-	sphinx_rtd_theme versioneer pylint autopep8
+	sphinx_rtd_theme versioneer pylint autopep8 pyscaffold
 
 export CUDA_PYTHON3_PACKAGES=pycuda scikit-cuda \
 	torch torchvision tensorflow-gpu theano cntk-gpu keras
