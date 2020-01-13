@@ -3,13 +3,13 @@ HOST=$(shell hostname)
 
 export D1=/shared/D1
 export r_version=3.6.2
-export python3_v=3.8.1
+export python3_v=3.6.5
 export python2_v=2.7.17
 
 # use virtual environment for anvio
 export PYTHON3_PACKAGES=pip numpy pandas nose python-libsbml \
 	cobra escher seaborn pillow bokeh dnaplotlib pysb \
-	biopython openpyxl xlrd fastcluster scikit-bio \
+	biopython bioservices openpyxl xlrd fastcluster scikit-bio \
 	scikit-learn rpy2 tzlocal networkx cutadapt \
 	libroadrunner distributed statsmodels biom-format \
 	seqmagick pygtrie xgboost kneaddata humann2 pysundials keyrings.alt dask_jobqueue
