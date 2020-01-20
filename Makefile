@@ -106,22 +106,11 @@ cuda-install:
 	sudo apt-key add /var/cuda-repo-10-2-local-10.2.89-440.33.01/7fa2af80.pub
 	sudo apt-get updatesudo apt-get -y install cuda
 
-<<<<<<< HEAD
 	CUDA_APTS="nvidia-cuda-toolkit"
 
 	for apt in $$CUDA_APTS; do sudo apt -y install $$apt; done
 # 	sudo dpkg -i libcudnn7_7.3.1.20-1+cuda10.0_amd64.deb \
 # 		libcudnn7-dev_7.3.1.20-1+cuda10.0_amd64.deb libcudnn7-doc_7.3.1.20-1+cuda10.0_amd64.deb
-=======
-	#CUDA_APTS="cuda-toolkit-10-0 cuda-tools-10-0 cuda-runtime-10-0 \
-	#	cuda-compiler-10-0 cuda-libraries-10-0 cuda-libraries-dev-10-0 \
-	#	cuda-drivers nvidia-cuda-toolkit"
-
-	#for apt in $$CUDA_APTS; do sudo apt -y install $$apt; done
-
-	sudo dpkg -i libcudnn7_7.3.1.20-1+cuda10.0_amd64.deb \
-		libcudnn7-dev_7.3.1.20-1+cuda10.0_amd64.deb libcudnn7-doc_7.3.1.20-1+cuda10.0_amd64.deb
->>>>>>> 926beed012abee4a8f3004f18e56c97b53da0b1f
 
 local-rpackages-install:
 	# install R packages
