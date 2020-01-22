@@ -75,7 +75,8 @@ apt-install:
 		sbmltoolbox soapdenovo2 spades speedtest-cli sra-toolkit sshfs synaptic tophat\
 		trimmomatic ttf-mscorefonts-installer unzip velvet virtualbox vlc vsearch\
 		python-numpy cython libblas-dev liblapacke gfortran\
-		libopenblas-dev liblapack-dev zlibc zlib1g-dev zlib1g sqlite sqlite3 libhdf5-serial-dev libsundials-dev libglfw3-dev mailutils"
+		libopenblas-dev liblapack-dev zlibc zlib1g-dev zlib1g sqlite sqlite3\
+		libsparsehash-dev libhdf5-serial-dev libsundials-dev libglfw3-dev mailutils"
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
 	checkinstall libssl-dev zlib1g-dev libncurses5-dev \
