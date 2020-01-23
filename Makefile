@@ -76,7 +76,9 @@ apt-install:
 		trimmomatic ttf-mscorefonts-installer unzip velvet virtualbox vlc vsearch\
 		python-numpy cython libblas-dev liblapacke gfortran\
 		libopenblas-dev liblapack-dev zlibc zlib1g-dev zlib1g sqlite sqlite3\
-		libsparsehash-dev libhdf5-serial-dev libsundials-dev libglfw3-dev mailutils"
+		libsparsehash-dev libhdf5-serial-dev libsundials-dev libglfw3-dev mailutils\
+		libjemalloc libjemalloc2 libjemalloc-dev gcc-4.8 g++-4.8 libsparsehash-dev roary\
+		libdist-zilla-perl"
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
 	checkinstall libssl-dev zlib1g-dev libncurses5-dev \
