@@ -78,7 +78,7 @@ apt-install:
 		libopenblas-dev liblapack-dev zlibc zlib1g-dev zlib1g sqlite sqlite3\
 		libsparsehash-dev libhdf5-serial-dev libsundials-dev libglfw3-dev mailutils\
 		libjemalloc1 libjemalloc-dev gcc-4.8 g++-4.8 libsparsehash-dev roary\
-		libdist-zilla-perl"
+		libdist-zilla-perl systemtap auditd rubber"
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
 	checkinstall libssl-dev zlib1g-dev libncurses5-dev \
