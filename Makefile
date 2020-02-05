@@ -56,34 +56,34 @@ apt-install:
 	sudo apt -y dist-upgrade
 	sudo apt -y remove xul-ext-ubufox gedit
 
-	APTS="ant apt-file aptitude artemis autoconf bamtools baobab barrnap bcftools bedtools\
-		biom-format-tools bioperl bison bowtie bowtie2 bwa capnproto cargo cd-hit\
-		chrome-gnome-shell cmake cufflinks curl dejagnu diamond-aligner ea-utils emboss\
-		fastqc fasttree fastx-toolkit flex ghostscript gimp gir1.2-clutter-1.0\
-		gir1.2-gtop-2.0 gir1.2-networkmanager-1.0 gnome-themes-standard gnome-tweak-tool\
-		gparted gzip hisat2 htop idba infernal inkscape kate kmc kompare lftp\
-		libatlas-base-dev libboost-all-dev libcanberra-gtk3-module\
-		libcanberra-gtk-module libcereal-dev libcurl4-openssl-dev libdivsufsort-dev\
-		libfile-slurp-perl libgdal-dev libgd-dev libgirepository1.0-dev libgsl-dev\
-		libhpdf-dev libhts-dev libjemalloc-dev libjson-perl libkrb5-dev\
-		liblwp-protocol-https-perl libmagick++-dev libopenmpi-dev libreoffice\
-		libstaden-read-dev libsundials-dev libtbb-dev libtext-csv-perl libtool libudunits2-dev\
-		libwww-perl libxm4 lm-sensors mafft mash maven nautilus-dropbox ncbi-blast+\
-		ncbi-blast+ net-tools nfs-common nfs-kernel-server nodejs ocamlbuild opam\
-		openjdk-11-jdk-headless openjdk-8-jdk openjdk-8-jre openssh-server pandoc\
-		pdfshuffler prodigal python-pip python-tk python3-pip python3-tk rar r-base rename ruby salmon samtools\
-		sbmltoolbox soapdenovo2 spades speedtest-cli sra-toolkit sshfs synaptic tophat\
-		trimmomatic ttf-mscorefonts-installer unzip velvet virtualbox vlc vsearch\
-		python-numpy cython libblas-dev liblapacke gfortran\
-		libopenblas-dev liblapack-dev zlibc zlib1g-dev zlib1g sqlite sqlite3\
-		libsparsehash-dev libhdf5-serial-dev libsundials-dev libglfw3-dev mailutils\
-		libjemalloc1 libjemalloc-dev gcc-4.8 g++-4.8 libsparsehash-dev roary\
-		libdist-zilla-perl systemtap auditd rubber"
+	APTS="ant apt-file aptitude artemis autoconf bamtools baobab barrnap bcftools bedtools \
+		biom-format-tools bioperl bison bowtie bowtie2 bwa capnproto cargo cd-hit \
+		chrome-gnome-shell cmake cufflinks curl dejagnu diamond-aligner ea-utils emboss \
+		fastqc fasttree fastx-toolkit flex ghostscript gimp gir1.2-clutter-1.0 \
+		gir1.2-gtop-2.0 gir1.2-networkmanager-1.0 gnome-themes-standard gnome-tweak-tool \
+		gparted gzip hisat2 htop idba infernal inkscape kate kmc kompare lftp \
+		libatlas-base-dev libboost-all-dev libcanberra-gtk3-module \
+		libcanberra-gtk-module libcereal-dev libcurl4-openssl-dev libdivsufsort-dev \
+		libfile-slurp-perl libgdal-dev libgd-dev libgirepository1.0-dev libgsl-dev \
+		libhpdf-dev libhts-dev libjemalloc-dev libjson-perl libkrb5-dev \
+		liblwp-protocol-https-perl libmagick++-dev libopenmpi-dev libreoffice \
+		libstaden-read-dev libsundials-dev libtbb-dev libtext-csv-perl libtool \
+		libudunits2-dev libwww-perl libxm4 lm-sensors mafft mash maven nautilus-dropbox \
+		ncbi-blast+ ncbi-blast+ net-tools nfs-common nfs-kernel-server nodejs ocamlbuild \
+		opam openjdk-11-jdk-headless openjdk-8-jdk openjdk-8-jre openssh-server pandoc \
+		pdfshuffler prodigal python-pip python-tk python3-pip python3-tk rar r-base \
+		rename ruby salmon samtools sbmltoolbox soapdenovo2 spades speedtest-cli \
+		sra-toolkit sshfs synaptic tophat trimmomatic ttf-mscorefonts-installer unzip \
+		velvet virtualbox vlc vsearch python-numpy cython libblas-dev liblapacke \
+		gfortran libopenblas-dev liblapack-dev zlibc zlib1g-dev zlib1g sqlite sqlite3 \
+		libsparsehash-dev libhdf5-serial-dev libsundials-dev libglfw3-dev mailutils \
+		libjemalloc1 libjemalloc-dev gcc-4.8 g++-4.8 libsparsehash-dev roary \
+		libdist-zilla-perl systemtap auditd rubber ubuntu-server"
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
-	checkinstall libssl-dev zlib1g-dev libncurses5-dev \
-	libncursesw5-dev libreadline-dev libsqlite3-dev libgdbm-dev \
-	libdb5.3-dev libbz2-dev libexpat1-dev liblzma-dev tk-dev uuid-dev"
+		checkinstall libssl-dev zlib1g-dev libncurses5-dev \
+		libncursesw5-dev libreadline-dev libsqlite3-dev libgdbm-dev \
+		libdb5.3-dev libbz2-dev libexpat1-dev liblzma-dev tk-dev uuid-dev"
 
 	R_DEPS="libcairo2-dev libxt-dev libtiff5-dev libssh2-1-dev libxml2 libxml2-dev"
 
@@ -98,16 +98,21 @@ apt-install:
 latex-install:
 	sudo apt-get -y install texstudio texlive-full
 
+cuda-download:
+	cd $$D1/opt/ubuntu-software
+	wget --continue https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin
+	wget --continue http://developer.download.nvidia.com/compute/cuda/10.2/Prod/local_installers/cuda-repo-ubuntu1804-10-2-local-10.2.89-440.33.01_1.0-1_amd64.deb
+
 cuda-install:
 	cd $$D1/opt/ubuntu-software
 
 	sudo apt -y install linux-headers-$(uname -r)
-	wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin
 	sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
-	wget http://developer.download.nvidia.com/compute/cuda/10.2/Prod/local_installers/cuda-repo-ubuntu1804-10-2-local-10.2.89-440.33.01_1.0-1_amd64.deb
+
 	sudo dpkg -i cuda-repo-ubuntu1804-10-2-local-10.2.89-440.33.01_1.0-1_amd64.deb
 	sudo apt-key add /var/cuda-repo-10-2-local-10.2.89-440.33.01/7fa2af80.pub
-	sudo apt-get updatesudo apt-get -y install cuda
+	sudo apt-get update
+	sudo apt-get -y install cuda
 
 	CUDA_APTS="nvidia-cuda-toolkit"
 
@@ -117,14 +122,14 @@ cuda-install:
 
 local-rpackages-install:
 	# install R packages
-	for package in $$R_PACKAGES; do $$D1/bin/R -e \
+	for package in $$R_PACKAGES; do $$D1/opt/R-$$r_version/bin/R -e \
 		"install.packages('$$package', dependencies = TRUE, repos = 'https://cloud.r-project.org/')"; done
 
 	# install Bioconductor packages
-	$$D1/bin/R -e \
+	$$D1/opt/R-$$r_version/R -e \
 		"if (!requireNamespace(\"BiocManager\", quietly = TRUE)) \
 		install.packages(\"BiocManager\", dependencies = TRUE, repos = 'https://cloud.r-project.org/')"
-	for package in $$BIOCONDUCTOR; do $$D1/bin/R -e "BiocManager::install(\"$$package\", version = \"3.8\")"; done
+	for package in $$BIOCONDUCTOR; do $$D1/opt/R-$$r_version/bin/R -e "BiocManager::install(\"$$package\", version = \"3.8\")"; done
 
 .ONESHELL:
 r-kernels-jupyter:
@@ -148,25 +153,25 @@ system-install-perl-packages:
 
 system-install-pip3-packages:
 	for package in $$PYTHON3_PACKAGES; do \
-		sudo -H /usr/local/bin/pip3 install $$package --upgrade; done
+		sudo -H pip3 install $$package --upgrade; done
 
 	for package in $$DEV_PYTHON_PACKAGES; do \
-		sudo -H /usr/local/bin/pip3 install $$package --upgrade; done
+		sudo -H pip3 install $$package --upgrade; done
 
 system-remove-pip3-packages:
 	for package in $$PYTHON3_PACKAGES; do \
-		sudo -H /usr/local/bin/pip3 uninstall $$package; done
+		sudo -H pip3 uninstall $$package; done
 
 	for package in $$DEV_PYTHON_PACKAGES; do \
-		sudo -H /usr/local/bin/pip3 uninstall $$package; done
+		sudo -H pip3 uninstall $$package; done
 
 system-install-cuda-pip3-packages:
 	for package in $$CUDA_PYTHON3_PACKAGES; do \
-		sudo -H /usr/local/bin/pip3 install $$package --upgrade; done
+		sudo -H pip3 install $$package --upgrade; done
 
 system-remove-cuda-pip3-packages:
 	for package in $$CUDA_PYTHON3_PACKAGES; do \
-		sudo -H /usr/local/bin/pip3 uninstall $$package; done
+		sudo -H pip3 uninstall $$package; done
 
 local-install-pip3-packages:
 	for package in $$PYTHON3_PACKAGES; do \
@@ -181,27 +186,27 @@ local-install-cuda-pip3-packages:
 
 system-install-jupyter-packages:
 	for package in $$JUPYTER_PACKAGES; do \
-		sudo -H /usr/local/bin/pip3 install $$package --upgrade; done
+		sudo -H pip3 install $$package --upgrade; done
 
 	# install python kernel
 	/usr/bin/python3 -m ipykernel install --user
 	/usr/bin/python3 -m nbopen.install_xdg
 
 	# install and enable rise
-	sudo /usr/local/bin/jupyter-nbextension install rise --py --sys-prefix
-	sudo /usr/local/bin/jupyter-nbextension enable rise --py --sys-prefix
+	sudo jupyter-nbextension install rise --py --sys-prefix
+	sudo jupyter-nbextension enable rise --py --sys-prefix
 
 local-install-jupyter-packages:
 	for package in $$JUPYTER_PACKAGES; do \
-		$$D1/opt/$$python3_v/bin/pip3 install $$package --upgrade; done
+		$$D1/opt/python-$$python3_v/bin/pip3 install $$package --upgrade; done
 
 	# install python kernel
-	$$D1/opt/$$python3_v/bin/python3 -m ipykernel install --user
-	$$D1/opt/$$python3_v/bin/python3 -m nbopen.install_xdg
+	$$D1/opt/python-$$python3_v/bin/python3 -m ipykernel install --user
+	$$D1/opt/python-$$python3_v/bin/python3 -m nbopen.install_xdg
 
 	# install and enable rise
-	$$D1/opt/$$python3_v/bin/jupyter-nbextension install rise --py --sys-prefix
-	$$D1/opt/$$python3_v/bin/jupyter-nbextension enable rise --py --sys-prefix
+	$$D1/opt/python-$$python3_v/bin/jupyter-nbextension install rise --py --sys-prefix
+	$$D1/opt/python-$$python3_v/bin/jupyter-nbextension enable rise --py --sys-prefix
 
 # install from source python and R
 .ONESHELL:
