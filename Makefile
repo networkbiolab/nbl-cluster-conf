@@ -37,7 +37,7 @@ export R_PACKAGES=tidyverse knitr rmarkdown gridExtra plotly Cairo ggpubr ape \
 	modeltools mvtnorm NLP phangorn pheatmap plotrix PMCMR png prabclus \
 	qdapDictionaries qdapRegex quadprog rafalib reports robustbase rvcheck segmented \
 	seqinr slam tidytree trimcluster UpSetR wordcloud freetypeharfbuzz EQUIVNONINF \
-	xgboost ROCR
+	xgboost ROCR BiocManager
 
 export BIOCONDUCTOR=dada2 edgeR phyloseq DESeq DESeq2 microbiome \
 	BiocVersion ggtree graph hypergraph treeio metagenomeSeq SIAMCAT \
@@ -126,21 +126,21 @@ local-rpackages-install:
 		"install.packages('$$package', dependencies = TRUE, repos = 'https://cloud.r-project.org/')"; done
 
 	# install Bioconductor packages
-	$$D1/opt/R-$$r_version/R -e \
-		"if (!requireNamespace(\"BiocManager\", quietly = TRUE)) \
-		install.packages(\"BiocManager\", dependencies = TRUE, repos = 'https://cloud.r-project.org/')"
-	for package in $$BIOCONDUCTOR; do $$D1/opt/R-$$r_version/bin/R -e "BiocManager::install(\"$$package\", version = \"3.8\")"; done
+# 	$$D1/opt/R-$$r_version/bin/R -e \
+# 		"if (!requireNamespace(\"BiocManager\", quietly = TRUE)) \
+# 		+install.packages(\"BiocManager\", dependencies = TRUE, repos = 'https://cloud.r-project.org/')"
+	for package in $$BIOCONDUCTOR; do $$D1/opt/R-$$r_version/bin/R -e "BiocManager::install(\"$$package\", version = \"3.10\")"; done
 
 .ONESHELL:
 r-kernels-jupyter:
-	/usr/bin/R -e "install.packages(c('crayon', 'pbdZMQ', 'devtools'), \
+	R -e "install.packages(c('crayon', 'pbdZMQ', 'devtools'), \
 	repos = 'https://cloud.r-project.org/', dependencies = TRUE); \
 	library(devtools); \
 	devtools::install('$$D1/opt/repositories/git-reps/IRkernel.IRkernel/R'); \
 	library(IRkernel); \
 	IRkernel::installspec(name = 'cran')"
 
-	$$D1/bin/R -e "install.packages(c('crayon', 'pbdZMQ', 'devtools'), \
+	$$D1/opt/R-$$r_version/bin/R -e "install.packages(c('crayon', 'pbdZMQ', 'devtools'), \
 	repos = 'https://cloud.r-project.org/', dependencies = TRUE); \
 	library(devtools); \
 	devtools::install('$$D1/opt/repositories/git-reps/IRkernel.IRkernel/R'); \
