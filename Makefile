@@ -153,44 +153,44 @@ system-install-perl-packages:
 
 system-install-pip3-packages:
 	for package in $$PYTHON3_PACKAGES; do \
-		sudo -H pip3 install $$package --upgrade; done
+		sudo -H python3 -m pip install $$package --upgrade; done
 
 	for package in $$DEV_PYTHON_PACKAGES; do \
-		sudo -H pip3 install $$package --upgrade; done
+		sudo -H python3 -m pip install $$package --upgrade; done
 
 system-remove-pip3-packages:
 	for package in $$PYTHON3_PACKAGES; do \
-		sudo -H pip3 uninstall $$package; done
+		sudo -H python3 -m pip uninstall $$package; done
 
 	for package in $$DEV_PYTHON_PACKAGES; do \
-		sudo -H pip3 uninstall $$package; done
+		sudo -H python3 -m pip uninstall $$package; done
 
 system-install-cuda-pip3-packages:
 	for package in $$CUDA_PYTHON3_PACKAGES; do \
-		sudo -H pip3 install $$package --upgrade; done
+		sudo -H python3 -m pip install $$package --upgrade; done
 
 system-remove-cuda-pip3-packages:
 	for package in $$CUDA_PYTHON3_PACKAGES; do \
-		sudo -H pip3 uninstall $$package; done
+		sudo -H python3 -m pip uninstall $$package; done
 
 local-install-pip3-packages:
 	for package in $$PYTHON3_PACKAGES; do \
-		$$D1/opt/python-$$python3_v/bin/pip3 install $$package --upgrade; done
+		$$D1/opt/python-$$python3_v/bin/python3 -m pip install $$package --upgrade; done
 
 	for package in $$DEV_PYTHON_PACKAGES; do \
-		$$D1/opt/python-$$python3_v/bin/pip3 install $$package --upgrade; done
+		$$D1/opt/python-$$python3_v/bin/python3 -m pip install $$package --upgrade; done
 
 local-install-cuda-pip3-packages:
 	for package in $$CUDA_PYTHON3_PACKAGES; do \
-		$$D1/opt/python-$$python3_v/bin/pip3 install $$package --upgrade; done
+		$$D1/opt/python-$$python3_v/bin/python3 -m pip install $$package --upgrade; done
 
 system-install-jupyter-packages:
 	for package in $$JUPYTER_PACKAGES; do \
-		sudo -H pip3 install $$package --upgrade; done
+		sudo -H python3 -m pip install $$package --upgrade; done
 
 	# install python kernel
-	/usr/bin/python3 -m ipykernel install --user
-	/usr/bin/python3 -m nbopen.install_xdg
+	python3 -m ipykernel install --user
+	python3 -m nbopen.install_xdg
 
 	# install and enable rise
 	sudo jupyter-nbextension install rise --py --sys-prefix
@@ -198,7 +198,7 @@ system-install-jupyter-packages:
 
 local-install-jupyter-packages:
 	for package in $$JUPYTER_PACKAGES; do \
-		$$D1/opt/python-$$python3_v/bin/pip3 install $$package --upgrade; done
+		$$D1/opt/python-$$python3_v/bin/python3 -m pip install $$package --upgrade; done
 
 	# install python kernel
 	$$D1/opt/python-$$python3_v/bin/python3 -m ipykernel install --user
