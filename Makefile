@@ -127,9 +127,8 @@ local-rpackages-install:
 
 	# install Bioconductor packages
 	$$D1/opt/R-$$r_version/bin/R -e \
-		"if (!requireNamespace(\"BiocManager\", quietly = TRUE)) \
-		+install.packages(\"BiocManager\", dependencies = TRUE, repos = 'https://cloud.r-project.org/', update = TRUE, ask = FALSE)"
-	for package in $$BIOCONDUCTOR; do $$D1/opt/R-$$r_version/bin/R -e "BiocManager::install(\"$$package\", version = \"3.10\")"; done
+		"install.packages(\"BiocManager\", dependencies = TRUE, repos = 'https://cloud.r-project.org/', update = TRUE, ask = FALSE)"
+	for package in $$BIOCONDUCTOR; do $$D1/opt/R-$$r_version/bin/R -e "update.packages(ask=F); BiocManager::install(\"$$package\", version = \"3.10\")"; done
 
 .ONESHELL:
 r-kernels-jupyter:
