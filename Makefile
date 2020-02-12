@@ -37,11 +37,11 @@ export R_PACKAGES=tidyverse knitr rmarkdown gridExtra plotly Cairo ggpubr ape \
 	modeltools mvtnorm NLP phangorn pheatmap plotrix PMCMR png prabclus \
 	qdapDictionaries qdapRegex quadprog rafalib reports robustbase rvcheck segmented \
 	seqinr slam tidytree trimcluster UpSetR wordcloud freetypeharfbuzz EQUIVNONINF \
-	xgboost ROCR EnhancedVolcano
+	xgboost ROCR
 
 export BIOCONDUCTOR=dada2 edgeR phyloseq DESeq DESeq2 microbiome \
 	BiocVersion ggtree graph hypergraph treeio metagenomeSeq SIAMCAT \
-	cluster clusterSim
+	cluster clusterSim EnhancedVolcano zinbwave
 
 .ONESHELL:
 test:
