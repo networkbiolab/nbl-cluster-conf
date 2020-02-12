@@ -41,7 +41,8 @@ export R_PACKAGES=tidyverse knitr rmarkdown gridExtra plotly Cairo ggpubr ape \
 
 export BIOCONDUCTOR=dada2 edgeR phyloseq DESeq DESeq2 microbiome \
 	BiocVersion ggtree graph hypergraph treeio metagenomeSeq SIAMCAT \
-	cluster clusterSim EnhancedVolcano zinbwave
+	cluster clusterSim EnhancedVolcano zinbwave scran MAST monocle \
+	ComplexHeatmap slingshot
 
 .ONESHELL:
 test:
