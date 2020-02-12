@@ -2,7 +2,8 @@ SHELL := /bin/bash
 HOST=$(shell hostname)
 
 export D1=/shared/D1
-export r_version=3.6.2
+export r_version=3.5.0
+export bioconductor_v=3.7
 export python3_v=3.6.5
 export python2_v=2.7.17
 
@@ -129,7 +130,7 @@ local-rpackages-install:
 	# install Bioconductor packages
 	$$D1/opt/R-$$r_version/bin/R -e \
 		"install.packages(\"BiocManager\", dependencies = TRUE, repos = 'https://cloud.r-project.org/', update = TRUE, ask = FALSE)"
-	for package in $$BIOCONDUCTOR; do $$D1/opt/R-$$r_version/bin/R -e "update.packages(ask=F); BiocManager::install(\"$$package\", version = \"3.10\")"; done
+	for package in $$BIOCONDUCTOR; do $$D1/opt/R-$$r_version/bin/R -e "BiocManager::install(\"$$package\", version = \"$$bioconductor_v\")"; done
 
 .ONESHELL:
 r-kernels-jupyter:
