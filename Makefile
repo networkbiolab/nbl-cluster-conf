@@ -25,7 +25,7 @@ export DEV_PYTHON_PACKAGES=testresources twine sphinx sphinx-autobuild \
 export CUDA_PYTHON3_PACKAGES=pycuda scikit-cuda \
 	torch torchvision tensorflow-gpu theano cntk-gpu keras
 
-export JUPYTER_PACKAGES=jupyter jupyterlab ipykernel nbopen rise
+export JUPYTER_PACKAGES=jupyter jupyterlab ipykernel nbopen rise nbserverproxy jupyter_nbextensions_configurator
 
 export PERL_PACKAGES=App::cpanminus CPAN
 
