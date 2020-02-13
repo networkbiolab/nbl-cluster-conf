@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 HOST=$(shell hostname)
 
-export D1=/shared/D1
+export D1=/
 export r_version=3.6.2
 export bioconductor_v=3.5 # for R 3.4
 export python3_v=3.6.5
@@ -13,7 +13,9 @@ export PYTHON3_PACKAGES=pip numpy pandas nose python-libsbml \
 	biopython bioservices openpyxl xlrd fastcluster scikit-bio \
 	scikit-learn rpy2 tzlocal networkx cutadapt \
 	libroadrunner distributed statsmodels biom-format \
-	seqmagick pygtrie xgboost kneaddata humann2 pysundials keyrings.alt dask_jobqueue
+	seqmagick pygtrie xgboost kneaddata humann2 pysundials \
+	keyrings.alt dask_jobqueue scanpy louvain python-igraph \
+	gprofiler-official anndata2ri
 
 export PYTHON2_PACKAGES=pip qiime biom-format msgpack xgboost kneaddata humann2
 
@@ -262,7 +264,7 @@ compile-r-cran:
 	cd $$D1/opt/R-$$r_version
 	if [ -f Makefile ]; then make clean; fi
 	if [ -d $$D1/opt/r-$$r_version ]; then rm -rf $$D1/opt/r-$$r_version; fi
-	./configure --prefix=$$D1/opt/r-$$r_version --enable-R-shlib --with-blas --with-lapack
+	./configure --prefix=$$D1/opt/r-$$r_version --enable-R-shlib --enable-R-static-lib --with-blas --with-lapack
 	make
 	make install
 
