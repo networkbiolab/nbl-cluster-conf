@@ -42,7 +42,7 @@ export R_PACKAGES=tidyverse knitr rmarkdown gridExtra plotly Cairo ggpubr ape \
 	seqinr slam tidytree trimcluster UpSetR wordcloud freetypeharfbuzz EQUIVNONINF \
 	xgboost ROCR
 
-export BIOCONDUCTOR=dada2 edgeR phyloseq DESeq DESeq2 microbiome \
+export BIOCONDUCTOR=gam clusterExperiment dada2 edgeR phyloseq DESeq DESeq2 microbiome \
 	BiocVersion ggtree graph hypergraph treeio metagenomeSeq SIAMCAT \
 	cluster clusterSim EnhancedVolcano zinbwave scran MAST monocle \
 	ComplexHeatmap slingshot
