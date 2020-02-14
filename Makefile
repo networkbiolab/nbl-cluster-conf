@@ -3,7 +3,7 @@ HOST=$(shell hostname)
 
 export D1=/
 export r_version=3.6.2
-export bioconductor_v=3.5 # for R 3.4
+export bioconductor_v=3.10
 export python3_v=3.6.5
 export python2_v=2.7.17
 
@@ -124,47 +124,57 @@ cuda-install:
 # 	sudo dpkg -i libcudnn7_7.3.1.20-1+cuda10.0_amd64.deb \
 # 		libcudnn7-dev_7.3.1.20-1+cuda10.0_amd64.deb libcudnn7-doc_7.3.1.20-1+cuda10.0_amd64.deb
 
+.ONESHELL:
 local-rpackages-install:
 	# install R packages
 	for package in $$R_PACKAGES; do $$D1/opt/R-$$r_version/bin/R -e \
-		"install.packages('$$package', dependencies = TRUE, repos = 'https://cloud.r-project.org/')"; done
+		"options(Ncpus = 8); install.packages('$$package', dependencies = TRUE, repos = 'https://cloud.r-project.org/')"; done
 
+.ONESHELL:
 local-bioconductor-install:
 	# install Bioconductor packages
 	$$D1/opt/R-$$r_version/bin/R -e \
-		"install.packages(\"BiocManager\", dependencies = TRUE, repos = 'https://cloud.r-project.org/', update = TRUE, ask = FALSE)"
-	for package in $$BIOCONDUCTOR; do $$D1/opt/R-$$r_version/bin/R -e "BiocManager::install(\"$$package\", version = \"$$bioconductor_v\")"; done
+		"options(Ncpus = 8); install.packages(\"BiocManager\", \
+		dependencies = TRUE, repos = 'https://cloud.r-project.org/', update = TRUE, ask = FALSE)"
+	for package in $$BIOCONDUCTOR; do $$D1/opt/R-$$r_version/bin/R -e \
+		"options(Ncpus = 8); BiocManager::install(\"$$package\", version = \"$$bioconductor_v\")"; done
 
+.ONESHELL:
 system-rpackages-install:
 	# install R packages
 	for package in $$R_PACKAGES; do sudo R -e \
-		"install.packages('$$package', dependencies = TRUE, repos = 'https://cloud.r-project.org/')"; done
+		"options(Ncpus = 8); install.packages('$$package', dependencies = TRUE, repos = 'https://cloud.r-project.org/')"; done
 
+.ONESHELL:
 system-bioconductor-install:
 	# install Bioconductor packages
-	sudo R -e "install.packages(\"BiocManager\", dependencies = TRUE, repos = 'https://cloud.r-project.org/', update = TRUE, ask = FALSE)"
-	for package in $$BIOCONDUCTOR; do sudo R -e "BiocManager::install(\"$$package\", version = \"$$bioconductor_v\")"; done
+	sudo R -e "options(Ncpus = 8); install.packages(\"BiocManager\", dependencies = TRUE, repos = 'https://cloud.r-project.org/', update = TRUE, ask = FALSE)"
+	for package in $$BIOCONDUCTOR; do sudo R -e "options(Ncpus = 8); BiocManager::install(\"$$package\", version = \"$$bioconductor_v\")"; done
 
 .ONESHELL:
 r-kernels-jupyter:
-	R -e "install.packages(c('crayon', 'pbdZMQ', 'devtools'), \
+	sudo R -e "options(Ncpus = 8); \
+	install.packages(c('crayon', 'pbdZMQ', 'devtools'), \
 	repos = 'https://cloud.r-project.org/', dependencies = TRUE); \
 	library(devtools); \
 	devtools::install('$$D1/opt/repositories/git-reps/IRkernel.IRkernel/R'); \
 	library(IRkernel); \
 	IRkernel::installspec(name = 'cran')"
 
-	$$D1/opt/R-$$r_version/bin/R -e "install.packages(c('crayon', 'pbdZMQ', 'devtools'), \
+	$$D1/opt/R-$$r_version/bin/R -e "options(Ncpus = 8); \
+	install.packages(c('crayon', 'pbdZMQ', 'devtools'), \
 	repos = 'https://cloud.r-project.org/', dependencies = TRUE); \
 	library(devtools); \
 	devtools::install('$$D1/opt/repositories/git-reps/IRkernel.IRkernel/R'); \
 	library(IRkernel); \
 	IRkernel::installspec(name = 'R-$$r_version-local')"
 
+.ONESHELL:
 system-install-perl-packages:
 	sudo cpan $$PERL_PACKAGES
 	sudo cpanm -n $$PERL_CPANM
 
+.ONESHELL:
 system-install-pip3-packages:
 	for package in $$PYTHON3_PACKAGES; do \
 		sudo -H python3 -m pip install $$package --upgrade; done
