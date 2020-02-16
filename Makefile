@@ -34,7 +34,7 @@ export PERL_CPANM=App::cpanoutdated Test::Pod::Coverage JSON Math::CDF HTML::Tem
 	Bio::Perl Statistics::R Bio::DB::Taxonomy XML::LibXML LWP::Simple Text::CSV \
 	Bio::Perl JSON File::Slurp XML::DOM::XPath GD App::Cmd::Setup
 
-export R_PACKAGES=tidyverse knitr rmarkdown gridExtra plotly Cairo ggpubr ape \
+export R_PACKAGES=Rcpp tidyverse knitr rmarkdown gridExtra plotly Cairo ggpubr ape \
 	biom optparse RColorBrewer randomForest vegan apcluster chron compare compute.es \
 	d3heatmap dendextend DEoptimR diptest fastmatch flexmix fpc kernlab mclust mds \
 	modeltools mvtnorm NLP phangorn pheatmap plotrix PMCMR png prabclus \
