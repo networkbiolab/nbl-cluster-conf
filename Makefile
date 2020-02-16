@@ -40,7 +40,7 @@ export R_PACKAGES=Rcpp tidyverse knitr rmarkdown gridExtra plotly Cairo ggpubr a
 	modeltools mvtnorm NLP phangorn pheatmap plotrix PMCMR png prabclus \
 	qdapDictionaries qdapRegex quadprog rafalib reports robustbase rvcheck segmented \
 	seqinr slam tidytree trimcluster UpSetR wordcloud freetypeharfbuzz EQUIVNONINF \
-	xgboost ROCR
+	xgboost ROCR ggplot2
 
 export BIOCONDUCTOR=gam clusterExperiment dada2 edgeR phyloseq DESeq DESeq2 microbiome \
 	BiocVersion ggtree graph hypergraph treeio metagenomeSeq SIAMCAT \
