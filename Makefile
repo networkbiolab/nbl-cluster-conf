@@ -32,7 +32,7 @@ export PERL_PACKAGES=App::cpanminus CPAN
 export PERL_CPANM=App::cpanoutdated Test::Pod::Coverage JSON Math::CDF HTML::Template \
 	XML::Compile::SOAP11 XML::Compile::WSDL11 XML::Compile::Transport::SOAPHTTP \
 	Bio::Perl Statistics::R Bio::DB::Taxonomy XML::LibXML LWP::Simple Text::CSV \
-	Bio::Perl JSON File::Slurp XML::DOM::XPath GD App::Cmd::Setup
+	JSON File::Slurp XML::DOM::XPath GD App::Cmd::Setup Bio::Roary
 
 export R_PACKAGES=Rcpp tidyverse knitr rmarkdown gridExtra plotly Cairo ggpubr ape \
 	biom optparse RColorBrewer randomForest vegan apcluster chron compare compute.es \
