@@ -55,11 +55,6 @@ test:
 
 .ONESHELL:
 apt-install:
-	sudo apt update
-	sudo apt -y upgrade
-	sudo apt -y dist-upgrade
-	sudo apt -y remove xul-ext-ubufox gedit
-
 	APTS="ant apt-file aptitude artemis autoconf bamtools baobab barrnap bcftools bedtools \
 		biom-format-tools bioperl bison bowtie bowtie2 bwa capnproto cargo cd-hit \
 		chrome-gnome-shell cmake cufflinks curl dejagnu diamond-aligner ea-utils emboss \
@@ -81,7 +76,7 @@ apt-install:
 		velvet virtualbox vlc vsearch python-numpy cython libblas-dev liblapacke \
 		gfortran libopenblas-dev liblapack-dev zlibc zlib1g-dev zlib1g sqlite sqlite3 \
 		libsparsehash-dev libhdf5-serial-dev libsundials-dev libglfw3-dev mailutils \
-		libjemalloc1 libjemalloc-dev gcc-4.8 g++-4.8 libsparsehash-dev roary \
+		libjemalloc1 libjemalloc-dev gcc-4.8 g++-4.8 libsparsehash-dev \
 		libdist-zilla-perl systemtap auditd rubber ubuntu-server disper kraken mcl parallel"
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
@@ -91,9 +86,18 @@ apt-install:
 
 	R_DEPS="libcairo2-dev libxt-dev libtiff5-dev libssh2-1-dev libxml2 libxml2-dev"
 
-	for apt in $$APTS; do sudo apt -y install $$apt; done
-	for apt in $$PYTHON3_DEPS; do sudo apt -y install $$apt; done
-	for apt in $$R_DEPS; do sudo apt -y install $$apt; done
+	sudo apt update
+	sudo apt -y upgrade
+	sudo apt -y dist-upgrade
+	sudo apt -y remove xul-ext-ubufox gedit
+
+	RED=$(tput setaf 1)
+	for apt in $$APTS; do printf "\\n %s\\n" "Installing $${apt}";
+		sudo apt -y install $$apt; done
+	for apt in $$PYTHON3_DEPS; do printf "\\n %s\\n" "Installing $${apt}";
+		sudo apt -y install $$apt; done
+	for apt in $$R_DEPS; do printf "\\n %s\\n" "Installing $${apt}";
+		sudo apt -y install $$apt; done
 
 	sudo apt -y autoremove
 	sudo apt -y autoclean
