@@ -15,7 +15,7 @@ export PYTHON3_PACKAGES=pip numpy pandas nose python-libsbml \
 	libroadrunner distributed statsmodels biom-format \
 	seqmagick pygtrie xgboost kneaddata humann2 pysundials \
 	keyrings.alt dask_jobqueue scanpy louvain python-igraph \
-	gprofiler-official anndata2ri symfit
+	gprofiler-official anndata2ri symfit fastai
 
 export PYTHON2_PACKAGES=pip qiime biom-format msgpack xgboost kneaddata humann2
 
@@ -77,7 +77,7 @@ apt-install:
 		gfortran libopenblas-dev liblapack-dev zlibc zlib1g-dev zlib1g sqlite sqlite3 \
 		libsparsehash-dev libhdf5-serial-dev libsundials-dev libglfw3-dev mailutils \
 		libjemalloc1 libjemalloc-dev gcc-4.8 g++-4.8 libsparsehash-dev \
-		libdist-zilla-perl systemtap auditd rubber ubuntu-server disper kraken mcl parallel postfix"
+		libdist-zilla-perl systemtap auditd rubber ubuntu-server disper kraken mcl parallel postfix x11-utils"
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
 		checkinstall libssl-dev zlib1g-dev libncurses5-dev \
