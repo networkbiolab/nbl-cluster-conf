@@ -129,13 +129,13 @@ cuda-install:
 # 		libcudnn7-dev_7.3.1.20-1+cuda10.0_amd64.deb libcudnn7-doc_7.3.1.20-1+cuda10.0_amd64.deb
 
 .ONESHELL:
-local-rpackages-install:
+local-install-rpackages:
 	# install R packages
 	for package in $$R_PACKAGES; do $$D1/opt/R-$$r_version/bin/R -e \
 		"options(Ncpus = 8); install.packages('$$package', dependencies = TRUE, repos = 'https://cloud.r-project.org/')"; done
 
 .ONESHELL:
-local-bioconductor-install:
+local-install-bioconductor:
 	# install Bioconductor packages
 	$$D1/opt/R-$$r_version/bin/R -e \
 		"options(Ncpus = 8); install.packages(\"BiocManager\", \
@@ -144,19 +144,29 @@ local-bioconductor-install:
 		"options(Ncpus = 8); BiocManager::install(\"$$package\", version = \"$$bioconductor_v\")"; done
 
 .ONESHELL:
-system-rpackages-install:
+system-install-rpackages:
 	# install R packages
 	for package in $$R_PACKAGES; do sudo R -e \
 		"options(Ncpus = 8); install.packages('$$package', dependencies = TRUE, repos = 'https://cloud.r-project.org/')"; done
 
 .ONESHELL:
-system-bioconductor-install:
+system-install-bioconductor:
 	# install Bioconductor packages
 	sudo R -e "options(Ncpus = 8); install.packages(\"BiocManager\", dependencies = TRUE, repos = 'https://cloud.r-project.org/', update = TRUE, ask = FALSE)"
 	for package in $$BIOCONDUCTOR; do sudo R -e "options(Ncpus = 8); BiocManager::install(\"$$package\", version = \"$$bioconductor_v\")"; done
 
 .ONESHELL:
-r-kernels-jupyter:
+test-rpackages:
+	for package in $$R_PACKAGES; do echo $$package;
+		R -e "library('$$package')"; done | grep "there is no package called"
+
+.ONESHELL:
+test-bioconductor:
+	for package in $$BIOCONDUCTOR; do echo $$package;
+		R -e "library('$$package')"; done | grep "there is no package called"
+
+.ONESHELL:
+jupyter-r-kernel:
 	sudo R -e "options(Ncpus = 8); \
 	install.packages(c('crayon', 'pbdZMQ', 'devtools'), \
 	repos = 'https://cloud.r-project.org/', dependencies = TRUE); \
@@ -165,13 +175,13 @@ r-kernels-jupyter:
 	library(IRkernel); \
 	IRkernel::installspec(name = 'cran')"
 
-	$$D1/opt/R-$$r_version/bin/R -e "options(Ncpus = 8); \
-	install.packages(c('crayon', 'pbdZMQ', 'devtools'), \
-	repos = 'https://cloud.r-project.org/', dependencies = TRUE); \
-	library(devtools); \
-	devtools::install('$$D1/opt/repositories/git-reps/IRkernel.IRkernel/R'); \
-	library(IRkernel); \
-	IRkernel::installspec(name = 'R-$$r_version-local')"
+# 	$$D1/opt/R-$$r_version/bin/R -e "options(Ncpus = 8); \
+# 	install.packages(c('crayon', 'pbdZMQ', 'devtools'), \
+# 	repos = 'https://cloud.r-project.org/', dependencies = TRUE); \
+# 	library(devtools); \
+# 	devtools::install('$$D1/opt/repositories/git-reps/IRkernel.IRkernel/R'); \
+# 	library(IRkernel); \
+# 	IRkernel::installspec(name = 'R-$$r_version-local')"
 
 .ONESHELL:
 system-install-perl-packages:
