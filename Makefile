@@ -35,12 +35,14 @@ export PERL_CPANM=App::cpanoutdated Test::Pod::Coverage JSON Math::CDF HTML::Tem
 	JSON File::Slurp XML::DOM::XPath GD App::Cmd::Setup Bio::Roary
 
 export R_PACKAGES=Rcpp tidyverse knitr rmarkdown gridExtra plotly Cairo ggpubr ape \
-	biom optparse RColorBrewer randomForest vegan apcluster chron compare compute.es \
+	optparse RColorBrewer randomForest vegan apcluster chron compare compute.es \
 	d3heatmap dendextend DEoptimR diptest fastmatch flexmix fpc kernlab mclust mds \
 	modeltools mvtnorm NLP phangorn pheatmap plotrix PMCMRplus png prabclus \
 	qdapDictionaries qdapRegex quadprog rafalib reports robustbase rvcheck segmented \
 	seqinr slam tidytree trimcluster UpSetR wordcloud freetypeharfbuzz EQUIVNONINF \
 	xgboost ROCR ggplot2
+
+export R_OLD2INSTALL=biom
 
 export BIOCONDUCTOR=gam clusterExperiment dada2 edgeR phyloseq DESeq DESeq2 microbiome \
 	BiocVersion ggtree graph hypergraph treeio metagenomeSeq SIAMCAT \
