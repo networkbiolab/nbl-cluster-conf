@@ -37,7 +37,7 @@ export PERL_CPANM=App::cpanoutdated Test::Pod::Coverage JSON Math::CDF HTML::Tem
 export R_PACKAGES=Rcpp tidyverse knitr rmarkdown gridExtra plotly Cairo ggpubr ape \
 	biom optparse RColorBrewer randomForest vegan apcluster chron compare compute.es \
 	d3heatmap dendextend DEoptimR diptest fastmatch flexmix fpc kernlab mclust mds \
-	modeltools mvtnorm NLP phangorn pheatmap plotrix PMCMR png prabclus \
+	modeltools mvtnorm NLP phangorn pheatmap plotrix PMCMRplus png prabclus \
 	qdapDictionaries qdapRegex quadprog rafalib reports robustbase rvcheck segmented \
 	seqinr slam tidytree trimcluster UpSetR wordcloud freetypeharfbuzz EQUIVNONINF \
 	xgboost ROCR ggplot2
@@ -157,13 +157,13 @@ system-install-bioconductor:
 
 .ONESHELL:
 test-rpackages:
-	for package in $$R_PACKAGES; do echo $$package;
-		R -e "library('$$package')"; done | grep "there is no package called"
+	for package in $$R_PACKAGES; do printf "\\n %s\\n" "Testing $${package}...";
+		R -e "library('$$package')" 2> out 1> /dev/null; grep "there is no package called" out; rm out; done
 
 .ONESHELL:
 test-bioconductor:
-	for package in $$BIOCONDUCTOR; do echo $$package;
-		R -e "library('$$package')"; done | grep "there is no package called"
+	for package in $$BIOCONDUCTOR; do printf "\\n %s\\n" "Testing $${package}...";
+		R -e "library('$$package')" 2> out 1> /dev/null; grep "there is no package called" out; rm out; done
 
 .ONESHELL:
 jupyter-r-kernel:
