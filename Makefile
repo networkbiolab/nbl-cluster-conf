@@ -80,7 +80,7 @@ apt-install:
 		libsparsehash-dev libhdf5-serial-dev libsundials-dev libglfw3-dev mailutils \
 		libjemalloc1 libjemalloc-dev gcc-4.8 g++-4.8 libsparsehash-dev \
 		libdist-zilla-perl systemtap auditd rubber ubuntu-server disper \
-		kraken mcl parallel postfix x11-utils libgmp-dev libmpfr-dev"
+		kraken mcl parallel postfix x11-utils libgmp-dev libmpfr-dev libglu1-mesa-dev"
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
 		checkinstall libssl-dev zlib1g-dev libncurses5-dev \
