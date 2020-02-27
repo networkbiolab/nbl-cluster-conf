@@ -40,13 +40,13 @@ export R_PACKAGES=Rcpp tidyverse knitr rmarkdown gridExtra plotly Cairo ggpubr a
 	modeltools mvtnorm NLP phangorn pheatmap plotrix PMCMRplus png prabclus \
 	qdapDictionaries qdapRegex quadprog rafalib reports robustbase rvcheck segmented \
 	seqinr slam tidytree trimcluster UpSetR wordcloud freetypeharfbuzz EQUIVNONINF \
-	xgboost ROCR ggplot2
+	xgboost ROCR ggplot2 clusterSim
 
 export R_OLD2INSTALL=biom
 
 export BIOCONDUCTOR=gam clusterExperiment dada2 edgeR phyloseq DESeq DESeq2 microbiome \
 	BiocVersion ggtree graph hypergraph treeio metagenomeSeq SIAMCAT \
-	cluster clusterSim EnhancedVolcano zinbwave scran MAST monocle \
+	cluster EnhancedVolcano zinbwave scran MAST monocle \
 	ComplexHeatmap slingshot
 
 .ONESHELL:
