@@ -40,7 +40,7 @@ export R_PACKAGES=Rcpp tidyverse knitr rmarkdown gridExtra plotly Cairo ggpubr a
 	modeltools mvtnorm NLP phangorn pheatmap plotrix PMCMRplus png prabclus \
 	qdapDictionaries qdapRegex quadprog rafalib reports robustbase rvcheck segmented \
 	seqinr slam tidytree trimcluster UpSetR wordcloud freetypeharfbuzz EQUIVNONINF \
-	xgboost ROCR ggplot2 clusterSim
+	xgboost ROCR ggplot2 clusterSim splines stats4 survival mvtnorm modeltools coin MASS
 
 export R_OLD2INSTALL=biom
 
