@@ -112,7 +112,7 @@ latex-install:
 cuda-download:
 	cd $$D1/opt/ubuntu-software
 	wget --continue https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin
-	wget --continue http://developer.download.nvidia.com/compute/cuda/10.2/Prod/local_installers/cuda-repo-ubuntu1804-10-2-local-10.2.89-440.33.01_1.0-1_amd64.deb
+	wget --continue https://developer.download.nvidia.com/compute/cuda/10.2/Prod/local_installers/cuda-repo-ubuntu1804-10-2-local-10.2.89-440.33.01_1.0-1_amd64.deb
 
 cuda-install:
 	cd $$D1/opt/ubuntu-software
@@ -125,9 +125,8 @@ cuda-install:
 	sudo apt-get update
 	sudo apt-get -y install cuda
 
-	CUDA_APTS="nvidia-cuda-toolkit"
-
-	for apt in $$CUDA_APTS; do sudo apt -y install $$apt; done
+# 	CUDA_APTS="nvidia-cuda-toolkit"
+# 	for apt in $$CUDA_APTS; do sudo apt -y install $$apt; done
 # 	sudo dpkg -i libcudnn7_7.3.1.20-1+cuda10.0_amd64.deb \
 # 		libcudnn7-dev_7.3.1.20-1+cuda10.0_amd64.deb libcudnn7-doc_7.3.1.20-1+cuda10.0_amd64.deb
 
