@@ -80,7 +80,7 @@ apt-install:
 		libsparsehash-dev libhdf5-serial-dev libsundials-dev libglfw3-dev mailutils \
 		libjemalloc1 libjemalloc-dev gcc-4.8 g++-4.8 libsparsehash-dev \
 		libdist-zilla-perl systemtap auditd rubber ubuntu-server disper \
-		kraken mcl parallel postfix x11-utils libgmp-dev libmpfr-dev libglu1-mesa-dev qiime"
+		kraken mcl parallel postfix x11-utils libgmp-dev libmpfr-dev libglu1-mesa-dev qiime julia"
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
 		checkinstall libssl-dev zlib1g-dev libncurses5-dev \
@@ -89,25 +89,25 @@ apt-install:
 
 	R_DEPS="libcairo2-dev libxt-dev libtiff5-dev libssh2-1-dev libxml2 libxml2-dev"
 
-	sudo apt update
-	sudo apt -y upgrade
-	sudo apt -y dist-upgrade
-	sudo apt -y remove xul-ext-ubufox gedit
+	apt-get update
+	apt-get -y upgrade
+	apt-get -y dist-upgrade
+	apt-get -y remove xul-ext-ubufox gedit
 
 	RED=$(tput setaf 1)
 	for apt in $$APTS; do printf "\\n %s\\n" "Installing $${apt}";
-		sudo apt -y install $$apt; done
+		apt-get -y install $$apt; done
 	for apt in $$PYTHON3_DEPS; do printf "\\n %s\\n" "Installing $${apt}";
-		sudo apt -y install $$apt; done
+		apt-get -y install $$apt; done
 	for apt in $$R_DEPS; do printf "\\n %s\\n" "Installing $${apt}";
-		sudo apt -y install $$apt; done
+		apt-get -y install $$apt; done
 
-	sudo apt -y autoremove
-	sudo apt -y autoclean
-	sudo apt -y clean
+	apt-get -y autoremove
+	apt-get -y autoclean
+	apt-get -y clean
 
 latex-install:
-	sudo apt-get -y install texstudio texlive-full
+	apt-get -y install texstudio texlive-full
 
 cuda-download:
 	cd $$D1/opt/ubuntu-software
@@ -117,17 +117,17 @@ cuda-download:
 cuda-install:
 	cd $$D1/opt/ubuntu-software
 
-	sudo apt -y install linux-headers-$(uname -r)
-	sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
+	apt-get -y install linux-headers-$(uname -r)
+	cp cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
 
-	sudo dpkg -i cuda-repo-ubuntu1804-10-2-local-10.2.89-440.33.01_1.0-1_amd64.deb
-	sudo apt-key add /var/cuda-repo-10-2-local-10.2.89-440.33.01/7fa2af80.pub
-	sudo apt-get update
-	sudo apt-get -y install cuda
+	dpkg -i cuda-repo-ubuntu1804-10-2-local-10.2.89-440.33.01_1.0-1_amd64.deb
+	apt-key add /var/cuda-repo-10-2-local-10.2.89-440.33.01/7fa2af80.pub
+	apt-get update
+	apt-get -y install cuda
 
 # 	CUDA_APTS="nvidia-cuda-toolkit"
-# 	for apt in $$CUDA_APTS; do sudo apt -y install $$apt; done
-# 	sudo dpkg -i libcudnn7_7.3.1.20-1+cuda10.0_amd64.deb \
+# 	for apt in $$CUDA_APTS; do apt-get -y install $$apt; done
+# 	dpkg -i libcudnn7_7.3.1.20-1+cuda10.0_amd64.deb \
 # 		libcudnn7-dev_7.3.1.20-1+cuda10.0_amd64.deb libcudnn7-doc_7.3.1.20-1+cuda10.0_amd64.deb
 
 .ONESHELL:
@@ -148,14 +148,14 @@ local-install-bioconductor:
 .ONESHELL:
 system-install-rpackages:
 	# install R packages
-	for package in $$R_PACKAGES; do sudo R -e \
+	for package in $$R_PACKAGES; do R -e \
 		"options(Ncpus = 8); install.packages('$$package', dependencies = TRUE, repos = 'https://cloud.r-project.org/')"; done
 
 .ONESHELL:
 system-install-bioconductor:
 	# install Bioconductor packages
-	sudo R -e "options(Ncpus = 8); install.packages(\"BiocManager\", dependencies = TRUE, repos = 'https://cloud.r-project.org/', update = TRUE, ask = FALSE)"
-	for package in $$BIOCONDUCTOR; do sudo R -e "options(Ncpus = 8); BiocManager::install(\"$$package\", version = \"$$bioconductor_v\")"; done
+	R -e "options(Ncpus = 8); install.packages(\"BiocManager\", dependencies = TRUE, repos = 'https://cloud.r-project.org/', update = TRUE, ask = FALSE)"
+	for package in $$BIOCONDUCTOR; do R -e "options(Ncpus = 8); BiocManager::install(\"$$package\", version = \"$$bioconductor_v\")"; done
 
 .ONESHELL:
 test-rpackages:
@@ -169,7 +169,7 @@ test-bioconductor:
 
 .ONESHELL:
 jupyter-r-kernel:
-	sudo R -e "options(Ncpus = 8); \
+	R -e "options(Ncpus = 8); \
 	install.packages(c('crayon', 'pbdZMQ', 'devtools'), \
 	repos = 'https://cloud.r-project.org/', dependencies = TRUE); \
 	library(devtools); \
@@ -187,31 +187,31 @@ jupyter-r-kernel:
 
 .ONESHELL:
 system-install-perl-packages:
-	sudo cpan $$PERL_PACKAGES
-	sudo cpanm -n $$PERL_CPANM
+	cpan $$PERL_PACKAGES
+	cpanm -n $$PERL_CPANM
 
 .ONESHELL:
 system-install-pip3-packages:
 	for package in $$PYTHON3_PACKAGES; do \
-		sudo -H python3 -m pip install $$package --upgrade; done
+		python3 -m pip install $$package --upgrade; done
 
 	for package in $$DEV_PYTHON_PACKAGES; do \
-		sudo -H python3 -m pip install $$package --upgrade; done
+		python3 -m pip install $$package --upgrade; done
 
 system-remove-pip3-packages:
 	for package in $$PYTHON3_PACKAGES; do \
-		sudo -H python3 -m pip uninstall $$package; done
+		python3 -m pip uninstall $$package; done
 
 	for package in $$DEV_PYTHON_PACKAGES; do \
-		sudo -H python3 -m pip uninstall $$package; done
+		python3 -m pip uninstall $$package; done
 
 system-install-cuda-pip3-packages:
 	for package in $$CUDA_PYTHON3_PACKAGES; do \
-		sudo -H python3 -m pip install $$package --upgrade; done
+		python3 -m pip install $$package --upgrade; done
 
 system-remove-cuda-pip3-packages:
 	for package in $$CUDA_PYTHON3_PACKAGES; do \
-		sudo -H python3 -m pip uninstall $$package; done
+		python3 -m pip uninstall $$package; done
 
 local-install-pip3-packages:
 	for package in $$PYTHON3_PACKAGES; do \
@@ -226,15 +226,15 @@ local-install-cuda-pip3-packages:
 
 system-install-jupyter-packages:
 	for package in $$JUPYTER_PACKAGES; do \
-		sudo -H python3 -m pip install $$package --upgrade; done
+		python3 -m pip install $$package --upgrade; done
 
 	# install python kernel
 	python3 -m ipykernel install --user
 	python3 -m nbopen.install_xdg
 
 	# install and enable rise
-	sudo jupyter-nbextension install rise --py --sys-prefix
-	sudo jupyter-nbextension enable rise --py --sys-prefix
+	jupyter-nbextension install rise --py --sys-prefix
+	jupyter-nbextension enable rise --py --sys-prefix
 
 local-install-jupyter-packages:
 	for package in $$JUPYTER_PACKAGES; do \
@@ -296,61 +296,61 @@ compile-r-cran:
 
 .ONESHELL:
 slurm-install:
-	sudo apt-get -y remove --purge munge slurm-wlm slurmdbd
-	sudo apt-get -y autoremove
-	sudo apt-get -y install munge slurm-wlm slurmdbd
+	apt-get -y remove --purge munge slurm-wlm slurmdbd
+	apt-get -y autoremove
+	apt-get -y install munge slurm-wlm slurmdbd
 
 .ONESHELL:
 slurm-conf:
-	sudo systemctl stop munge
-	sudo systemctl stop slurmd
+	systemctl stop munge
+	systemctl stop slurmd
 
 	if [[ "$(HOST)" == "nbl1" ]] ; then
-		sudo systemctl stop slurmctld
-		sudo systemctl stop slurmdbd
+		systemctl stop slurmctld
+		systemctl stop slurmdbd
 	fi
 
-	sudo rm -rf /var/lib/slurm-llnl /var/run/slurm-llnl /var/log/slurm-llnl
+	rm -rf /var/lib/slurm-llnl /var/run/slurm-llnl /var/log/slurm-llnl
 
-	sudo mkdir -p /var/spool/slurmd
-	sudo mkdir -p /var/lib/slurm-llnl
-	sudo mkdir -p /var/lib/slurm-llnl/slurmd
-	sudo mkdir -p /var/lib/slurm-llnl/slurmctld
-	sudo mkdir -p /var/run/slurm-llnl
-	sudo mkdir -p /var/log/slurm-llnl
+	mkdir -p /var/spool/slurmd
+	mkdir -p /var/lib/slurm-llnl
+	mkdir -p /var/lib/slurm-llnl/slurmd
+	mkdir -p /var/lib/slurm-llnl/slurmctld
+	mkdir -p /var/run/slurm-llnl
+	mkdir -p /var/log/slurm-llnl
 
-	sudo chmod -R 755 /var/spool/slurmd
-	sudo chmod -R 755 /var/lib/slurm-llnl/
-	sudo chmod -R 755 /var/run/slurm-llnl/
-	sudo chmod -R 755 /var/log/slurm-llnl/
+	chmod -R 755 /var/spool/slurmd
+	chmod -R 755 /var/lib/slurm-llnl/
+	chmod -R 755 /var/run/slurm-llnl/
+	chmod -R 755 /var/log/slurm-llnl/
 
-	sudo chown -R slurm:slurm /var/spool/slurmd
-	sudo chown -R slurm:slurm /var/lib/slurm-llnl/
-	sudo chown -R slurm:slurm /var/run/slurm-llnl/
-	sudo chown -R slurm:slurm /var/log/slurm-llnl/
+	chown -R slurm:slurm /var/spool/slurmd
+	chown -R slurm:slurm /var/lib/slurm-llnl/
+	chown -R slurm:slurm /var/run/slurm-llnl/
+	chown -R slurm:slurm /var/log/slurm-llnl/
 
-	sudo cp slurm.conf gres.conf /etc/slurm-llnl/
+	cp slurm.conf gres.conf /etc/slurm-llnl/
 
 	if [[ "$(HOST)" == "nbl1" ]] ; then
 		dd if=/dev/urandom bs=1 count=1024 > ./munge.key
 	fi
 
-	sudo rsync -avu -P munge.key /etc/munge/munge.key
-	sudo chown munge:munge /etc/munge/munge.key
-	sudo chmod 400 /etc/munge/munge.key
-	sudo chmod 711 /var/lib/munge/
-	sudo chmod 755 /var/run/munge/
+	rsync -avu -P munge.key /etc/munge/munge.key
+	chown munge:munge /etc/munge/munge.key
+	chmod 400 /etc/munge/munge.key
+	chmod 711 /var/lib/munge/
+	chmod 755 /var/run/munge/
 
-	sudo systemctl restart munge
-	sudo service munge status
+	systemctl restart munge
+	service munge status
 
-	sudo systemctl restart slurmd
-	sudo service slurmd status
+	systemctl restart slurmd
+	service slurmd status
 
 	if [[ "$(HOST)" == "nbl1" ]] ; then
-		sudo systemctl restart slurmctld
-		sudo service slurmctld status
+		systemctl restart slurmctld
+		service slurmctld status
 	else
-		sudo systemctl stop slurmctld
-		sudo service slurmctld status
+		systemctl stop slurmctld
+		service slurmctld status
 	fi
