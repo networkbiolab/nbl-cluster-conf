@@ -1,6 +1,6 @@
-apt install net-tools
-apt install openssh-client
-apt install openssh-server
-apt install nfs-common
-apt install make
-apt install screen
+apt-get -y install net-tools
+apt-get -y install openssh-client
+apt-get -y install openssh-server
+apt-get -y install nfs-common
+apt-get -y install make
+apt-get -y install screen
