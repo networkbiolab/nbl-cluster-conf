@@ -7,7 +7,7 @@ export bioconductor_v=3.10
 export python3_v=3.6.5
 export python2_v=2.7.17
 
-# use virtual environment for anvio
+# use virtual environment for anvio, symfit
 export PYTHON3_PACKAGES=pip numpy pandas nose python-libsbml \
 	cobra escher seaborn pillow bokeh dnaplotlib pysb \
 	biopython bioservices openpyxl xlrd fastcluster scikit-bio \
@@ -15,7 +15,7 @@ export PYTHON3_PACKAGES=pip numpy pandas nose python-libsbml \
 	libroadrunner distributed statsmodels biom-format \
 	seqmagick pygtrie xgboost kneaddata humann2 pysundials \
 	keyrings.alt dask_jobqueue scanpy louvain python-igraph \
-	gprofiler-official anndata2ri symfit fastai
+	gprofiler-official anndata2ri fastai
 
 export PYTHON2_PACKAGES=pip qiime biom-format msgpack xgboost kneaddata humann2
 
