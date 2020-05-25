@@ -79,8 +79,20 @@ apt-install:
 		gfortran libopenblas-dev liblapack-dev zlibc zlib1g-dev zlib1g sqlite sqlite3 \
 		libsparsehash-dev libhdf5-serial-dev libsundials-dev libglfw3-dev mailutils \
 		libjemalloc1 libjemalloc-dev gcc-4.8 g++-4.8 libsparsehash-dev \
-		libdist-zilla-perl systemtap auditd rubber ubuntu-server disper \
-		kraken mcl parallel postfix x11-utils libgmp-dev libmpfr-dev libglu1-mesa-dev qiime julia vagrant python3-opencv kallisto hddtemp smartmontools"
+		libdist-zilla-perl systemtap auditd rubber ubuntu-server disper kraken mcl \
+		parallel postfix x11-utils libgmp-dev libmpfr-dev libglu1-mesa-dev qiime julia \
+		vagrant python3-opencv kallisto hddtemp smartmontools libgtk2.0-dev man2html \
+		freeipmi libyaml-dev libjwt-dev libpam0g-dev libhttp-parser-dev liblua50-dev \
+		liblua5.1-0-dev liblua5.2-dev liblua5.3-dev libmunge-dev libfreeipmi-dev \
+		librrd-dev libpmix-dev libopenmpi-dev nginx hmmer testssl.sh libhwloc-dev \
+		libibmad-dev libipmimonitoring-dev wakeonlan pdsh nagios3 smem libargtable2-dev \
+		augustus libhmsbeagle-dev bedops clustalx cutadapt doxygen libeigen3-dev expat \
+		gettext gperf libgoogle-perftools-dev help2man python3-biopython hwloc intltool \
+		libjansson-dev junit lammps libcerf-dev libdrm-dev libidn11-dev libpciaccess-dev \
+		libsndfile1-dev libxslt1-dev llvm-dev liblmdb-dev liblpsolve55-dev \
+		mesa-common-dev libmetis-dev mira-assembler mrbayes nasm libnlopt-dev numactl \
+		repeatmasker-recon snap snap-aligner swig tabix trnascan-se"
+
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
 		checkinstall libssl-dev zlib1g-dev libncurses5-dev \
