@@ -91,8 +91,7 @@ apt-install:
 		libjansson-dev junit lammps libcerf-dev libdrm-dev libidn11-dev libpciaccess-dev \
 		libsndfile1-dev libxslt1-dev llvm-dev liblmdb-dev liblpsolve55-dev \
 		mesa-common-dev libmetis-dev mira-assembler mrbayes nasm libnlopt-dev numactl \
-		repeatmasker-recon snap snap-aligner swig tabix trnascan-se"
-
+		repeatmasker-recon snap snap-aligner swig tabix trnascan-se apache2"
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
 		checkinstall libssl-dev zlib1g-dev libncurses5-dev \
