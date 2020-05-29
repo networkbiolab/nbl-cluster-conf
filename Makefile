@@ -91,7 +91,7 @@ apt-install:
 		libjansson-dev junit lammps libcerf-dev libdrm-dev libidn11-dev libpciaccess-dev \
 		libsndfile1-dev libxslt1-dev llvm-dev liblmdb-dev liblpsolve55-dev \
 		mesa-common-dev libmetis-dev mira-assembler mrbayes nasm libnlopt-dev numactl \
-		repeatmasker-recon snap snap-aligner swig tabix trnascan-se apache2 php7.2 libapache2-mod-php7.2 php7.2-common php7.2-gmp php7.2-curl php7.2-intl php7.2-mbstring php7.2-xmlrpc php7.2-mysql php7.2-gd php7.2-xml php7.2-cli php7.2-zip"
+		repeatmasker-recon snap snap-aligner swig tabix trnascan-se apache2 php7.2 libapache2-mod-php7.2 php7.2-common php7.2-gmp php7.2-curl php7.2-intl php7.2-mbstring php7.2-xmlrpc php7.2-mysql php7.2-gd php7.2-xml php7.2-cli php7.2-zip ganglia-monitor rrdtool gmetad ganglia-webfrontend"
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
 		checkinstall libssl-dev zlib1g-dev libncurses5-dev \
