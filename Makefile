@@ -7,12 +7,12 @@ export bioconductor_v=3.10
 export python3_v=3.8.2
 export python2_v=2.7.18
 
-# use virtual environment for anvio, symfit because of incompatibilities
+# use virtual environment for anvio, symfit, libroadrunner because of incompatibilities
 export PYTHON3_PACKAGES=pip numpy pandas nose python-libsbml \
 	cobra escher seaborn pillow bokeh dnaplotlib pysb \
 	biopython bioservices openpyxl xlrd fastcluster scikit-bio \
 	scikit-learn rpy2 tzlocal networkx cutadapt \
-	libroadrunner distributed statsmodels biom-format \
+	distributed statsmodels biom-format \
 	seqmagick pygtrie xgboost kneaddata humann2 pysundials \
 	keyrings.alt dask_jobqueue scanpy louvain python-igraph \
 	gprofiler-official anndata2ri fastai s-tui
