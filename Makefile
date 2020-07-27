@@ -2,12 +2,12 @@ SHELL := /bin/bash
 HOST=$(shell hostname)
 
 export D1=/
-export r_version=3.6.2
+export r_version=3.6.3
 export bioconductor_v=3.10
-export python3_v=3.6.5
-export python2_v=2.7.17
+export python3_v=3.8.2
+export python2_v=2.7.18
 
-# use virtual environment for anvio, symfit
+# use virtual environment for anvio, symfit because of incompatibilities
 export PYTHON3_PACKAGES=pip numpy pandas nose python-libsbml \
 	cobra escher seaborn pillow bokeh dnaplotlib pysb \
 	biopython bioservices openpyxl xlrd fastcluster scikit-bio \
@@ -69,7 +69,7 @@ apt-install:
 		libhpdf-dev libhts-dev libjemalloc-dev libjson-perl libkrb5-dev \
 		liblwp-protocol-https-perl libmagick++-dev libopenmpi-dev libreoffice \
 		libstaden-read-dev libsundials-dev libtbb-dev libtext-csv-perl libtool \
-		libudunits2-dev libwww-perl libxm4 lm-sensors mafft mash maven nautilus-dropbox \
+		libudunits2-dev libwww-perl libxm4 lm-sensors mafft mash maven docker.io \
 		ncbi-blast+ ncbi-blast+ net-tools nfs-common nfs-kernel-server nodejs ocamlbuild \
 		opam openjdk-11-jdk-headless openjdk-8-jdk openjdk-8-jre openssh-server pandoc \
 		pdfshuffler prodigal python-pip python-tk python3-pip python3-tk rar r-base \
@@ -91,7 +91,7 @@ apt-install:
 		libjansson-dev junit lammps libcerf-dev libdrm-dev libidn11-dev libpciaccess-dev \
 		libsndfile1-dev libxslt1-dev llvm-dev liblmdb-dev liblpsolve55-dev \
 		mesa-common-dev libmetis-dev mira-assembler mrbayes nasm libnlopt-dev numactl \
-		repeatmasker-recon snap snap-aligner swig tabix trnascan-se apache2 php7.2 libapache2-mod-php7.2 php7.2-common php7.2-gmp php7.2-curl php7.2-intl php7.2-mbstring php7.2-xmlrpc php7.2-mysql php7.2-gd php7.2-xml php7.2-cli php7.2-zip ganglia-monitor rrdtool gmetad ganglia-webfrontend"
+		repeatmasker-recon snap snap-aligner swig tabix trnascan-se apache2 php7.2 libapache2-mod-php7.2 php7.2-common php7.2-gmp php7.2-curl php7.2-intl php7.2-mbstring php7.2-xmlrpc php7.2-mysql php7.2-gd php7.2-xml php7.2-cli php7.2-zip ganglia-monitor rrdtool gmetad ganglia-webfrontend npm ffmpeg mlocate"
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
 		checkinstall libssl-dev zlib1g-dev libncurses5-dev \
