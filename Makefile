@@ -22,7 +22,8 @@ export PYTHON2_PACKAGES=pip qiime biom-format msgpack xgboost kneaddata humann2
 export DEV_PYTHON_PACKAGES=testresources twine sphinx sphinx-autobuild \
 	sphinx_rtd_theme versioneer pylint autopep8 pyscaffold
 
-export CUDA_PYTHON3_PACKAGES=pycuda scikit-cuda \
+# pycuda have some problems
+export CUDA_PYTHON3_PACKAGES=scikit-cuda \
 	torch torchvision tensorflow-gpu theano cntk-gpu keras
 
 export JUPYTER_PACKAGES=jupyter jupyterlab ipykernel nbopen rise nbserverproxy jupyter_nbextensions_configurator
