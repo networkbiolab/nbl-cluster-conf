@@ -22,9 +22,8 @@ export PYTHON2_PACKAGES=pip qiime biom-format msgpack xgboost kneaddata humann2
 export DEV_PYTHON_PACKAGES=testresources twine sphinx sphinx-autobuild \
 	sphinx_rtd_theme versioneer pylint autopep8 pyscaffold
 
-# pycuda have some problems
-export CUDA_PYTHON3_PACKAGES=scikit-cuda \
-	torch torchvision tensorflow-gpu theano cntk-gpu keras
+export CUDA_PYTHON3_PACKAGES=pycuda scikit-cuda \
+	torch torchvision tensorflow-gpu theano cntk cntk-gpu keras
 
 export JUPYTER_PACKAGES=jupyter jupyterlab ipykernel nbopen rise nbserverproxy jupyter_nbextensions_configurator
 
@@ -56,20 +55,22 @@ test:
 	echo $$(which pip3)
 	echo $(HOST)
 
+# libcurl4-openssl-dev incompatible with libstaden-read-dev
+# fastx-toolkit, gir1.2-networkmanager-1.0, qiime, sra-toolkit, tophat not available ubuntu 20.04
 .ONESHELL:
 apt-install:
 	APTS="ant apache2 apt-file aptitude artemis auditd augustus autoconf bamtools baobab \
 		barrnap bcftools bedops bedtools biom-format-tools bioperl bison bowtie bowtie2 \
 		bwa capnproto cargo cd-hit chrome-gnome-shell clustalx cmake cufflinks curl \
 		cutadapt cython dejagnu diamond-aligner disper docker.io doxygen ea-utils emboss \
-		expat fastqc fasttree fastx-toolkit ffmpeg flex freeipmi g++-4.8 ganglia-monitor \
-		ganglia-webfrontend gcc-4.8 gettext gfortran ghostscript gimp gir1.2-clutter-1.0 \
-		gir1.2-gtop-2.0 gir1.2-networkmanager-1.0 gmetad gnome-core gnome-devel \
+		expat fastqc fasttree ffmpeg flex freeipmi g++ ganglia-monitor \
+		ganglia-webfrontend gcc gettext gfortran ghostscript gimp gir1.2-clutter-1.0 \
+		gir1.2-gtop-2.0 gmetad gnome-core gnome-devel \
 		gnome-themes-standard gnome-tweak-tool gparted gperf gzip hddtemp help2man \
 		hisat2 hmmer htop hwloc idba infernal inkscape intltool julia junit kallisto \
-		kate kmc kompare kraken lammps lftp libapache2-mod-php7.2 libargtable2-dev \
+		kate kmc kompare kraken lammps lftp libapache2-mod-php7.4 libargtable2-dev \
 		libatlas-base-dev libblas-dev libboost-all-dev libcanberra-gtk3-module \
-		libcanberra-gtk-module libcereal-dev libcerf-dev libcurl4-openssl-dev \
+		libcanberra-gtk-module libcereal-dev libcerf-dev  \
 		libdist-zilla-perl libdivsufsort-dev libdrm-dev libeigen3-dev libfile-slurp-perl \
 		libfreeipmi-dev libgdal-dev libgd-dev libgirepository1.0-dev libglfw3-dev \
 		libglu1-mesa-dev libgmp-dev libgoogle-perftools-dev libgsl-dev libgtk2.0-dev \
@@ -87,13 +88,13 @@ apt-install:
 		net-tools nfs-common nfs-kernel-server nginx nodejs npm numactl nvidia-cuda-dev \
 		nvidia-cuda-doc nvidia-cuda-gdb nvidia-cuda-toolkit ocamlbuild opam \
 		openjdk-11-jdk-headless openjdk-8-jdk openjdk-8-jre openssh-server pandoc \
-		parallel pdfshuffler pdsh php7.2 php7.2-cli php7.2-common php7.2-curl php7.2-gd \
-		php7.2-gmp php7.2-intl php7.2-mbstring php7.2-mysql php7.2-xml php7.2-xmlrpc \
-		php7.2-zip postfix prodigal python3-opencv python3-pip python3-tk python-pip \
-		python-tk qiime rar r-base rename repeatmasker-recon rrdtool rubber ruby salmon \
+		parallel pdfshuffler pdsh php7.4 php7.4-cli php7.4-common php7.4-curl php7.4-gd \
+		php7.4-gmp php7.4-intl php7.4-mbstring php7.4-mysql php7.4-xml php7.4-xmlrpc \
+		php7.4-zip postfix prodigal python3-opencv python3-pip python3-tk python-pip \
+		python-tk rar r-base rename repeatmasker-recon rrdtool rubber ruby salmon \
 		samtools sbmltoolbox smartmontools smem snap snap-aligner soapdenovo2 spades \
-		speedtest-cli sqlite sqlite3 sra-toolkit sshfs swig synaptic systemtap tabix \
-		testssl.sh tophat trimmomatic trnascan-se ttf-mscorefonts-installer \
+		speedtest-cli sqlite sqlite3 sshfs swig synaptic systemtap tabix \
+		testssl.sh trimmomatic trnascan-se ttf-mscorefonts-installer \
 		ubuntu-server unzip vagrant velvet virtualbox vlc vsearch wakeonlan x11-utils \
 		zlib1g zlib1g-dev zlibc"
 
@@ -107,7 +108,6 @@ apt-install:
 	apt-get update
 	apt-get -y upgrade
 	apt-get -y dist-upgrade
-	apt-get -y remove xul-ext-ubufox gedit
 
 	RED=$(tput setaf 1)
 	for apt in $$APTS; do printf "\\n %s\\n" "Installing $${apt}";
@@ -117,6 +117,7 @@ apt-install:
 	for apt in $$R_DEPS; do printf "\\n %s\\n" "Installing $${apt}";
 		apt-get -y install $$apt; done
 
+	apt-get -y remove xul-ext-ubufox gedit
 	apt-get -y autoremove
 	apt-get -y autoclean
 	apt-get -y clean
@@ -124,11 +125,13 @@ apt-install:
 latex-install:
 	apt-get -y install texstudio texlive-full
 
+# only ubuntu 18.04
 cuda-download:
 	cd $$D1/opt/ubuntu-software
 	wget --continue https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin
 	wget --continue https://developer.download.nvidia.com/compute/cuda/10.2/Prod/local_installers/cuda-repo-ubuntu1804-10-2-local-10.2.89-440.33.01_1.0-1_amd64.deb
 
+# only ubuntu 18.4
 cuda-install:
 	cd $$D1/opt/ubuntu-software
 
@@ -139,11 +142,6 @@ cuda-install:
 	apt-key add /var/cuda-repo-10-2-local-10.2.89-440.33.01/7fa2af80.pub
 	apt-get update
 	apt-get -y install cuda
-
-# 	CUDA_APTS="nvidia-cuda-toolkit"
-# 	for apt in $$CUDA_APTS; do apt-get -y install $$apt; done
-# 	dpkg -i libcudnn7_7.3.1.20-1+cuda10.0_amd64.deb \
-# 		libcudnn7-dev_7.3.1.20-1+cuda10.0_amd64.deb libcudnn7-doc_7.3.1.20-1+cuda10.0_amd64.deb
 
 .ONESHELL:
 local-install-rpackages:
@@ -213,6 +211,7 @@ system-install-pip3-packages:
 	for package in $$DEV_PYTHON_PACKAGES; do \
 		python3 -m pip install $$package --upgrade; done
 
+.ONESHELL:
 system-remove-pip3-packages:
 	for package in $$PYTHON3_PACKAGES; do \
 		python3 -m pip uninstall $$package; done
@@ -220,14 +219,17 @@ system-remove-pip3-packages:
 	for package in $$DEV_PYTHON_PACKAGES; do \
 		python3 -m pip uninstall $$package; done
 
+.ONESHELL:
 system-install-cuda-pip3-packages:
 	for package in $$CUDA_PYTHON3_PACKAGES; do \
 		python3 -m pip install $$package --upgrade; done
 
+.ONESHELL:
 system-remove-cuda-pip3-packages:
 	for package in $$CUDA_PYTHON3_PACKAGES; do \
 		python3 -m pip uninstall $$package; done
 
+.ONESHELL:
 local-install-pip3-packages:
 	for package in $$PYTHON3_PACKAGES; do \
 		$$D1/opt/python-$$python3_v/bin/python3 -m pip install $$package --upgrade; done
@@ -235,10 +237,12 @@ local-install-pip3-packages:
 	for package in $$DEV_PYTHON_PACKAGES; do \
 		$$D1/opt/python-$$python3_v/bin/python3 -m pip install $$package --upgrade; done
 
+.ONESHELL:
 local-install-cuda-pip3-packages:
 	for package in $$CUDA_PYTHON3_PACKAGES; do \
 		$$D1/opt/python-$$python3_v/bin/python3 -m pip install $$package --upgrade; done
 
+.ONESHELL:
 system-install-jupyter-packages:
 	for package in $$JUPYTER_PACKAGES; do \
 		python3 -m pip install $$package --upgrade; done
@@ -251,6 +255,7 @@ system-install-jupyter-packages:
 	jupyter-nbextension install rise --py --sys-prefix
 	jupyter-nbextension enable rise --py --sys-prefix
 
+.ONESHELL:
 local-install-jupyter-packages:
 	for package in $$JUPYTER_PACKAGES; do \
 		$$D1/opt/python-$$python3_v/bin/python3 -m pip install $$package --upgrade; done
@@ -263,7 +268,7 @@ local-install-jupyter-packages:
 	$$D1/opt/python-$$python3_v/bin/jupyter-nbextension install rise --py --sys-prefix
 	$$D1/opt/python-$$python3_v/bin/jupyter-nbextension enable rise --py --sys-prefix
 
-# install from source python and R
+# install python and R from source
 .ONESHELL:
 compile-python2:
 	mkdir -p $$D1/opt/ubuntu-software
