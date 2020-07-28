@@ -58,41 +58,44 @@ test:
 
 .ONESHELL:
 apt-install:
-	APTS="ant apt-file aptitude artemis autoconf bamtools baobab barrnap bcftools bedtools \
-		biom-format-tools bioperl bison bowtie bowtie2 bwa capnproto cargo cd-hit \
-		chrome-gnome-shell cmake cufflinks curl dejagnu diamond-aligner ea-utils emboss \
-		fastqc fasttree fastx-toolkit flex ghostscript gimp gir1.2-clutter-1.0 \
-		gir1.2-gtop-2.0 gir1.2-networkmanager-1.0 gnome-themes-standard gnome-tweak-tool \
-		gparted gzip hisat2 htop idba infernal inkscape kate kmc kompare lftp \
-		libatlas-base-dev libboost-all-dev libcanberra-gtk3-module \
-		libcanberra-gtk-module libcereal-dev libcurl4-openssl-dev libdivsufsort-dev \
-		libfile-slurp-perl libgdal-dev libgd-dev libgirepository1.0-dev libgsl-dev \
-		libhpdf-dev libhts-dev libjemalloc-dev libjson-perl libkrb5-dev \
-		liblwp-protocol-https-perl libmagick++-dev libopenmpi-dev libreoffice \
-		libstaden-read-dev libsundials-dev libtbb-dev libtext-csv-perl libtool \
-		libudunits2-dev libwww-perl libxm4 lm-sensors mafft mash maven docker.io \
-		ncbi-blast+ ncbi-blast+ net-tools nfs-common nfs-kernel-server nodejs ocamlbuild \
-		opam openjdk-11-jdk-headless openjdk-8-jdk openjdk-8-jre openssh-server pandoc \
-		pdfshuffler prodigal python-pip python-tk python3-pip python3-tk rar r-base \
-		rename ruby salmon samtools sbmltoolbox soapdenovo2 spades speedtest-cli \
-		sra-toolkit sshfs synaptic tophat trimmomatic ttf-mscorefonts-installer unzip \
-		velvet virtualbox vlc vsearch python-numpy cython libblas-dev liblapacke \
-		gfortran libopenblas-dev liblapack-dev zlibc zlib1g-dev zlib1g sqlite sqlite3 \
-		libsparsehash-dev libhdf5-serial-dev libsundials-dev libglfw3-dev mailutils \
-		libjemalloc1 libjemalloc-dev gcc-4.8 g++-4.8 libsparsehash-dev \
-		libdist-zilla-perl systemtap auditd rubber ubuntu-server disper kraken mcl \
-		parallel postfix x11-utils libgmp-dev libmpfr-dev libglu1-mesa-dev qiime julia \
-		vagrant python3-opencv kallisto hddtemp smartmontools libgtk2.0-dev man2html \
-		freeipmi libyaml-dev libjwt-dev libpam0g-dev libhttp-parser-dev liblua50-dev \
-		liblua5.1-0-dev liblua5.2-dev liblua5.3-dev libmunge-dev libfreeipmi-dev \
-		librrd-dev libpmix-dev libopenmpi-dev nginx hmmer testssl.sh libhwloc-dev \
-		libibmad-dev libipmimonitoring-dev wakeonlan pdsh nagios3 smem libargtable2-dev \
-		augustus libhmsbeagle-dev bedops clustalx cutadapt doxygen libeigen3-dev expat \
-		gettext gperf libgoogle-perftools-dev help2man python3-biopython hwloc intltool \
-		libjansson-dev junit lammps libcerf-dev libdrm-dev libidn11-dev libpciaccess-dev \
-		libsndfile1-dev libxslt1-dev llvm-dev liblmdb-dev liblpsolve55-dev \
-		mesa-common-dev libmetis-dev mira-assembler mrbayes nasm libnlopt-dev numactl \
-		repeatmasker-recon snap snap-aligner swig tabix trnascan-se apache2 php7.2 libapache2-mod-php7.2 php7.2-common php7.2-gmp php7.2-curl php7.2-intl php7.2-mbstring php7.2-xmlrpc php7.2-mysql php7.2-gd php7.2-xml php7.2-cli php7.2-zip ganglia-monitor rrdtool gmetad ganglia-webfrontend npm ffmpeg mlocate"
+	APTS="ant apache2 apt-file aptitude artemis auditd augustus autoconf bamtools baobab \
+		barrnap bcftools bedops bedtools biom-format-tools bioperl bison bowtie bowtie2 \
+		bwa capnproto cargo cd-hit chrome-gnome-shell clustalx cmake cufflinks curl \
+		cutadapt cython dejagnu diamond-aligner disper docker.io doxygen ea-utils emboss \
+		expat fastqc fasttree fastx-toolkit ffmpeg flex freeipmi g++-4.8 ganglia-monitor \
+		ganglia-webfrontend gcc-4.8 gettext gfortran ghostscript gimp gir1.2-clutter-1.0 \
+		gir1.2-gtop-2.0 gir1.2-networkmanager-1.0 gmetad gnome-core gnome-devel \
+		gnome-themes-standard gnome-tweak-tool gparted gperf gzip hddtemp help2man \
+		hisat2 hmmer htop hwloc idba infernal inkscape intltool julia junit kallisto \
+		kate kmc kompare kraken lammps lftp libapache2-mod-php7.2 libargtable2-dev \
+		libatlas-base-dev libblas-dev libboost-all-dev libcanberra-gtk3-module \
+		libcanberra-gtk-module libcereal-dev libcerf-dev libcurl4-openssl-dev \
+		libdist-zilla-perl libdivsufsort-dev libdrm-dev libeigen3-dev libfile-slurp-perl \
+		libfreeipmi-dev libgdal-dev libgd-dev libgirepository1.0-dev libglfw3-dev \
+		libglu1-mesa-dev libgmp-dev libgoogle-perftools-dev libgsl-dev libgtk2.0-dev \
+		libhdf5-serial-dev libhmsbeagle-dev libhpdf-dev libhts-dev libhttp-parser-dev \
+		libhwloc-dev libibmad-dev libidn11-dev libipmimonitoring-dev libjansson-dev \
+		libjemalloc1 libjemalloc-dev libjson-perl libjwt-dev libkrb5-dev liblapack-dev \
+		liblapacke liblmdb-dev liblpsolve55-dev liblua50-dev liblua5.1-0-dev \
+		liblua5.2-dev liblua5.3-dev liblwp-protocol-https-perl libmagick++-dev \
+		libmetis-dev libmpfr-dev libmunge-dev libnlopt-dev libopenblas-dev \
+		libopenmpi-dev libpam0g-dev libpciaccess-dev libpmix-dev libreoffice librrd-dev \
+		libsndfile1-dev libsparsehash-dev libstaden-read-dev libsundials-dev libtbb-dev \
+		libtext-csv-perl libtool libudunits2-dev libwww-perl libxm4 libxslt1-dev \
+		libyaml-dev llvm-dev lm-sensors mafft mailutils man2html mash maven mcl \
+		mesa-common-dev mira-assembler mlocate mrbayes nagios3 nasm ncbi-blast+ \
+		net-tools nfs-common nfs-kernel-server nginx nodejs npm numactl nvidia-cuda-dev \
+		nvidia-cuda-doc nvidia-cuda-gdb nvidia-cuda-toolkit ocamlbuild opam \
+		openjdk-11-jdk-headless openjdk-8-jdk openjdk-8-jre openssh-server pandoc \
+		parallel pdfshuffler pdsh php7.2 php7.2-cli php7.2-common php7.2-curl php7.2-gd \
+		php7.2-gmp php7.2-intl php7.2-mbstring php7.2-mysql php7.2-xml php7.2-xmlrpc \
+		php7.2-zip postfix prodigal python3-opencv python3-pip python3-tk python-pip \
+		python-tk qiime rar r-base rename repeatmasker-recon rrdtool rubber ruby salmon \
+		samtools sbmltoolbox smartmontools smem snap snap-aligner soapdenovo2 spades \
+		speedtest-cli sqlite sqlite3 sra-toolkit sshfs swig synaptic systemtap tabix \
+		testssl.sh tophat trimmomatic trnascan-se ttf-mscorefonts-installer \
+		ubuntu-server unzip vagrant velvet virtualbox vlc vsearch wakeonlan x11-utils \
+		zlib1g zlib1g-dev zlibc"
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
 		checkinstall libssl-dev zlib1g-dev libncurses5-dev \
