@@ -15,7 +15,7 @@ export PYTHON3_PACKAGES=pip numpy pandas nose python-libsbml \
 	distributed statsmodels biom-format \
 	seqmagick pygtrie xgboost kneaddata humann2 pysundials \
 	keyrings.alt dask_jobqueue scanpy louvain python-igraph \
-	gprofiler-official anndata2ri fastai s-tui
+	gprofiler-official anndata2ri fastai s-tui pythoncyc
 
 export PYTHON2_PACKAGES=pip qiime biom-format msgpack xgboost kneaddata humann2
 
@@ -96,7 +96,7 @@ apt-install:
 		speedtest-cli sqlite sqlite3 sshfs swig synaptic systemtap tabix \
 		testssl.sh trimmomatic trnascan-se ttf-mscorefonts-installer \
 		ubuntu-server unzip vagrant velvet virtualbox vlc vsearch wakeonlan x11-utils \
-		zlib1g zlib1g-dev zlibc"
+		zlib1g zlib1g-dev zlibc gnome-shell-extensions"
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
 		checkinstall libssl-dev zlib1g-dev libncurses5-dev \
