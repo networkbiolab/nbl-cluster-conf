@@ -15,7 +15,7 @@ export PYTHON3_PACKAGES=pip numpy pandas nose python-libsbml \
 	distributed statsmodels biom-format \
 	seqmagick pygtrie xgboost kneaddata humann2 pysundials \
 	keyrings.alt dask_jobqueue scanpy louvain python-igraph \
-	gprofiler-official anndata2ri fastai s-tui pythoncyc docopts deblur
+	gprofiler-official anndata2ri fastai s-tui pythoncyc docopts deblur indra
 
 export PYTHON2_PACKAGES=pip qiime biom-format msgpack xgboost kneaddata humann2
 
