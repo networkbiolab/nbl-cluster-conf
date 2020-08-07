@@ -295,7 +295,7 @@ compile-python2:
 	cd $$D1/opt/Python-$$python2_v
 	if [ -f Makefile ]; then make clean; fi
 	if [ -d $$D1/opt/python-$$python2_v ]; then rm -rf $$D1/opt/python-$$python2_v; fi
-	./configure --prefix=$$D1/opt/python-$$python2_v --enable-optimizations
+	./configure --prefix=$$D1/opt/python-$$python2_v --enable-optimizations --with-ensurepip=install
 	make
 	make install
 
@@ -310,7 +310,7 @@ compile-python3:
 	cd $$D1/opt/Python-$$python3_v
 	if [ -f Makefile ]; then make clean; fi
 	if [ -d $$D1/opt/python-$$python3_v ]; then rm -rf $$D1/opt/python-$$python3_v; fi
-	./configure --prefix=$$D1/opt/python-$$python3_v --enable-optimizations
+	./configure --prefix=$$D1/opt/python-$$python3_v --enable-optimizations --with-ensurepip=install
 	make
 	make install
 
