@@ -167,10 +167,8 @@ local-install-rpackages:
 local-install-bioconductor:
 	# install Bioconductor packages
 	$$D1/opt/R-$$r_version/bin/R -e \
-		"options(Ncpus = 8); install.packages(\"BiocManager\", \
-		dependencies = TRUE, repos = 'https://cloud.r-project.org/', update = TRUE, ask = FALSE)"
-	for package in $$BIOCONDUCTOR; do $$D1/opt/R-$$r_version/bin/R -e \
-		"options(Ncpus = 8); BiocManager::install(\"$$package\", version = \"$$bioconductor_v\")"; done
+		"options(Ncpus = 8); install.packages(\"BiocManager\", dependencies = TRUE, repos = 'https://cloud.r-project.org/', update = TRUE, ask = FALSE)"
+	for package in $$BIOCONDUCTOR; do $$D1/opt/R-$$r_version/bin/R -e "options(Ncpus = 8); BiocManager::install(\"$$package\", version = \"$$bioconductor_v\")"; done
 
 .ONESHELL:
 system-install-rpackages:
