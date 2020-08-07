@@ -16,9 +16,9 @@ export PYTHON3_PACKAGES=pip numpy pandas nose python-libsbml \
 	distributed statsmodels biom-format \
 	seqmagick pygtrie xgboost kneaddata humann2 pysundials \
 	keyrings.alt dask_jobqueue scanpy louvain python-igraph \
-	gprofiler-official anndata2ri fastai s-tui pythoncyc docopts deblur yaml
+	gprofiler-official anndata2ri fastai s-tui pythoncyc docopts deblur pyyaml
 
-export PYTHON2_PACKAGES=pip qiime biom-format msgpack xgboost kneaddata humann2 yaml
+export PYTHON2_PACKAGES=pip qiime biom-format msgpack xgboost kneaddata humann2 pyyaml
 
 export DEV_PYTHON_PACKAGES=testresources twine sphinx sphinx-autobuild \
 	sphinx_rtd_theme versioneer pylint autopep8 pyscaffold
@@ -295,7 +295,7 @@ compile-python2:
 	cd $$D1/opt/Python-$$python2_v
 	if [ -f Makefile ]; then make clean; fi
 	if [ -d $$D1/opt/python-$$python2_v ]; then rm -rf $$D1/opt/python-$$python2_v; fi
-	./configure --prefix=$$D1/opt/python-$$python2_v --enable-optimizations --with-ensurepip=install
+	./configure --prefix=$$D1/opt/python-$$python2_v --with-ensurepip=install
 	make
 	make install
 
@@ -310,7 +310,7 @@ compile-python3:
 	cd $$D1/opt/Python-$$python3_v
 	if [ -f Makefile ]; then make clean; fi
 	if [ -d $$D1/opt/python-$$python3_v ]; then rm -rf $$D1/opt/python-$$python3_v; fi
-	./configure --prefix=$$D1/opt/python-$$python3_v --enable-optimizations --with-ensurepip=install
+	./configure --prefix=$$D1/opt/python-$$python3_v --with-ensurepip=install
 	make
 	make install
 
