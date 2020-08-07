@@ -7,7 +7,8 @@ export bioconductor_v=3.10
 export python3_v=3.8.2
 export python2_v=2.7.18
 
-# use virtual environment for anvio, symfit, libroadrunner because of incompatibilities
+# use virtual environment for anvio, symfit, libroadrunner, tensorflow-gpu because of incompatibilities
+# use virtual environment for indra because downgrades pysb
 export PYTHON3_PACKAGES=pip numpy pandas nose python-libsbml \
 	cobra escher seaborn pillow bokeh dnaplotlib pysb \
 	biopython bioservices openpyxl xlrd fastcluster scikit-bio \
@@ -15,7 +16,7 @@ export PYTHON3_PACKAGES=pip numpy pandas nose python-libsbml \
 	distributed statsmodels biom-format \
 	seqmagick pygtrie xgboost kneaddata humann2 pysundials \
 	keyrings.alt dask_jobqueue scanpy louvain python-igraph \
-	gprofiler-official anndata2ri fastai s-tui pythoncyc docopts deblur indra
+	gprofiler-official anndata2ri fastai s-tui pythoncyc docopts deblur
 
 export PYTHON2_PACKAGES=pip qiime biom-format msgpack xgboost kneaddata humann2
 
@@ -23,7 +24,7 @@ export DEV_PYTHON_PACKAGES=testresources twine sphinx sphinx-autobuild \
 	sphinx_rtd_theme versioneer pylint autopep8 pyscaffold
 
 export CUDA_PYTHON3_PACKAGES=pycuda scikit-cuda \
-	torch torchvision tensorflow-gpu theano cntk cntk-gpu keras
+	torch torchvision theano cntk cntk-gpu keras
 
 export JUPYTER_PACKAGES=jupyter jupyterlab ipykernel nbopen rise nbserverproxy jupyter_nbextensions_configurator
 
@@ -33,6 +34,17 @@ export PERL_CPANM=App::cpanoutdated Test::Pod::Coverage JSON Math::CDF HTML::Tem
 	XML::Compile::SOAP11 XML::Compile::WSDL11 XML::Compile::Transport::SOAPHTTP \
 	Bio::Perl Statistics::R Bio::DB::Taxonomy XML::LibXML LWP::Simple Text::CSV \
 	JSON File::Slurp XML::DOM::XPath GD App::Cmd::Setup Bio::Roary
+
+export PERL_RSAT=Algorithm::Cluster Bio::Das Bio::Perl Class::Std::Fast DB_File \
+	Digest::MD5::File Email::Sender Email::Sender::Transport::SMTPS Email::Simple \
+	Email::Simple::Creator IO::All JSON LockFile::Simple Log::Log4perl MCE::Shared \
+	Math::CDF Module::Build::Compat Number::Format OLE::Storage_Lite \
+	Object::InsideOut Util::Properties Parallel::ForkManager PostScript::Simple \
+	REST::Client Readonly SOAP::Lite SOAP::Packager SOAP::Transport::HTTP SOAP::WSDL \
+	Spreadsheet::WriteExcel Spreadsheet::WriteExcel::Big Statistics::Distributions \
+	Template::Plugin::Number::Format XML::Compile XML::Compile::Cache \
+	XML::Compile::SOAP11 XML::Compile::Transport::SOAPHTTP XML::Compile::WSDL11 \
+	XML::DOM  XML::LibXML::Simple YAML
 
 export R_PACKAGES=Rcpp tidyverse knitr rmarkdown gridExtra plotly Cairo ggpubr ape \
 	optparse RColorBrewer randomForest vegan apcluster chron compare compute.es \
