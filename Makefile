@@ -35,16 +35,18 @@ export PERL_CPANM=App::cpanoutdated Test::Pod::Coverage JSON Math::CDF HTML::Tem
 	Bio::Perl Statistics::R Bio::DB::Taxonomy XML::LibXML LWP::Simple Text::CSV \
 	JSON File::Slurp XML::DOM::XPath GD App::Cmd::Setup Bio::Roary
 
-export PERL_RSAT=Algorithm::Cluster Bio::Das Bio::Perl Class::Std::Fast DB_File \
-	Digest::MD5::File Email::Sender Email::Sender::Transport::SMTPS Email::Simple \
-	Email::Simple::Creator IO::All JSON LockFile::Simple Log::Log4perl MCE::Shared \
-	Math::CDF Module::Build::Compat Number::Format OLE::Storage_Lite \
-	Object::InsideOut Util::Properties Parallel::ForkManager PostScript::Simple \
-	REST::Client Readonly SOAP::Lite SOAP::Packager SOAP::Transport::HTTP SOAP::WSDL \
-	Spreadsheet::WriteExcel Spreadsheet::WriteExcel::Big Statistics::Distributions \
+export PERL_RSAT=Algorithm::Cluster Bio::Das Bio::Perl CGI Class::Std::Fast DBD::mysql DBI \
+	DB_File Data::Dumper Digest::MD5::File Email::Sender \
+	Email::Sender::Transport::SMTPS Email::Simple Email::Simple::Creator File::Spec \
+	GD HTTP::Tiny IO::All JSON LWP::Simple LWP::UserAgent LockFile::Simple \
+	Log::Log4perl MCE::Shared Math::CDF Module::Build::Compat Number::Format \
+	OLE::Storage_Lite Object::InsideOut Util::Properties POSIX Parallel::ForkManager \
+	PostScript::Simple REST::Client Readonly SOAP::Lite SOAP::Packager \
+	SOAP::Transport::HTTP SOAP::WSDL Spreadsheet::WriteExcel \
+	Spreadsheet::WriteExcel::Big Statistics::Distributions \
 	Template::Plugin::Number::Format XML::Compile XML::Compile::Cache \
 	XML::Compile::SOAP11 XML::Compile::Transport::SOAPHTTP XML::Compile::WSDL11 \
-	XML::DOM  XML::LibXML::Simple YAML
+	XML::DOM XML::LibXML XML::LibXML::Simple XML::Parser::Expat YAML
 
 export R_PACKAGES=Rcpp tidyverse knitr rmarkdown gridExtra plotly Cairo ggpubr ape \
 	optparse RColorBrewer randomForest vegan apcluster chron compare compute.es \
