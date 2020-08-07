@@ -216,6 +216,7 @@ jupyter-r-kernel:
 system-install-perl-packages:
 	cpan $$PERL_PACKAGES
 	cpanm -n $$PERL_CPANM
+	cpanm -n $$PERL_RSAT
 
 .ONESHELL:
 system-install-pip3-packages:
