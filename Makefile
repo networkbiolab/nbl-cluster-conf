@@ -50,13 +50,13 @@ export PERL_RSAT=Algorithm::Cluster Bio::Das Bio::Perl CGI Class::Std::Fast DBD:
 
 export R_PACKAGES=Rcpp tidyverse knitr rmarkdown gridExtra plotly Cairo ggpubr ape \
 	optparse RColorBrewer randomForest vegan apcluster chron compare compute.es \
-	d3heatmap dendextend DEoptimR diptest fastmatch flexmix fpc kernlab mclust mds \
+	dendextend DEoptimR diptest fastmatch flexmix fpc kernlab mclust mds \
 	modeltools mvtnorm NLP phangorn pheatmap plotrix PMCMRplus png prabclus \
-	qdapDictionaries qdapRegex quadprog rafalib reports robustbase rvcheck segmented \
+	qdapDictionaries qdapRegex quadprog rafalib robustbase rvcheck segmented \
 	seqinr slam tidytree trimcluster UpSetR wordcloud freetypeharfbuzz EQUIVNONINF \
 	xgboost ROCR ggplot2 clusterSim splines stats4 survival mvtnorm modeltools coin MASS
 
-export R_OLD2INSTALL=biom
+export R_OLD2INSTALL=biom reports d3heatmap
 
 export BIOCONDUCTOR=gam clusterExperiment dada2 edgeR phyloseq DESeq DESeq2 microbiome \
 	BiocVersion ggtree graph hypergraph treeio metagenomeSeq SIAMCAT \
