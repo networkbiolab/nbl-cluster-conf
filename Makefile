@@ -70,16 +70,17 @@ test:
 	echo $(HOST)
 
 # libcurl4-openssl-dev incompatible with libstaden-read-dev
-# fastx-toolkit, gir1.2-networkmanager-1.0, qiime, sra-toolkit, tophat not available ubuntu 20.04
+# gnome-core is removed along with gedit
+# disper, fastx-toolkit, gir1.2-networkmanager-1.0, python-pip, qiime, sra-toolkit, tophat not available ubuntu 20.04
 .ONESHELL:
 apt-install:
 	APTS="ant apache2 apt-file aptitude artemis auditd augustus autoconf bamtools baobab \
 		barrnap bcftools bedops bedtools biom-format-tools bioperl bison bowtie bowtie2 \
 		bwa capnproto cargo cd-hit chrome-gnome-shell clustalx cmake cufflinks curl \
-		cutadapt cython dejagnu diamond-aligner disper docker.io doxygen ea-utils emboss \
+		cutadapt cython dejagnu diamond-aligner docker.io doxygen ea-utils emboss \
 		expat fastqc fasttree ffmpeg flex freeipmi g++ ganglia-monitor \
 		ganglia-webfrontend gcc gettext gfortran ghostscript gimp gir1.2-clutter-1.0 \
-		gir1.2-gtop-2.0 gmetad gnome-core gnome-devel \
+		gir1.2-gtop-2.0 gmetad gnome-devel \
 		gnome-themes-standard gnome-tweak-tool gparted gperf gzip hddtemp help2man \
 		hisat2 hmmer htop hwloc idba infernal inkscape intltool julia junit kallisto \
 		kate kmc kompare kraken lammps lftp libapache2-mod-php7.4 libargtable2-dev \
@@ -90,7 +91,7 @@ apt-install:
 		libglu1-mesa-dev libgmp-dev libgoogle-perftools-dev libgsl-dev libgtk2.0-dev \
 		libhdf5-serial-dev libhmsbeagle-dev libhpdf-dev libhts-dev libhttp-parser-dev \
 		libhwloc-dev libibmad-dev libidn11-dev libipmimonitoring-dev libjansson-dev \
-		libjemalloc1 libjemalloc-dev libjson-perl libjwt-dev libkrb5-dev liblapack-dev \
+		libjemalloc2 libjemalloc-dev libjson-perl libjwt-dev libkrb5-dev liblapack-dev \
 		liblapacke liblmdb-dev liblpsolve55-dev liblua50-dev liblua5.1-0-dev \
 		liblua5.2-dev liblua5.3-dev liblwp-protocol-https-perl libmagick++-dev \
 		libmetis-dev libmpfr-dev libmunge-dev libnlopt-dev libopenblas-dev \
@@ -98,13 +99,13 @@ apt-install:
 		libsndfile1-dev libsparsehash-dev libstaden-read-dev libsundials-dev libtbb-dev \
 		libtext-csv-perl libtool libudunits2-dev libwww-perl libxm4 libxslt1-dev \
 		libyaml-dev llvm-dev lm-sensors mafft mailutils man2html mash maven mcl \
-		mesa-common-dev mira-assembler mlocate mrbayes nagios3 nasm ncbi-blast+ \
+		mesa-common-dev mira-assembler mlocate mrbayes nagios4 nasm ncbi-blast+ \
 		net-tools nfs-common nfs-kernel-server nginx nodejs npm numactl nvidia-cuda-dev \
 		nvidia-cuda-doc nvidia-cuda-gdb nvidia-cuda-toolkit ocamlbuild opam \
 		openjdk-11-jdk-headless openjdk-8-jdk openjdk-8-jre openssh-server pandoc \
 		parallel pdfshuffler pdsh php7.4 php7.4-cli php7.4-common php7.4-curl php7.4-gd \
 		php7.4-gmp php7.4-intl php7.4-mbstring php7.4-mysql php7.4-xml php7.4-xmlrpc \
-		php7.4-zip postfix prodigal python3-opencv python3-pip python3-tk python-pip \
+		php7.4-zip postfix prodigal python3-opencv python3-pip python3-tk python-pip-whl \
 		python-tk rar r-base rename repeatmasker-recon rrdtool rubber ruby salmon \
 		samtools sbmltoolbox smartmontools smem snap snap-aligner soapdenovo2 spades \
 		speedtest-cli sqlite sqlite3 sshfs swig synaptic systemtap tabix \
