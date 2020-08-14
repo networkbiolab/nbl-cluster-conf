@@ -292,7 +292,7 @@ compile-python2:
 	if [ -d $$D1/opt/Python-$$python2_v ]; then rm -rf $$D1/opt/Python-$$python2_v; fi
 	tar xvzf $$D1/opt/ubuntu-software/Python-$$python2_v.tgz -C $$D1/opt
 	cd $$D1/opt/Python-$$python2_v
-	if [ -f Makefile ]; then make clean; fi
+	#if [ -f Makefile ]; then make clean; fi
 	if [ -d $$D1/opt/python-$$python2_v ]; then rm -rf $$D1/opt/python-$$python2_v; fi
 	./configure --prefix=$$D1/opt/python-$$python2_v --with-ensurepip=install
 	make
@@ -307,7 +307,7 @@ compile-python3:
 	if [ -d $$D1/opt/Python-$$python3_v ]; then rm -rf $$D1/opt/Python-$$python3_v; fi
 	tar xvzf $$D1/opt/ubuntu-software/Python-$$python3_v.tgz -C $$D1/opt
 	cd $$D1/opt/Python-$$python3_v
-	if [ -f Makefile ]; then make clean; fi
+	#if [ -f Makefile ]; then make clean; fi
 	if [ -d $$D1/opt/python-$$python3_v ]; then rm -rf $$D1/opt/python-$$python3_v; fi
 	./configure --prefix=$$D1/opt/python-$$python3_v --with-ensurepip=install
 	make
@@ -322,7 +322,7 @@ compile-r-cran:
 	if [ -d $$D1/opt/R-$$r_version ]; then rm -rf $$D1/opt/R-$$r_version; fi
 	tar xvzf $$D1/opt/ubuntu-software/R-$$r_version.tgz -C $$D1/opt
 	cd $$D1/opt/R-$$r_version
-	if [ -f Makefile ]; then make clean; fi
+	#if [ -f Makefile ]; then make clean; fi
 	if [ -d $$D1/opt/r-$$r_version ]; then rm -rf $$D1/opt/r-$$r_version; fi
 	./configure --prefix=$$D1/opt/r-$$r_version --enable-R-shlib --enable-R-static-lib --with-blas --with-lapack
 	make
