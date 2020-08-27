@@ -111,7 +111,7 @@ apt-install:
 		speedtest-cli sqlite sqlite3 sshfs swig synaptic systemtap tabix \
 		testssl.sh trimmomatic trnascan-se ttf-mscorefonts-installer \
 		ubuntu-server unzip vagrant velvet virtualbox vlc vsearch wakeonlan x11-utils \
-		zlib1g zlib1g-dev zlibc gnome-shell-extensions gradle hhsuite golang-go sortmerna tilix python3-venv libgraphviz-dev"
+		zlib1g zlib1g-dev zlibc gnome-shell-extensions gradle hhsuite golang-go sortmerna tilix python3-venv libgraphviz-dev environment-modules"
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
 		checkinstall libssl-dev zlib1g-dev libncurses5-dev \
