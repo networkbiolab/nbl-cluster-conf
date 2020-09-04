@@ -18,7 +18,7 @@ export PYTHON3_PACKAGES=pip numpy pandas nose python-libsbml \
 	keyrings.alt dask_jobqueue scanpy louvain python-igraph \
 	gprofiler-official anndata2ri fastai s-tui pythoncyc docopts deblur pyyaml pybedtools cogent3
 
-export PYTHON2_PACKAGES=pip qiime biom-format msgpack xgboost kneaddata humann2 pyyaml "biopython==1.76"
+export PYTHON2_PACKAGES=pip qiime biom-format msgpack xgboost kneaddata humann2 pyyaml "biopython==1.76" pyfasta pybedtools pydnase pybigwig parmap keras
 
 export DEV_PYTHON_PACKAGES=testresources twine sphinx sphinx-autobuild \
 	sphinx_rtd_theme versioneer pylint autopep8 pyscaffold
