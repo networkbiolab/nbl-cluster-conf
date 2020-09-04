@@ -33,7 +33,7 @@ export PERL_PACKAGES=App::cpanminus CPAN
 export PERL_CPANM=App::cpanoutdated Test::Pod::Coverage JSON Math::CDF HTML::Template \
 	XML::Compile::SOAP11 XML::Compile::WSDL11 XML::Compile::Transport::SOAPHTTP \
 	Bio::Perl Statistics::R Bio::DB::Taxonomy XML::LibXML LWP::Simple Text::CSV \
-	JSON File::Slurp XML::DOM::XPath GD App::Cmd::Setup Bio::Roary
+	JSON File::Slurp XML::DOM::XPath GD App::Cmd::Setup Bio::Roary PDF::API2
 
 export PERL_RSAT=Algorithm::Cluster Bio::Das Bio::Perl CGI Class::Std::Fast DBD::mysql DBI \
 	DB_File Data::Dumper Digest::MD5::File Email::Sender \
