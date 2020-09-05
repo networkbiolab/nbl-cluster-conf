@@ -18,7 +18,7 @@ export PYTHON3_PACKAGES=pip numpy pandas nose python-libsbml \
 	keyrings.alt dask_jobqueue scanpy louvain python-igraph \
 	gprofiler-official anndata2ri fastai s-tui pythoncyc docopts deblur pyyaml pybedtools cogent3 funannotate
 
-export PYTHON2_PACKAGES=pip qiime biom-format msgpack xgboost kneaddata humann2 pyyaml "biopython==1.76" pyfasta pybedtools pydnase pybigwig parmap keras funannotate
+export PYTHON2_PACKAGES=pip qiime biom-format msgpack xgboost kneaddata humann2 pyyaml "biopython==1.76" pyfasta pybedtools pydnase pybigwig parmap keras funannotate bcbio-gff networkx markdown2 matplotlib
 
 export DEV_PYTHON_PACKAGES=testresources twine sphinx sphinx-autobuild \
 	sphinx_rtd_theme versioneer pylint autopep8 pyscaffold
@@ -33,7 +33,7 @@ export PERL_PACKAGES=App::cpanminus CPAN
 export PERL_CPANM=App::cpanoutdated Test::Pod::Coverage JSON Math::CDF HTML::Template \
 	XML::Compile::SOAP11 XML::Compile::WSDL11 XML::Compile::Transport::SOAPHTTP \
 	Bio::Perl Statistics::R Bio::DB::Taxonomy XML::LibXML LWP::Simple Text::CSV \
-	JSON File::Slurp XML::DOM::XPath GD App::Cmd::Setup Bio::Roary PDF::API2
+	JSON File::Slurp XML::DOM::XPath GD App::Cmd::Setup Bio::Roary PDF::API2 Hash::Merge Logger::Simple
 
 export PERL_RSAT=Algorithm::Cluster Bio::Das Bio::Perl CGI Class::Std::Fast DBD::mysql DBI \
 	DB_File Data::Dumper Digest::MD5::File Email::Sender \
