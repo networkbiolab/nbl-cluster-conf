@@ -30,31 +30,36 @@ export JUPYTER_PACKAGES=jupyter jupyterlab ipykernel nbopen rise nbserverproxy j
 
 export PERL_PACKAGES=App::cpanminus CPAN
 
-export PERL_CPANM=App::cpanoutdated Test::Pod::Coverage JSON Math::CDF HTML::Template \
-	XML::Compile::SOAP11 XML::Compile::WSDL11 XML::Compile::Transport::SOAPHTTP \
-	Bio::Perl Statistics::R Bio::DB::Taxonomy XML::LibXML LWP::Simple Text::CSV \
-	JSON File::Slurp XML::DOM::XPath GD App::Cmd::Setup Bio::Roary PDF::API2 Hash::Merge Logger::Simple
+export PERL_CPANM=App::Cmd::Setup App::cpanoutdated Bio::DB::Taxonomy Bio::Perl Bio::Roary \
+	Data::Dumper experimental File::Slurp File::Spec GD Getopt::Long Hash::Merge \
+	HTML::Template JSON List::Util Logger::Simple LWP::Simple Math::CDF \
+	Parallel::ForkManager PDF::API2 Scalar::Util Statistics::R SVG \
+	Test::Pod::Coverage Text::CSV Try::Tiny XML::Compile::SOAP11 \
+	XML::Compile::Transport::SOAPHTTP XML::Compile::WSDL11 XML::DOM::XPath \
+	XML::LibXML
 
-export PERL_RSAT=Algorithm::Cluster Bio::Das Bio::Perl CGI Class::Std::Fast DBD::mysql DBI \
-	DB_File Data::Dumper Digest::MD5::File Email::Sender \
+export PERL_RSAT=Algorithm::Cluster Bio::Das Bio::Perl CGI Class::Std::Fast Data::Dumper \
+	DBD::mysql DB_File DBI Digest::MD5::File Email::Sender \
 	Email::Sender::Transport::SMTPS Email::Simple Email::Simple::Creator File::Spec \
-	GD HTTP::Tiny IO::All JSON LWP::Simple LWP::UserAgent LockFile::Simple \
-	Log::Log4perl MCE::Shared Math::CDF Module::Build::Compat Number::Format \
-	OLE::Storage_Lite Object::InsideOut Util::Properties POSIX Parallel::ForkManager \
-	PostScript::Simple REST::Client Readonly SOAP::Lite SOAP::Packager \
+	GD HTTP::Tiny IO::All JSON LockFile::Simple Log::Log4perl LWP::Simple \
+	LWP::UserAgent Math::CDF MCE::Shared Module::Build::Compat Number::Format \
+	Object::InsideOut OLE::Storage_Lite Parallel::ForkManager POSIX \
+	PostScript::Simple Readonly REST::Client SOAP::Lite SOAP::Packager \
 	SOAP::Transport::HTTP SOAP::WSDL Spreadsheet::WriteExcel \
 	Spreadsheet::WriteExcel::Big Statistics::Distributions \
-	Template::Plugin::Number::Format XML::Compile XML::Compile::Cache \
-	XML::Compile::SOAP11 XML::Compile::Transport::SOAPHTTP XML::Compile::WSDL11 \
-	XML::DOM XML::LibXML XML::LibXML::Simple XML::Parser::Expat YAML
+	Template::Plugin::Number::Format Util::Properties XML::Compile \
+	XML::Compile::Cache XML::Compile::SOAP11 XML::Compile::Transport::SOAPHTTP \
+	XML::Compile::WSDL11 XML::DOM XML::LibXML XML::LibXML::Simple XML::Parser::Expat \
+	YAML
 
-export R_PACKAGES=Rcpp tidyverse knitr rmarkdown gridExtra plotly Cairo ggpubr ape \
-	optparse RColorBrewer randomForest vegan apcluster chron compare compute.es \
-	dendextend DEoptimR diptest fastmatch flexmix fpc kernlab mclust mds \
-	modeltools mvtnorm NLP phangorn pheatmap plotrix PMCMRplus png prabclus \
-	qdapDictionaries qdapRegex quadprog rafalib robustbase rvcheck segmented \
-	seqinr slam tidytree trimcluster UpSetR wordcloud freetypeharfbuzz EQUIVNONINF \
-	xgboost ROCR ggplot2 clusterSim splines stats4 survival mvtnorm modeltools coin MASS tsne rgl pROC
+export R_PACKAGES=apcluster ape Cairo chron clusterSim coin compare compute.es data.table \
+	dendextend DEoptimR diptest EQUIVNONINF fastmatch flexmix fpc freetypeharfbuzz \
+	GenomicAlignments GenomicFeatures ggplot2 ggpubr GOstats gridExtra jsonlite \
+	kernlab knitr MASS mclust mds modeltools mvtnorm NLP optparse phangorn pheatmap \
+	plotly plotrix PMCMRplus png prabclus pROC qdapDictionaries qdapRegex quadprog \
+	rafalib randomForest RColorBrewer Rcpp RCurl rgl rmarkdown robustbase ROCR \
+	rvcheck segmented seqinr slam splines stats4 survival tidytree tidyverse \
+	trimcluster tsne UpSetR vegan wordcloud xgboost XML
 
 export R_OLD2INSTALL=biom reports d3heatmap
 
