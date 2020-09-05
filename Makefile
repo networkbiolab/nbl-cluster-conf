@@ -170,20 +170,20 @@ local-install-rpackages:
 		"options(Ncpus = 8); install.packages('$$package', dependencies = TRUE, repos = 'https://cloud.r-project.org/')"; done
 
 .ONESHELL:
-local-install-bioconductor:
+local-install-bioconductor-packages:
 	# install Bioconductor packages
 	$$D1/opt/R-$$r_version/bin/R -e \
 		"options(Ncpus = 8); install.packages(\"BiocManager\", dependencies = TRUE, repos = 'https://cloud.r-project.org/', update = TRUE, ask = FALSE)"
 	for package in $$BIOCONDUCTOR; do $$D1/opt/R-$$r_version/bin/R -e "options(Ncpus = 8); BiocManager::install(\"$$package\", version = \"$$bioconductor_v\")"; done
 
 .ONESHELL:
-system-install-rpackages:
+system-install-r-packages:
 	# install R packages
 	for package in $$R_PACKAGES; do R -e \
 		"options(Ncpus = 8); install.packages('$$package', dependencies = TRUE, repos = 'https://cloud.r-project.org/')"; done
 
 .ONESHELL:
-system-install-bioconductor:
+system-install-bioconductor-packages:
 	# install Bioconductor packages
 	R -e "options(Ncpus = 8); install.packages(\"BiocManager\", dependencies = TRUE, repos = 'https://cloud.r-project.org/', update = TRUE, ask = FALSE)"
 	for package in $$BIOCONDUCTOR; do R -e "options(Ncpus = 8); BiocManager::install(\"$$package\", version = \"$$bioconductor_v\")"; done
