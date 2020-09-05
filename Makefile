@@ -54,7 +54,7 @@ export PERL_RSAT=Algorithm::Cluster Bio::Das Bio::Perl CGI Class::Std::Fast Data
 
 export R_PACKAGES=apcluster ape Cairo chron clusterSim coin compare compute.es data.table \
 	dendextend DEoptimR diptest EQUIVNONINF fastmatch flexmix fpc freetypeharfbuzz \
-	GenomicAlignments ggplot2 ggpubr gridExtra jsonlite \
+	ggplot2 ggpubr gridExtra jsonlite \
 	kernlab knitr MASS mclust mds modeltools mvtnorm NLP optparse phangorn pheatmap \
 	plotly plotrix PMCMRplus png prabclus pROC qdapDictionaries qdapRegex quadprog \
 	rafalib randomForest RColorBrewer Rcpp RCurl rgl rmarkdown robustbase ROCR \
