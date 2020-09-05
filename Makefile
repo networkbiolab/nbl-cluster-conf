@@ -58,7 +58,7 @@ export R_PACKAGES=apcluster ape Cairo chron clusterSim coin compare compute.es d
 	kernlab knitr MASS mclust mds modeltools mvtnorm NLP optparse phangorn pheatmap \
 	plotly plotrix PMCMRplus png prabclus pROC qdapDictionaries qdapRegex quadprog \
 	rafalib randomForest RColorBrewer Rcpp RCurl rgl rmarkdown robustbase ROCR \
-	rvcheck segmented seqinr slam splines survival tidytree tidyverse \
+	rvcheck segmented seqinr slam survival tidytree tidyverse \
 	trimcluster tsne UpSetR vegan wordcloud xgboost XML
 
 export R_OLD2INSTALL=biom reports d3heatmap
