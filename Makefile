@@ -54,7 +54,7 @@ export PERL_RSAT=Algorithm::Cluster Bio::Das Bio::Perl CGI Class::Std::Fast Data
 
 export R_PACKAGES=apcluster ape Cairo chron clusterSim coin compare compute.es data.table \
 	dendextend DEoptimR diptest EQUIVNONINF fastmatch flexmix fpc freetypeharfbuzz \
-	GenomicAlignments GenomicFeatures ggplot2 ggpubr GOstats gridExtra jsonlite \
+	GenomicAlignments ggplot2 ggpubr GOstats gridExtra jsonlite \
 	kernlab knitr MASS mclust mds modeltools mvtnorm NLP optparse phangorn pheatmap \
 	plotly plotrix PMCMRplus png prabclus pROC qdapDictionaries qdapRegex quadprog \
 	rafalib randomForest RColorBrewer Rcpp RCurl rgl rmarkdown robustbase ROCR \
@@ -66,7 +66,7 @@ export R_OLD2INSTALL=biom reports d3heatmap
 export BIOCONDUCTOR=gam clusterExperiment dada2 edgeR phyloseq DESeq DESeq2 microbiome \
 	BiocVersion ggtree graph hypergraph treeio metagenomeSeq SIAMCAT \
 	cluster EnhancedVolcano zinbwave scran MAST monocle \
-	ComplexHeatmap slingshot vsn
+	ComplexHeatmap slingshot vsn GenomicFeatures
 
 .ONESHELL:
 test:
