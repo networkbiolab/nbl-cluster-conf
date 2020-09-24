@@ -16,7 +16,7 @@ export PYTHON3_PACKAGES=pip numpy pandas nose python-libsbml \
 	distributed statsmodels biom-format \
 	seqmagick pygtrie xgboost kneaddata humann2 pysundials \
 	keyrings.alt dask_jobqueue scanpy louvain python-igraph \
-	gprofiler-official anndata2ri fastai s-tui pythoncyc docopts deblur pyyaml pybedtools cogent3 funannotate snakeviz scikit-image fsspec
+	gprofiler-official anndata2ri fastai s-tui pythoncyc docopts deblur pyyaml pybedtools cogent3 funannotate snakeviz scikit-image fsspec pygraphviz
 
 export PYTHON2_PACKAGES=pip qiime biom-format msgpack xgboost kneaddata humann2 pyyaml "biopython==1.76" pyfasta pybedtools pydnase pybigwig parmap keras funannotate bcbio-gff networkx markdown2 matplotlib
 
