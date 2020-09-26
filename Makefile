@@ -9,7 +9,7 @@ export python2_v=2.7.18
 
 # use virtual environment for anvio, symfit, libroadrunner, tensorflow-gpu because of incompatibilities
 # use virtual environment for indra because downgrades pysb
-export PYTHON3_PACKAGES=pip numpy pandas nose python-libsbml \
+export PYTHON3_PACKAGES=pip wheel numpy pandas nose python-libsbml \
 	cobra escher seaborn pillow bokeh dnaplotlib pysb \
 	biopython bioservices openpyxl xlrd fastcluster scikit-bio \
 	scikit-learn rpy2 tzlocal networkx cutadapt \
