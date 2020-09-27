@@ -4,21 +4,28 @@ HOST=$(shell hostname)
 export D1=/
 export r_version=3.6.3
 export bioconductor_v=3.10
-export python3_v=3.8.2
+export python3_v=3.8.5
 export python2_v=2.7.18
+
+export all_python3_v=3.7.9 3.6.12 3.5.10 3.4.10 3.3.7 3.2.6 3.1.5 3.0.1
+export all_python2_v=2.6.9 2.5.4 2.4.4 2.3.5 2.2.3 2.1.3 2.0.1
+export all_r_versions=4.0.2 4.0.1 3.6.3 3.6.2
 
 # use virtual environment for anvio, symfit, libroadrunner, tensorflow-gpu because of incompatibilities
 # use virtual environment for indra because downgrades pysb
-export PYTHON3_PACKAGES=pip wheel numpy pandas nose python-libsbml \
-	cobra escher seaborn pillow bokeh dnaplotlib pysb \
-	biopython bioservices openpyxl xlrd fastcluster scikit-bio \
-	scikit-learn rpy2 tzlocal networkx cutadapt \
-	distributed statsmodels biom-format \
-	seqmagick pygtrie xgboost kneaddata humann2 pysundials \
-	keyrings.alt dask_jobqueue scanpy louvain python-igraph \
-	gprofiler-official anndata2ri fastai s-tui pythoncyc docopts deblur pyyaml pybedtools cogent3 snakeviz scikit-image fsspec pygraphviz checkm-genome
+export PYTHON3_PACKAGES=pip wheel \
+	anndata2ri biom-format biopython bioservices bokeh checkm-genome cobra cogent3 \
+	cutadapt dask_jobqueue deblur distributed dnaplotlib docopts escher fastai \
+	fastcluster fsspec gprofiler-official humann2 keyrings.alt kneaddata louvain \
+	networkx nose numpy openpyxl pandas pillow pybedtools pygraphviz pygtrie pysb \
+	pysundials pythoncyc python-igraph python-libsbml pyyaml rpy2 scanpy scikit-bio \
+	scikit-image scikit-learn seaborn seqmagick snakeviz statsmodels s-tui tzlocal \
+	xgboost xlrd
 
-export PYTHON2_PACKAGES=pip qiime biom-format msgpack xgboost kneaddata humann2 pyyaml "biopython==1.76" pyfasta pybedtools pydnase pybigwig parmap keras funannotate bcbio-gff networkx markdown2 matplotlib
+export PYTHON2_PACKAGES=pip wheel \
+	bcbio-gff biom-format "biopython==1.76" funannotate humann2 keras kneaddata \
+	markdown2 matplotlib msgpack networkx parmap pybedtools pybigwig pydnase pyfasta \
+	pyyaml qiime xgboost
 
 export DEV_PYTHON_PACKAGES=testresources twine sphinx sphinx-autobuild \
 	sphinx_rtd_theme versioneer pylint autopep8 pyscaffold
@@ -164,7 +171,7 @@ cuda-install:
 	apt-get -y install cuda
 
 .ONESHELL:
-local-install-rpackages:
+local-install-cran-packages:
 	# install R packages
 	for package in $$R_PACKAGES; do $$D1/opt/R-$$r_version/bin/R -e \
 		"options(Ncpus = 8); install.packages('$$package', dependencies = TRUE, repos = 'https://cloud.r-project.org/')"; done
@@ -174,10 +181,12 @@ local-install-bioconductor-packages:
 	# install Bioconductor packages
 	$$D1/opt/R-$$r_version/bin/R -e \
 		"options(Ncpus = 8); install.packages(\"BiocManager\", dependencies = TRUE, repos = 'https://cloud.r-project.org/', update = TRUE, ask = FALSE)"
-	for package in $$BIOCONDUCTOR; do $$D1/opt/R-$$r_version/bin/R -e "options(Ncpus = 8); BiocManager::install(\"$$package\", version = \"$$bioconductor_v\")"; done
+	for package in $$BIOCONDUCTOR; do
+		$$D1/opt/R-$$r_version/bin/R -e "options(Ncpus = 8); BiocManager::install(\"$$package\", version = \"$$bioconductor_v\")";
+	done
 
 .ONESHELL:
-system-install-r-packages:
+system-install-cran-packages:
 	# install R packages
 	for package in $$R_PACKAGES; do R -e \
 		"options(Ncpus = 8); install.packages('$$package', dependencies = TRUE, repos = 'https://cloud.r-project.org/')"; done
@@ -186,20 +195,22 @@ system-install-r-packages:
 system-install-bioconductor-packages:
 	# install Bioconductor packages
 	R -e "options(Ncpus = 8); install.packages(\"BiocManager\", dependencies = TRUE, repos = 'https://cloud.r-project.org/', update = TRUE, ask = FALSE)"
-	for package in $$BIOCONDUCTOR; do R -e "options(Ncpus = 8); BiocManager::install(\"$$package\", version = \"$$bioconductor_v\")"; done
+	for package in $$BIOCONDUCTOR; do
+		R -e "options(Ncpus = 8); BiocManager::install(\"$$package\", version = \"$$bioconductor_v\")";
+	done
 
 .ONESHELL:
-test-rpackages:
+test-cran-packages:
 	for package in $$R_PACKAGES; do printf "\\n %s\\n" "Testing $${package}...";
 		R -e "library('$$package')" 2> out 1> /dev/null; grep "there is no package called" out; rm out; done
 
 .ONESHELL:
-test-bioconductor:
+test-bioconductor-packages:
 	for package in $$BIOCONDUCTOR; do printf "\\n %s\\n" "Testing $${package}...";
 		R -e "library('$$package')" 2> out 1> /dev/null; grep "there is no package called" out; rm out; done
 
 .ONESHELL:
-jupyter-r-kernel:
+system-jupyter-r-kernel:
 	R -e "options(Ncpus = 8); \
 	install.packages(c('crayon', 'pbdZMQ', 'devtools'), \
 	repos = 'https://cloud.r-project.org/', dependencies = TRUE); \
@@ -208,13 +219,15 @@ jupyter-r-kernel:
 	library(IRkernel); \
 	IRkernel::installspec(name = 'cran')"
 
-# 	$$D1/opt/R-$$r_version/bin/R -e "options(Ncpus = 8); \
-# 	install.packages(c('crayon', 'pbdZMQ', 'devtools'), \
-# 	repos = 'https://cloud.r-project.org/', dependencies = TRUE); \
-# 	library(devtools); \
-# 	devtools::install('$$D1/opt/repositories/git-reps/IRkernel.IRkernel/R'); \
-# 	library(IRkernel); \
-# 	IRkernel::installspec(name = 'R-$$r_version-local')"
+.ONESHELL:
+local-jupyter-r-kernel:
+	$$D1/opt/R-$$r_version/bin/R -e "options(Ncpus = 8); \
+	install.packages(c('crayon', 'pbdZMQ', 'devtools'), \
+	repos = 'https://cloud.r-project.org/', dependencies = TRUE); \
+	library(devtools); \
+	devtools::install('$$D1/opt/repositories/git-reps/IRkernel.IRkernel/R'); \
+	library(IRkernel); \
+	IRkernel::installspec(name = 'R-$$r_version-local')"
 
 .ONESHELL:
 system-install-perl-packages:
@@ -244,9 +257,17 @@ system-install-cuda-pip3-packages:
 		python3 -m pip install $$package --upgrade; done
 
 .ONESHELL:
-system-remove-cuda-pip3-packages:
-	for package in $$CUDA_PYTHON3_PACKAGES; do \
-		python3 -m pip uninstall $$package; done
+system-install-jupyter-packages:
+	for package in $$JUPYTER_PACKAGES; do \
+		python3 -m pip install $$package --upgrade; done
+
+	# install python kernel
+	python3 -m ipykernel install --user
+	python3 -m nbopen.install_xdg
+
+	# install and enable rise
+	jupyter-nbextension install rise --py --sys-prefix
+	jupyter-nbextension enable rise --py --sys-prefix
 
 .ONESHELL:
 local-install-pip3-packages:
@@ -262,19 +283,6 @@ local-install-cuda-pip3-packages:
 		$$D1/opt/python-$$python3_v/bin/python3 -m pip install $$package --upgrade; done
 
 .ONESHELL:
-system-install-jupyter-packages:
-	for package in $$JUPYTER_PACKAGES; do \
-		python3 -m pip install $$package --upgrade; done
-
-	# install python kernel
-	python3 -m ipykernel install --user
-	python3 -m nbopen.install_xdg
-
-	# install and enable rise
-	jupyter-nbextension install rise --py --sys-prefix
-	jupyter-nbextension enable rise --py --sys-prefix
-
-.ONESHELL:
 local-install-jupyter-packages:
 	for package in $$JUPYTER_PACKAGES; do \
 		$$D1/opt/python-$$python3_v/bin/python3 -m pip install $$package --upgrade; done
@@ -286,6 +294,14 @@ local-install-jupyter-packages:
 	# install and enable rise
 	$$D1/opt/python-$$python3_v/bin/jupyter-nbextension install rise --py --sys-prefix
 	$$D1/opt/python-$$python3_v/bin/jupyter-nbextension enable rise --py --sys-prefix
+
+.ONESHELL:
+local-remove-pip3-packages:
+	for package in $$PYTHON3_PACKAGES; do \
+		$$D1/opt/python-$$python3_v/bin/python3 -m pip uninstall $$package; done
+
+	for package in $$DEV_PYTHON_PACKAGES; do \
+		$$D1/opt/python-$$python3_v/bin/python3 -m pip uninstall $$package; done
 
 # install python and R from source
 .ONESHELL:
@@ -304,6 +320,27 @@ compile-python2:
 	make install
 
 .ONESHELL:
+all-compile-python2:
+	for version in $$all_python2_v; do
+		export python2_v=$$version
+		echo $$python2_v
+
+		mkdir -p $$D1/opt/ubuntu-software
+
+		wget https://www.python.org/ftp/python/$$python2_v/Python-$$python2_v.tgz \
+		-O $$D1/opt/ubuntu-software/Python-$$python2_v.tgz
+		if [ -d $$D1/opt/Python-$$python2_v ]; then rm -rf $$D1/opt/Python-$$python2_v; fi
+		tar xvzf $$D1/opt/ubuntu-software/Python-$$python2_v.tgz -C $$D1/opt
+		cd $$D1/opt/Python-$$python2_v
+		#if [ -f Makefile ]; then make clean; fi
+		if [ -d $$D1/opt/python-$$python2_v ]; then rm -rf $$D1/opt/python-$$python2_v; fi
+		./configure --prefix=$$D1/opt/python-$$python2_v --with-ensurepip=install
+		make
+		make install
+
+	done
+
+.ONESHELL:
 compile-python3:
 	mkdir -p $$D1/opt/ubuntu-software
 
@@ -317,6 +354,27 @@ compile-python3:
 	./configure --prefix=$$D1/opt/python-$$python3_v --with-ensurepip=install
 	make
 	make install
+
+.ONESHELL:
+all-compile-python3:
+	for version in $$all_python3_v; do
+		export python3_v=$$version
+		echo $$python3_v
+
+		mkdir -p $$D1/opt/ubuntu-software
+
+		wget https://www.python.org/ftp/python/$$python3_v/Python-$$python3_v.tgz \
+		-O $$D1/opt/ubuntu-software/Python-$$python3_v.tgz
+		if [ -d $$D1/opt/Python-$$python3_v ]; then rm -rf $$D1/opt/Python-$$python3_v; fi
+		tar xvzf $$D1/opt/ubuntu-software/Python-$$python3_v.tgz -C $$D1/opt
+		cd $$D1/opt/Python-$$python3_v
+		#if [ -f Makefile ]; then make clean; fi
+		if [ -d $$D1/opt/python-$$python3_v ]; then rm -rf $$D1/opt/python-$$python3_v; fi
+		./configure --prefix=$$D1/opt/python-$$python3_v --with-ensurepip=install
+		make
+		make install
+
+	done
 
 .ONESHELL:
 compile-r-cran:
