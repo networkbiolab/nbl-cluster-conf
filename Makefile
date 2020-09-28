@@ -378,7 +378,10 @@ compile-r4-cran:
 
 .ONESHELL:
 all-compile-r4-cran:
-	$(call compile_r,R-4,$$all_r4_versions)
+	for version in $$all_r4_versions; do
+		export r4_version=$$version
+		$(call compile_r,R-4,$$r4_version)
+	done
 
 .ONESHELL:
 compile-r3-cran:
@@ -386,7 +389,10 @@ compile-r3-cran:
 
 .ONESHELL:
 all-compile-r3-cran:
-	$(call compile_r,R-3,$$all_r3_versions)
+	for version in $$all_r3_versions; do
+		export r3_version=$$version
+		$(call compile_r,R-3,$$r3_version)
+	done
 
 .ONESHELL:
 slurm-install:
