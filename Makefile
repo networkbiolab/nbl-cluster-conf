@@ -22,10 +22,11 @@ export PYTHON3_PACKAGES=pip wheel numpy cython \
 	networkx nose openpyxl pandas pillow pybedtools pygraphviz pygtrie pysb \
 	pysundials pythoncyc python-igraph python-libsbml pyyaml rpy2 scanpy scikit-bio \
 	scikit-image scikit-learn seaborn seqmagick snakeviz statsmodels s-tui tzlocal \
-	xgboost xlrd
+	xgboost xlrd pysam
 
+# biom-format not supported for python2.7
 export PYTHON2_PACKAGES=pip wheel numpy cython \
-	bcbio-gff biom-format "biopython==1.76" funannotate humann2 keras kneaddata \
+	bcbio-gff "biopython==1.76" funannotate humann2 keras kneaddata \
 	markdown2 matplotlib msgpack networkx parmap pybedtools pybigwig pydnase pyfasta \
 	pyyaml qiime xgboost
 
