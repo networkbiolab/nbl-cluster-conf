@@ -283,6 +283,21 @@ local-install-pip3-packages:
 local-install-cuda-pip3-packages:
 	$(call install_python_packages,$$CUDA_PYTHON3_PACKAGES,$$D1/opt/python-$$python3_v/bin/python3)
 
+.ONESHELL:
+all-local-install-pip3-packages:
+	for version in $$all_python3_v; do
+		export python3_v=$$version
+		$(call install_python_packages,$$PYTHON3_PACKAGES,$$D1/opt/python-$$python3_v/bin/python3)
+		$(call install_python_packages,$$DEV_PYTHON_PACKAGES,$$D1/opt/python-$$python3_v/bin/python3)
+	done
+
+.ONESHELL:
+all-local-install-cuda-pip3-packages:
+	for version in $$all_python3_v; do
+		export python3_v=$$version
+		$(call install_python_packages,$$CUDA_PYTHON3_PACKAGES,$$D1/opt/python-$$python3_v/bin/python3)
+	done
+
 define remove_python_packages
 	for package in $(1); do
 		$(2) -m pip uninstall $$package;
@@ -298,6 +313,14 @@ system-remove-pip3-packages:
 local-remove-pip3-packages:
 	$(call remove_python_packages,$$PYTHON3_PACKAGES,$$D1/opt/python-$$python3_v/bin/python3)
 	$(call remove_python_packages,$$DEV_PYTHON_PACKAGES,$$D1/opt/python-$$python3_v/bin/python3)
+
+.ONESHELL:
+all-local-remove-pip3-packages:
+	for version in $$all_python3_v; do
+		export python3_v=$$version
+		$(call remove_python_packages,$$PYTHON3_PACKAGES,$$D1/opt/python-$$python3_v/bin/python3)
+		$(call remove_python_packages,$$DEV_PYTHON_PACKAGES,$$D1/opt/python-$$python3_v/bin/python3)
+	done
 
 define jupyter
 	# install python kernel
