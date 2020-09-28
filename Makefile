@@ -2,38 +2,38 @@ SHELL := /bin/bash
 HOST=$(shell hostname)
 
 export D1=/
-export r_version=3.6.3
-export bioconductor_v=3.10
+export r4_version=4.0.2
+export r3_version=3.6.3
+export bioconductor_v=3.11
 export python3_v=3.8.5
 export python2_v=2.7.18
 
 export all_python3_v=3.7.9 3.6.12 3.5.10 3.4.10 3.3.7 3.2.6 3.1.5 3.0.1
 export all_python2_v=2.6.9 2.5.4 2.4.4 2.3.5 2.2.3 2.1.3 2.0.1
-export all_r_versions=4.0.2 4.0.1 3.6.3 3.6.2
+export all_r4_versions=4.0.1 4.0.0
+export all_r3_versions=3.5.3 3.4.4 3.3.3 3.2.5 3.1.3 3.0.3
 
 # use virtual environment for anvio, symfit, libroadrunner, tensorflow-gpu because of incompatibilities
 # use virtual environment for indra because downgrades pysb
-export PYTHON3_PACKAGES=pip wheel \
+export PYTHON3_PACKAGES=pip wheel numpy cython \
 	anndata2ri biom-format biopython bioservices bokeh checkm-genome cobra cogent3 \
 	cutadapt dask_jobqueue deblur distributed dnaplotlib docopts escher fastai \
 	fastcluster fsspec gprofiler-official humann2 keyrings.alt kneaddata louvain \
-	networkx nose numpy openpyxl pandas pillow pybedtools pygraphviz pygtrie pysb \
+	networkx nose openpyxl pandas pillow pybedtools pygraphviz pygtrie pysb \
 	pysundials pythoncyc python-igraph python-libsbml pyyaml rpy2 scanpy scikit-bio \
 	scikit-image scikit-learn seaborn seqmagick snakeviz statsmodels s-tui tzlocal \
 	xgboost xlrd
 
-export PYTHON2_PACKAGES=pip wheel \
+export PYTHON2_PACKAGES=pip wheel numpy cython \
 	bcbio-gff biom-format "biopython==1.76" funannotate humann2 keras kneaddata \
 	markdown2 matplotlib msgpack networkx parmap pybedtools pybigwig pydnase pyfasta \
 	pyyaml qiime xgboost
 
-export DEV_PYTHON_PACKAGES=testresources twine sphinx sphinx-autobuild \
-	sphinx_rtd_theme versioneer pylint autopep8 pyscaffold
+export DEV_PYTHON_PACKAGES=autopep8 pylint pyscaffold sphinx sphinx-autobuild sphinx_rtd_theme testresources twine versioneer
 
-export CUDA_PYTHON3_PACKAGES=pycuda scikit-cuda \
-	torch torchvision theano cntk cntk-gpu keras
+export CUDA_PYTHON3_PACKAGES=cntk cntk-gpu keras pycuda scikit-cuda theano torch torchvision
 
-export JUPYTER_PACKAGES=jupyter jupyterlab ipykernel nbopen rise nbserverproxy jupyter_nbextensions_configurator
+export JUPYTER_PACKAGES=ipykernel jupyter jupyterlab jupyter_nbextensions_configurator nbopen nbserverproxy rise
 
 export PERL_PACKAGES=App::cpanminus CPAN
 
@@ -61,19 +61,18 @@ export PERL_RSAT=Algorithm::Cluster Bio::Das Bio::Perl CGI Class::Std::Fast Data
 
 export R_PACKAGES=apcluster ape Cairo chron clusterSim coin compare compute.es data.table \
 	dendextend DEoptimR diptest EQUIVNONINF fastmatch flexmix fpc freetypeharfbuzz \
-	ggplot2 ggpubr gridExtra jsonlite \
-	kernlab knitr MASS mclust mds modeltools mvtnorm NLP optparse phangorn pheatmap \
-	plotly plotrix PMCMRplus png prabclus pROC qdapDictionaries qdapRegex quadprog \
-	rafalib randomForest RColorBrewer Rcpp RCurl rgl rmarkdown robustbase ROCR \
-	rvcheck segmented seqinr slam survival tidytree tidyverse \
-	trimcluster tsne UpSetR vegan wordcloud xgboost XML
+	ggplot2 ggpubr gridExtra jsonlite kernlab knitr MASS mclust mds modeltools \
+	mvtnorm NLP optparse phangorn pheatmap plotly plotrix PMCMRplus png prabclus \
+	pROC qdapDictionaries qdapRegex quadprog rafalib randomForest RColorBrewer Rcpp \
+	RCurl rgl rmarkdown robustbase ROCR rvcheck segmented seqinr slam survival \
+	tidytree tidyverse trimcluster tsne UpSetR vegan wordcloud xgboost XML
 
 export R_OLD2INSTALL=biom reports d3heatmap
 
-export BIOCONDUCTOR=gam clusterExperiment dada2 edgeR phyloseq DESeq DESeq2 microbiome \
-	BiocVersion ggtree graph hypergraph treeio metagenomeSeq SIAMCAT \
-	cluster EnhancedVolcano zinbwave scran MAST monocle \
-	ComplexHeatmap slingshot vsn GenomicFeatures GenomicAlignments GOstats kebabs
+export BIOCONDUCTOR=BiocVersion cluster clusterExperiment ComplexHeatmap dada2 DESeq DESeq2 edgeR \
+	EnhancedVolcano gam GenomicAlignments GenomicFeatures ggtree GOstats graph \
+	hypergraph kebabs MAST metagenomeSeq microbiome monocle phyloseq scran SIAMCAT \
+	slingshot treeio vsn zinbwave
 
 .ONESHELL:
 test:
@@ -90,40 +89,40 @@ apt-install:
 		barrnap bcftools bedops bedtools biom-format-tools bioperl bison bowtie bowtie2 \
 		bwa capnproto cargo cd-hit chrome-gnome-shell clustalx cmake cufflinks curl \
 		cutadapt cython dejagnu diamond-aligner docker.io doxygen ea-utils emboss \
-		expat fastqc fasttree ffmpeg flex freeipmi g++ ganglia-monitor \
-		ganglia-webfrontend gcc gettext gfortran ghostscript gimp gir1.2-clutter-1.0 \
-		gir1.2-gtop-2.0 gmetad gnome-devel \
-		gnome-themes-standard gnome-tweak-tool gparted gperf gzip hddtemp help2man \
-		hisat2 hmmer htop hwloc idba infernal inkscape intltool julia junit kallisto \
-		kate kmc kompare kraken lammps lftp libapache2-mod-php7.4 libargtable2-dev \
-		libatlas-base-dev libblas-dev libboost-all-dev libcanberra-gtk3-module \
-		libcanberra-gtk-module libcereal-dev libcerf-dev  \
+		environment-modules expat fastqc fasttree ffmpeg flex freeipmi g++ \
+		ganglia-monitor ganglia-webfrontend gcc gettext gfortran ghostscript gimp \
+		gir1.2-clutter-1.0 gir1.2-gtop-2.0 gmetad gnome-devel gnome-shell-extensions \
+		gnome-themes-standard gnome-tweak-tool golang-go gparted gperf gradle gzip \
+		hddtemp help2man hhsuite hisat2 hmmer htop hwloc idba infernal inkscape intltool \
+		julia junit kallisto kate kmc kompare kraken lammps lftp libapache2-mod-php7.4 \
+		libargtable2-dev libatlas-base-dev libblas-dev libboost-all-dev \
+		libcanberra-gtk3-module libcanberra-gtk-module libcereal-dev libcerf-dev \
 		libdist-zilla-perl libdivsufsort-dev libdrm-dev libeigen3-dev libfile-slurp-perl \
 		libfreeipmi-dev libgdal-dev libgd-dev libgirepository1.0-dev libglfw3-dev \
-		libglu1-mesa-dev libgmp-dev libgoogle-perftools-dev libgsl-dev libgtk2.0-dev \
-		libhdf5-serial-dev libhmsbeagle-dev libhpdf-dev libhts-dev libhttp-parser-dev \
-		libhwloc-dev libibmad-dev libidn11-dev libipmimonitoring-dev libjansson-dev \
-		libjemalloc2 libjemalloc-dev libjson-perl libjwt-dev libkrb5-dev liblapack-dev \
-		liblapacke liblmdb-dev liblpsolve55-dev liblua50-dev liblua5.1-0-dev \
-		liblua5.2-dev liblua5.3-dev liblwp-protocol-https-perl libmagick++-dev \
-		libmetis-dev libmpfr-dev libmunge-dev libnlopt-dev libopenblas-dev \
-		libopenmpi-dev libpam0g-dev libpciaccess-dev libpmix-dev libreoffice librrd-dev \
-		libsndfile1-dev libsparsehash-dev libstaden-read-dev libsundials-dev libtbb-dev \
-		libtext-csv-perl libtool libudunits2-dev libwww-perl libxm4 libxslt1-dev \
-		libyaml-dev llvm-dev lm-sensors mafft mailutils man2html mash maven mcl \
-		mesa-common-dev mira-assembler mlocate mrbayes nagios4 nasm ncbi-blast+ \
-		net-tools nfs-common nfs-kernel-server nginx nodejs npm numactl nvidia-cuda-dev \
-		nvidia-cuda-doc nvidia-cuda-gdb nvidia-cuda-toolkit ocamlbuild opam \
-		openjdk-11-jdk-headless openjdk-8-jdk openjdk-8-jre openssh-server pandoc \
+		libglu1-mesa-dev libgmp-dev libgoogle-perftools-dev libgraphviz-dev libgsl-dev \
+		libgtk2.0-dev libhdf5-serial-dev libhmsbeagle-dev libhpdf-dev libhts-dev \
+		libhttp-parser-dev libhwloc-dev libibmad-dev libidn11-dev libipmimonitoring-dev \
+		libjansson-dev libjemalloc2 libjemalloc-dev libjson-perl libjwt-dev libkrb5-dev \
+		liblapack-dev liblapacke liblmdb-dev liblpsolve55-dev liblua50-dev \
+		liblua5.1-0-dev liblua5.2-dev liblua5.3-dev liblwp-protocol-https-perl \
+		libmagick++-dev libmetis-dev libmpfr-dev libmunge-dev libnlopt-dev \
+		libopenblas-dev libopenmpi-dev libpam0g-dev libpciaccess-dev libpmix-dev \
+		libreoffice librrd-dev libsndfile1-dev libsparsehash-dev libstaden-read-dev \
+		libsundials-dev libtbb-dev libtext-csv-perl libtool libudunits2-dev libwww-perl \
+		libxm4 libxslt1-dev libyaml-dev llvm-dev lm-sensors mafft mailutils man2html \
+		mash maven mcl mesa-common-dev mira-assembler mlocate mrbayes nagios4 nasm \
+		ncbi-blast+ net-tools nfs-common nfs-kernel-server nginx nodejs npm numactl \
+		nvidia-cuda-dev nvidia-cuda-doc nvidia-cuda-gdb nvidia-cuda-toolkit ocamlbuild \
+		opam openjdk-11-jdk-headless openjdk-8-jdk openjdk-8-jre openssh-server pandoc \
 		parallel pdfshuffler pdsh php7.4 php7.4-cli php7.4-common php7.4-curl php7.4-gd \
 		php7.4-gmp php7.4-intl php7.4-mbstring php7.4-mysql php7.4-xml php7.4-xmlrpc \
-		php7.4-zip postfix prodigal python3-opencv python3-pip python3-tk python-pip-whl \
-		python-tk rar r-base rename repeatmasker-recon rrdtool rubber ruby salmon \
-		samtools sbmltoolbox smartmontools smem snap snap-aligner soapdenovo2 spades \
-		speedtest-cli sqlite sqlite3 sshfs swig synaptic systemtap tabix \
-		testssl.sh trimmomatic trnascan-se ttf-mscorefonts-installer \
-		ubuntu-server unzip vagrant velvet virtualbox vlc vsearch wakeonlan x11-utils \
-		zlib1g zlib1g-dev zlibc gnome-shell-extensions gradle hhsuite golang-go sortmerna tilix python3-venv libgraphviz-dev environment-modules"
+		php7.4-zip postfix prodigal python3-opencv python3-pip python3-tk python3-venv \
+		python-pip-whl python-tk rar r-base rename repeatmasker-recon rrdtool rubber \
+		ruby salmon samtools sbmltoolbox smartmontools smem snap snap-aligner \
+		soapdenovo2 sortmerna spades speedtest-cli sqlite sqlite3 sshfs swig synaptic \
+		systemtap tabix testssl.sh tilix trimmomatic trnascan-se \
+		ttf-mscorefonts-installer ubuntu-server unzip vagrant velvet virtualbox vlc \
+		vsearch wakeonlan x11-utils zlib1g zlib1g-dev zlibc "
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
 		checkinstall libssl-dev zlib1g-dev libncurses5-dev \
@@ -136,12 +135,14 @@ apt-install:
 	apt-get -y upgrade
 	apt-get -y dist-upgrade
 
-	RED=$(tput setaf 1)
-	for apt in $$APTS; do printf "\\n %s\\n" "Installing $${apt}";
+	for apt in $$APTS; do
+		printf "\\n %s\\n" "Installing $${apt}";
 		apt-get -y install $$apt; done
-	for apt in $$PYTHON3_DEPS; do printf "\\n %s\\n" "Installing $${apt}";
+	for apt in $$PYTHON3_DEPS; do
+		printf "\\n %s\\n" "Installing $${apt}";
 		apt-get -y install $$apt; done
-	for apt in $$R_DEPS; do printf "\\n %s\\n" "Installing $${apt}";
+	for apt in $$R_DEPS; do
+		printf "\\n %s\\n" "Installing $${apt}";
 		apt-get -y install $$apt; done
 
 	apt-get -y remove xul-ext-ubufox gedit
@@ -170,44 +171,67 @@ cuda-install:
 	apt-get update
 	apt-get -y install cuda
 
-.ONESHELL:
-local-install-cran-packages:
-	# install R packages
-	for package in $$R_PACKAGES; do $$D1/opt/R-$$r_version/bin/R -e \
-		"options(Ncpus = 8); install.packages('$$package', dependencies = TRUE, repos = 'https://cloud.r-project.org/')"; done
-
-.ONESHELL:
-local-install-bioconductor-packages:
-	# install Bioconductor packages
-	$$D1/opt/R-$$r_version/bin/R -e \
-		"options(Ncpus = 8); install.packages(\"BiocManager\", dependencies = TRUE, repos = 'https://cloud.r-project.org/', update = TRUE, ask = FALSE)"
-	for package in $$BIOCONDUCTOR; do
-		$$D1/opt/R-$$r_version/bin/R -e "options(Ncpus = 8); BiocManager::install(\"$$package\", version = \"$$bioconductor_v\")";
+define install_cran_packages
+	for package in $$R_PACKAGES; do
+		$(1) -e "options(Ncpus = 8); install.packages('$$package', dependencies = TRUE, repos = 'https://cloud.r-project.org/')";
 	done
+endef
 
 .ONESHELL:
 system-install-cran-packages:
-	# install R packages
-	for package in $$R_PACKAGES; do R -e \
-		"options(Ncpus = 8); install.packages('$$package', dependencies = TRUE, repos = 'https://cloud.r-project.org/')"; done
+	$(call install_cran_packages,R)
+
+.ONESHELL:
+local-install-r3-packages:
+	$(call install_cran_packages,$$D1/opt/R-$$r3_version/bin/R)
+
+.ONESHELL:
+local-install-r4-packages:
+	$(call install_cran_packages,$$D1/opt/R-$$r4_version/bin/R)
+
+define install_bioconductor_packages
+	$(1) -e "options(Ncpus = 8); install.packages('BiocManager', dependencies = TRUE, repos = 'https://cloud.r-project.org/', update = TRUE, ask = FALSE)"
+	for package in $$BIOCONDUCTOR; do
+		$(1) -e "options(Ncpus = 8); BiocManager::install(\"$$package\", version = \"$$bioconductor_v\")";
+	done
+endef
 
 .ONESHELL:
 system-install-bioconductor-packages:
-	# install Bioconductor packages
-	R -e "options(Ncpus = 8); install.packages(\"BiocManager\", dependencies = TRUE, repos = 'https://cloud.r-project.org/', update = TRUE, ask = FALSE)"
-	for package in $$BIOCONDUCTOR; do
-		R -e "options(Ncpus = 8); BiocManager::install(\"$$package\", version = \"$$bioconductor_v\")";
-	done
+	$(call install_bioconductor_packages,R)
 
 .ONESHELL:
-test-cran-packages:
-	for package in $$R_PACKAGES; do printf "\\n %s\\n" "Testing $${package}...";
-		R -e "library('$$package')" 2> out 1> /dev/null; grep "there is no package called" out; rm out; done
+local-install-bioconductor-r3-packages:
+	$(call install_bioconductor_packages,$$D1/opt/R-$$r3_version/bin/R)
 
 .ONESHELL:
-test-bioconductor-packages:
-	for package in $$BIOCONDUCTOR; do printf "\\n %s\\n" "Testing $${package}...";
-		R -e "library('$$package')" 2> out 1> /dev/null; grep "there is no package called" out; rm out; done
+local-install-bioconductor-r4-packages:
+	$(call install_bioconductor_packages,$$D1/opt/R-$$r4_version/bin/R)
+
+define test_packages:
+	for package in $(1); do
+		printf "\\n %s\\n" "Testing $${package}...";
+		$(2) -e "library('$$package')" 2> out 1> /dev/null;
+		grep "there is no package called" out;
+		rm out;
+		done
+endef
+
+.ONESHELL:
+test-system-cran-packages:
+	$(call test_packages,$$R_PACKAGES,R)
+
+.ONESHELL:
+test-system-bioconductor-packages:
+	$(call test_packages,$$BIOCONDUCTOR,R)
+
+.ONESHELL:
+test-local-cran-packages:
+	$(call test_packages,$$R_PACKAGES,$$D1/opt/R-$$r_version/bin/R)
+
+.ONESHELL:
+test-local-bioconductor-packages:
+	$(call test_packages,$$BIOCONDUCTOR,$$D1/opt/R-$$r_version/bin/R)
 
 .ONESHELL:
 system-jupyter-r-kernel:
@@ -235,161 +259,134 @@ system-install-perl-packages:
 	cpanm -n $$PERL_CPANM
 	cpanm -n $$PERL_RSAT
 
+define install_python_packages
+	for package in $(1); do
+		$(2) -m pip install $$package --upgrade;
+	done
+endef
+
 .ONESHELL:
 system-install-pip3-packages:
-	for package in $$PYTHON3_PACKAGES; do \
-		python3 -m pip install $$package --upgrade; done
-
-	for package in $$DEV_PYTHON_PACKAGES; do \
-		python3 -m pip install $$package --upgrade; done
-
-.ONESHELL:
-system-remove-pip3-packages:
-	for package in $$PYTHON3_PACKAGES; do \
-		python3 -m pip uninstall $$package; done
-
-	for package in $$DEV_PYTHON_PACKAGES; do \
-		python3 -m pip uninstall $$package; done
+	$(call install_python_packages,$$PYTHON3_PACKAGES,python3)
+	$(call install_python_packages,$$DEV_PYTHON_PACKAGES,python3)
 
 .ONESHELL:
 system-install-cuda-pip3-packages:
-	for package in $$CUDA_PYTHON3_PACKAGES; do \
-		python3 -m pip install $$package --upgrade; done
-
-.ONESHELL:
-system-install-jupyter-packages:
-	for package in $$JUPYTER_PACKAGES; do \
-		python3 -m pip install $$package --upgrade; done
-
-	# install python kernel
-	python3 -m ipykernel install --user
-	python3 -m nbopen.install_xdg
-
-	# install and enable rise
-	jupyter-nbextension install rise --py --sys-prefix
-	jupyter-nbextension enable rise --py --sys-prefix
+	$(call install_python_packages,$$CUDA_PYTHON3_PACKAGES,python3)
 
 .ONESHELL:
 local-install-pip3-packages:
-	for package in $$PYTHON3_PACKAGES; do \
-		$$D1/opt/python-$$python3_v/bin/python3 -m pip install $$package --upgrade; done
-
-	for package in $$DEV_PYTHON_PACKAGES; do \
-		$$D1/opt/python-$$python3_v/bin/python3 -m pip install $$package --upgrade; done
+	$(call install_python_packages,$$PYTHON3_PACKAGES,$$D1/opt/python-$$python3_v/bin/python3)
+	$(call install_python_packages,$$DEV_PYTHON_PACKAGES,$$D1/opt/python-$$python3_v/bin/python3)
 
 .ONESHELL:
 local-install-cuda-pip3-packages:
-	for package in $$CUDA_PYTHON3_PACKAGES; do \
-		$$D1/opt/python-$$python3_v/bin/python3 -m pip install $$package --upgrade; done
+	$(call install_python_packages,$$CUDA_PYTHON3_PACKAGES,$$D1/opt/python-$$python3_v/bin/python3)
+
+define remove_python_packages
+	for package in $(1); do
+		$(2) -m pip uninstall $$package;
+	done
+endef
 
 .ONESHELL:
-local-install-jupyter-packages:
-	for package in $$JUPYTER_PACKAGES; do \
-		$$D1/opt/python-$$python3_v/bin/python3 -m pip install $$package --upgrade; done
-
-	# install python kernel
-	$$D1/opt/python-$$python3_v/bin/python3 -m ipykernel install --user
-	$$D1/opt/python-$$python3_v/bin/python3 -m nbopen.install_xdg
-
-	# install and enable rise
-	$$D1/opt/python-$$python3_v/bin/jupyter-nbextension install rise --py --sys-prefix
-	$$D1/opt/python-$$python3_v/bin/jupyter-nbextension enable rise --py --sys-prefix
+system-remove-pip3-packages:
+	$(call remove_python_packages,$$PYTHON3_PACKAGES,python3)
+	$(call remove_python_packages,$$DEV_PYTHON_PACKAGES,python3)
 
 .ONESHELL:
 local-remove-pip3-packages:
-	for package in $$PYTHON3_PACKAGES; do \
-		$$D1/opt/python-$$python3_v/bin/python3 -m pip uninstall $$package; done
+	$(call remove_python_packages,$$PYTHON3_PACKAGES,$$D1/opt/python-$$python3_v/bin/python3)
+	$(call remove_python_packages,$$DEV_PYTHON_PACKAGES,$$D1/opt/python-$$python3_v/bin/python3)
 
-	for package in $$DEV_PYTHON_PACKAGES; do \
-		$$D1/opt/python-$$python3_v/bin/python3 -m pip uninstall $$package; done
+define jupyter
+	# install python kernel
+	$(1) -m ipykernel install --user
+	$(1) -m nbopen.install_xdg
 
-# install python and R from source
+	# install and enable rise
+	$(2) install rise --py --sys-prefix
+	$(2) enable rise --py --sys-prefix
+endef
+
 .ONESHELL:
-compile-python2:
+system-install-jupyter-packages:
+	$(call install_python_packages,$$JUPYTER_PACKAGES,python3)
+	$(call jupyter,python3,jupyter-nbextension)
+
+.ONESHELL:
+local-install-jupyter-packages:
+	$(call install_python_packages,$$JUPYTER_PACKAGES,$$D1/opt/python-$$python3_v/bin/python3)
+	$(call jupyter,$$D1/opt/python-$$python3_v/bin/python3,$$D1/opt/python-$$python3_v/bin/jupyter-nbextension)
+
+define compile_python
 	mkdir -p $$D1/opt/ubuntu-software
 
-	wget https://www.python.org/ftp/python/$$python2_v/Python-$$python2_v.tgz \
-	-O $$D1/opt/ubuntu-software/Python-$$python2_v.tgz
-	if [ -d $$D1/opt/Python-$$python2_v ]; then rm -rf $$D1/opt/Python-$$python2_v; fi
-	tar xvzf $$D1/opt/ubuntu-software/Python-$$python2_v.tgz -C $$D1/opt
-	cd $$D1/opt/Python-$$python2_v
+	wget https://www.python.org/ftp/python/$(1)/Python-$(1).tgz -O $$D1/opt/ubuntu-software/Python-$(1).tgz
+	if [ -d $$D1/opt/Python-$(1) ]; then rm -rf $$D1/opt/Python-$(1); fi
+	tar xvzf $$D1/opt/ubuntu-software/Python-$(1).tgz -C $$D1/opt
+	cd $$D1/opt/Python-$(1)
 	#if [ -f Makefile ]; then make clean; fi
-	if [ -d $$D1/opt/python-$$python2_v ]; then rm -rf $$D1/opt/python-$$python2_v; fi
-	./configure --prefix=$$D1/opt/python-$$python2_v --with-ensurepip=install
+	if [ -d $$D1/opt/python-$(1) ]; then rm -rf $$D1/opt/python-$(1); fi
+	./configure --prefix=$$D1/opt/python-$(1) --with-ensurepip=install
 	make
 	make install
+	rm -rf $$D1/opt/Python-$(1)
+endef
+
+.ONESHELL:
+compile-python2:
+	$(call compile_python,$$python2_v)
 
 .ONESHELL:
 all-compile-python2:
 	for version in $$all_python2_v; do
 		export python2_v=$$version
 		echo $$python2_v
-
-		mkdir -p $$D1/opt/ubuntu-software
-
-		wget https://www.python.org/ftp/python/$$python2_v/Python-$$python2_v.tgz \
-		-O $$D1/opt/ubuntu-software/Python-$$python2_v.tgz
-		if [ -d $$D1/opt/Python-$$python2_v ]; then rm -rf $$D1/opt/Python-$$python2_v; fi
-		tar xvzf $$D1/opt/ubuntu-software/Python-$$python2_v.tgz -C $$D1/opt
-		cd $$D1/opt/Python-$$python2_v
-		#if [ -f Makefile ]; then make clean; fi
-		if [ -d $$D1/opt/python-$$python2_v ]; then rm -rf $$D1/opt/python-$$python2_v; fi
-		./configure --prefix=$$D1/opt/python-$$python2_v --with-ensurepip=install
-		make
-		make install
-
+		$(call compile_python,$$python2_v)
 	done
 
 .ONESHELL:
 compile-python3:
-	mkdir -p $$D1/opt/ubuntu-software
-
-	wget https://www.python.org/ftp/python/$$python3_v/Python-$$python3_v.tgz \
-	-O $$D1/opt/ubuntu-software/Python-$$python3_v.tgz
-	if [ -d $$D1/opt/Python-$$python3_v ]; then rm -rf $$D1/opt/Python-$$python3_v; fi
-	tar xvzf $$D1/opt/ubuntu-software/Python-$$python3_v.tgz -C $$D1/opt
-	cd $$D1/opt/Python-$$python3_v
-	#if [ -f Makefile ]; then make clean; fi
-	if [ -d $$D1/opt/python-$$python3_v ]; then rm -rf $$D1/opt/python-$$python3_v; fi
-	./configure --prefix=$$D1/opt/python-$$python3_v --with-ensurepip=install
-	make
-	make install
+	$(call compile_python,$$python3_v)
 
 .ONESHELL:
 all-compile-python3:
 	for version in $$all_python3_v; do
 		export python3_v=$$version
-		echo $$python3_v
-
-		mkdir -p $$D1/opt/ubuntu-software
-
-		wget https://www.python.org/ftp/python/$$python3_v/Python-$$python3_v.tgz \
-		-O $$D1/opt/ubuntu-software/Python-$$python3_v.tgz
-		if [ -d $$D1/opt/Python-$$python3_v ]; then rm -rf $$D1/opt/Python-$$python3_v; fi
-		tar xvzf $$D1/opt/ubuntu-software/Python-$$python3_v.tgz -C $$D1/opt
-		cd $$D1/opt/Python-$$python3_v
-		#if [ -f Makefile ]; then make clean; fi
-		if [ -d $$D1/opt/python-$$python3_v ]; then rm -rf $$D1/opt/python-$$python3_v; fi
-		./configure --prefix=$$D1/opt/python-$$python3_v --with-ensurepip=install
-		make
-		make install
-
+		$(call compile_python,$$python3_v)
 	done
 
-.ONESHELL:
-compile-r-cran:
+define compile_r
 	mkdir -p $$D1/opt/ubuntu-software
 
-	wget https://cloud.r-project.org/bin/linux/ubuntu/bionic-cran35/r-base_$$r_version.orig.tar.gz \
-	-O $$D1/opt/ubuntu-software/R-$$r_version.tgz
-	if [ -d $$D1/opt/R-$$r_version ]; then rm -rf $$D1/opt/R-$$r_version; fi
-	tar xvzf $$D1/opt/ubuntu-software/R-$$r_version.tgz -C $$D1/opt
-	cd $$D1/opt/R-$$r_version
+	wget https://cran.r-project.org/src/base/$(1)/R-$(2).tar.gz \
+	-O $$D1/opt/ubuntu-software/R-$(2).tgz
+	if [ -d $$D1/opt/R-$(2) ]; then rm -rf $$D1/opt/R-$(2); fi
+	tar xvzf $$D1/opt/ubuntu-software/R-$(2).tgz -C $$D1/opt
+	cd $$D1/opt/R-$(2)
 	#if [ -f Makefile ]; then make clean; fi
-	if [ -d $$D1/opt/r-$$r_version ]; then rm -rf $$D1/opt/r-$$r_version; fi
-	./configure --prefix=$$D1/opt/r-$$r_version --enable-R-shlib --enable-R-static-lib --with-blas --with-lapack
+	if [ -d $$D1/opt/r-$(2) ]; then rm -rf $$D1/opt/r-$(2); fi
+	./configure --prefix=$$D1/opt/r-$(2) --enable-R-shlib --enable-R-static-lib --with-blas --with-lapack
 	make
 	make install
+endef
+
+.ONESHELL:
+compile-r4-cran:
+	$(call compile_r,R-4,$$r4_version)
+
+.ONESHELL:
+all-compile-r4-cran:
+	$(call compile_r,R-4,$$all_r4_versions)
+
+.ONESHELL:
+compile-r3-cran:
+	$(call compile_r,R-3,$$r3_version)
+
+.ONESHELL:
+all-compile-r3-cran:
+	$(call compile_r,R-3,$$all_r3_versions)
 
 .ONESHELL:
 slurm-install:
