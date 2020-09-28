@@ -8,7 +8,7 @@ export bioconductor_v=3.11
 export python3_v=3.8.5
 export python2_v=2.7.18
 
-export all_python3_v=3.7.9 3.6.12 3.5.10 3.4.10 3.3.7 3.2.6 3.1.5 3.0.1
+export all_python3_v=3.7.9 3.6.12 3.5.10 3.4.10 #3.3.7 3.2.6 3.1.5 3.0.1
 export all_python2_v=2.6.9 2.5.4 2.4.4 2.3.5 2.2.3 2.1.3 2.0.1
 export all_r4_versions=4.0.1 4.0.0
 export all_r3_versions=3.5.3 3.4.4 3.3.3 3.2.5 3.1.3 3.0.3
