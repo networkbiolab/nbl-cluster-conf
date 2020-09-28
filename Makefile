@@ -15,7 +15,7 @@ export all_r3_versions=3.5.3 3.4.4 3.3.3 3.2.5 3.1.3 3.0.3
 
 # use virtual environment for anvio, symfit, libroadrunner, tensorflow-gpu because of incompatibilities
 # use virtual environment for indra because downgrades pysb
-export PYTHON3_PACKAGES=pip wheel numpy cython \
+export PYTHON3_PACKAGES=pip wheel numpy cython futures \
 	anndata2ri biom-format biopython bioservices bokeh checkm-genome cobra cogent3 \
 	cutadapt dask_jobqueue deblur distributed dnaplotlib docopts escher fastai \
 	fastcluster fsspec gprofiler-official humann2 keyrings.alt kneaddata louvain \
@@ -25,7 +25,7 @@ export PYTHON3_PACKAGES=pip wheel numpy cython \
 	xgboost xlrd pysam
 
 # biom-format not supported for python2.7
-export PYTHON2_PACKAGES=pip wheel numpy cython \
+export PYTHON2_PACKAGES=pip wheel numpy cython futures \
 	bcbio-gff "biopython==1.76" funannotate humann2 keras kneaddata \
 	markdown2 matplotlib msgpack networkx parmap pybedtools pybigwig pydnase pyfasta \
 	pyyaml qiime xgboost
