@@ -360,8 +360,7 @@ all-compile-python3:
 define compile_r
 	mkdir -p $$D1/opt/ubuntu-software
 
-	wget https://cran.r-project.org/src/base/$(1)/R-$(2).tar.gz \
-	-O $$D1/opt/ubuntu-software/R-$(2).tgz
+	wget https://cran.r-project.org/src/base/$(1)/R-$(2).tar.gz -O $$D1/opt/ubuntu-software/R-$(2).tgz
 	if [ -d $$D1/opt/R-$(2) ]; then rm -rf $$D1/opt/R-$(2); fi
 	tar xvzf $$D1/opt/ubuntu-software/R-$(2).tgz -C $$D1/opt
 	cd $$D1/opt/R-$(2)
@@ -370,6 +369,7 @@ define compile_r
 	./configure --prefix=$$D1/opt/r-$(2) --enable-R-shlib --enable-R-static-lib --with-blas --with-lapack
 	make
 	make install
+	rm -rf $$D1/opt/R-$(2)
 endef
 
 .ONESHELL:
@@ -392,7 +392,7 @@ all-compile-r3-cran:
 	for version in $$all_r3_versions; do
 		export r3_version=$$version
 		$(call compile_r,R-3,$$r3_version)
-	done
+	done´
 
 .ONESHELL:
 slurm-install:
