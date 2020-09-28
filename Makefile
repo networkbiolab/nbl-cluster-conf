@@ -415,7 +415,7 @@ all-compile-r3-cran:
 	for version in $$all_r3_versions; do
 		export r3_version=$$version
 		$(call compile_r,R-3,$$r3_version)
-	done´
+	done
 
 .ONESHELL:
 slurm-install:
