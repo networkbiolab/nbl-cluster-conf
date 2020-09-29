@@ -44,7 +44,7 @@ export PERL_CPANM=App::Cmd::Setup App::cpanoutdated Bio::DB::Taxonomy Bio::Perl 
 	Parallel::ForkManager PDF::API2 Scalar::Util Statistics::R SVG \
 	Test::Pod::Coverage Text::CSV Try::Tiny XML::Compile::SOAP11 \
 	XML::Compile::Transport::SOAPHTTP XML::Compile::WSDL11 XML::DOM::XPath \
-	XML::LibXML
+	XML::LibXML Mail::Mailer CGI::Session::Driver::db_file CGI::Session
 
 export PERL_RSAT=Algorithm::Cluster Bio::Das Bio::Perl CGI Class::Std::Fast Data::Dumper \
 	DBD::mysql DB_File DBI Digest::MD5::File Email::Sender \
