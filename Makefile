@@ -186,11 +186,11 @@ system-install-cran-packages:
 
 .ONESHELL:
 local-install-r3-packages:
-	$(call install_cran_packages,$$D1/opt/R-$$r3_version/bin/R)
+	$(call install_cran_packages,$$D1/opt/r-$$r3_version/bin/R)
 
 .ONESHELL:
 local-install-r4-packages:
-	$(call install_cran_packages,$$D1/opt/R-$$r4_version/bin/R)
+	$(call install_cran_packages,$$D1/opt/r-$$r4_version/bin/R)
 
 define install_bioconductor_packages
 	$(1) -e "options(Ncpus = 8); install.packages('BiocManager', dependencies = TRUE, repos = 'https://cloud.r-project.org/', update = TRUE, ask = FALSE)"
@@ -205,11 +205,11 @@ system-install-bioconductor-packages:
 
 .ONESHELL:
 local-install-bioconductor-r3-packages:
-	$(call install_bioconductor_packages,$$D1/opt/R-$$r3_version/bin/R)
+	$(call install_bioconductor_packages,$$D1/opt/r-$$r3_version/bin/R)
 
 .ONESHELL:
 local-install-bioconductor-r4-packages:
-	$(call install_bioconductor_packages,$$D1/opt/R-$$r4_version/bin/R)
+	$(call install_bioconductor_packages,$$D1/opt/r-$$r4_version/bin/R)
 
 define test_packages:
 	for package in $(1); do
@@ -230,11 +230,11 @@ test-system-bioconductor-packages:
 
 .ONESHELL:
 test-local-cran-packages:
-	$(call test_packages,$$R_PACKAGES,$$D1/opt/R-$$r_version/bin/R)
+	$(call test_packages,$$R_PACKAGES,$$D1/opt/r-$$r_version/bin/R)
 
 .ONESHELL:
 test-local-bioconductor-packages:
-	$(call test_packages,$$BIOCONDUCTOR,$$D1/opt/R-$$r_version/bin/R)
+	$(call test_packages,$$BIOCONDUCTOR,$$D1/opt/r-$$r_version/bin/R)
 
 .ONESHELL:
 system-jupyter-r-kernel:
