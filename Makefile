@@ -48,7 +48,8 @@ export PERL_CPANM=App::Cmd::Setup App::cpanoutdated Bio::DB::Taxonomy Bio::Perl 
 	LWP::Simple Mail::Mailer Math::CDF Parallel::ForkManager PDF::API2 \
 	Perl::Unsafe::Signals Scalar::Util Statistics::R SVG Test::Pod::Coverage \
 	Text::CSV Try::Tiny Want XML::Compile::SOAP11 XML::Compile::Transport::SOAPHTTP \
-	XML::Compile::WSDL11 XML::DOM::XPath XML::LibXML XML::Simple
+	XML::Compile::WSDL11 XML::DOM::XPath XML::LibXML XML::Simple \
+	Alien::Build Log::Log4perl YAML PAR::Dist CPAN::DistnameInfo inc::latest Module::Build
 
 export PERL_RSAT=Algorithm::Cluster Bio::Das Bio::Perl CGI Class::Std::Fast Data::Dumper \
 	DBD::mysql DB_File DBI Digest::MD5::File Email::Sender \
@@ -195,6 +196,7 @@ all-local-install-r3-packages:
 	for version in $$all_r3_versions; do
 		export r3_version=$$version
 		$(call install_cran_packages,$$D1/opt/r-$$r3_version/bin/R)
+	done
 
 .ONESHELL:
 local-install-r4-packages:
@@ -205,6 +207,7 @@ all-local-install-r4-packages:
 	for version in $$all_r4_versions; do
 		export r4_version=$$version
 		$(call install_cran_packages,$$D1/opt/r-$$r4_version/bin/R)
+	done
 
 define install_bioconductor_packages
 	$(1) -e "options(Ncpus = 8); install.packages('BiocManager', dependencies = TRUE, repos = 'https://cloud.r-project.org/', update = TRUE, ask = FALSE)"
