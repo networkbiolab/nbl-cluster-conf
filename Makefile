@@ -7,6 +7,7 @@ export r3_version=3.6.3
 export bioconductor_v=3.11
 export python3_v=3.8.5
 export python2_v=2.7.18
+export perl_v=5.32.0
 
 export all_python3_v=3.7.9 3.6.12 3.5.10 3.4.10 #3.3.7 3.2.6 3.1.5 3.0.1
 export all_python2_v=2.6.9 2.5.4 2.4.4 2.3.5 2.2.3 2.1.3 2.0.1
@@ -256,11 +257,19 @@ local-jupyter-r-kernel:
 	library(IRkernel); \
 	IRkernel::installspec(name = 'R-$$r_version-local')"
 
+define install_perl_packages
+	$(1)cpan $$PERL_PACKAGES
+	$(1)cpanm -n $$PERL_CPANM
+	$(1)cpanm -n $$PERL_RSAT
+endef
+
 .ONESHELL:
 system-install-perl-packages:
-	cpan $$PERL_PACKAGES
-	cpanm -n $$PERL_CPANM
-	cpanm -n $$PERL_RSAT
+	$(call install_perl_packages,)
+
+.ONESHELL:
+local-install-perl-packages:
+	$(call install_perl_packages,$$D1/opt/perl-$$perl_v/bin/)
 
 define install_python_packages
 	for package in $(1); do
@@ -419,6 +428,26 @@ all-compile-r3-cran:
 		export r3_version=$$version
 		$(call compile_r,R-3,$$r3_version)
 	done
+
+define compile_perl
+	mkdir -p $$D1/opt/ubuntu-software
+
+	wget https://www.cpan.org/src/5.0/perl-$(1).tar.gz -O $$D1/opt/ubuntu-software/PERL-$(1).tgz
+	if [ -d $$D1/opt/PERL-$(1) ]; then rm -rf $$D1/opt/PERL-$(1); fi
+	tar xvzf $$D1/opt/ubuntu-software/PERL-$(1).tgz -C $$D1/opt
+	mv $$D1/opt/perl-$(1) $$D1/opt/PERL-$(1)
+	cd $$D1/opt/PERL-$(1)
+	#if [ -f Makefile ]; then make clean; fi
+	if [ -d $$D1/opt/perl-$(1) ]; then rm -rf $$D1/opt/perl-$(1); fi
+	./Configure -des -Dprefix=$$D1/opt/perl-$(1) -Dusethreads
+	make
+	make install
+	rm -rf $$D1/opt/PERL-$(1)
+endef
+
+.ONESHELL:
+compile-perl:
+	$(call compile_perl,$$perl_v)
 
 .ONESHELL:
 slurm-install:
