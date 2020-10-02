@@ -9,7 +9,8 @@ export python3_v=3.8.5
 export python2_v=2.7.18
 export perl_v=5.32.0
 
-export all_python3_v=3.7.9 3.6.12 3.5.10 3.4.10 #3.3.7 3.2.6 3.1.5 3.0.1
+export all_python3_v=3.7.9 3.6.12 3.5.10 3.4.10
+#3.3.7 3.2.6 3.1.5 3.0.1
 export all_python2_v=2.6.9 2.5.4 2.4.4 2.3.5 2.2.3 2.1.3 2.0.1
 export all_r4_versions=4.0.1 4.0.0
 export all_r3_versions=3.5.3 3.4.4 3.3.3 3.2.5 3.1.3 3.0.3
@@ -41,13 +42,13 @@ export JUPYTER_PACKAGES=ipykernel jupyter jupyterlab jupyter_nbextensions_config
 export PERL_PACKAGES=App::cpanminus CPAN
 
 export PERL_CPANM=App::Cmd::Setup App::cpanoutdated Bio::DB::Taxonomy Bio::Perl Bio::Roary \
-	Data::Dumper experimental File::Slurp File::Spec GD Getopt::Long Hash::Merge \
-	HTML::Template JSON List::Util Logger::Simple LWP::Simple Math::CDF \
-	Parallel::ForkManager PDF::API2 Scalar::Util Statistics::R SVG \
-	Test::Pod::Coverage Text::CSV Try::Tiny XML::Compile::SOAP11 \
-	XML::Compile::Transport::SOAPHTTP XML::Compile::WSDL11 XML::DOM::XPath \
-	XML::LibXML \
-	Mail::Mailer CGI::Session::Driver::db_file CGI::Session XML::Simple Bit::Vector DBD::SQLite Inline::C Perl::Unsafe::Signals Want forks forks::shared DBD::Pg
+	Bit::Vector CGI::Session CGI::Session::Driver::db_file Data::Dumper DBD::Pg \
+	DBD::SQLite experimental File::Slurp File::Spec forks forks::shared GD \
+	Getopt::Long Hash::Merge HTML::Template Inline::C JSON List::Util Logger::Simple \
+	LWP::Simple Mail::Mailer Math::CDF Parallel::ForkManager PDF::API2 \
+	Perl::Unsafe::Signals Scalar::Util Statistics::R SVG Test::Pod::Coverage \
+	Text::CSV Try::Tiny Want XML::Compile::SOAP11 XML::Compile::Transport::SOAPHTTP \
+	XML::Compile::WSDL11 XML::DOM::XPath XML::LibXML XML::Simple
 
 export PERL_RSAT=Algorithm::Cluster Bio::Das Bio::Perl CGI Class::Std::Fast Data::Dumper \
 	DBD::mysql DB_File DBI Digest::MD5::File Email::Sender \
@@ -190,8 +191,20 @@ local-install-r3-packages:
 	$(call install_cran_packages,$$D1/opt/r-$$r3_version/bin/R)
 
 .ONESHELL:
+all-local-install-r3-packages:
+	for version in $$all_r3_versions; do
+		export r3_version=$$version
+		$(call install_cran_packages,$$D1/opt/r-$$r3_version/bin/R)
+
+.ONESHELL:
 local-install-r4-packages:
 	$(call install_cran_packages,$$D1/opt/r-$$r4_version/bin/R)
+
+.ONESHELL:
+all-local-install-r4-packages:
+	for version in $$all_r4_versions; do
+		export r4_version=$$version
+		$(call install_cran_packages,$$D1/opt/r-$$r4_version/bin/R)
 
 define install_bioconductor_packages
 	$(1) -e "options(Ncpus = 8); install.packages('BiocManager', dependencies = TRUE, repos = 'https://cloud.r-project.org/', update = TRUE, ask = FALSE)"
