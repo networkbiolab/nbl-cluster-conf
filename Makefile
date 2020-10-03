@@ -212,7 +212,7 @@ all-local-install-r4-packages:
 define install_bioconductor_packages
 	$(1) -e "options(Ncpus = 8); install.packages('BiocManager', dependencies = TRUE, repos = 'https://cloud.r-project.org/', update = TRUE, ask = FALSE)"
 	for package in $$BIOCONDUCTOR; do
-		$(1) -e "options(Ncpus = 8); BiocManager::install(\"$$package\", version = \"$$bioconductor_v\")";
+		$(1) -e "options(Ncpus = 8); BiocManager::install(\"$$package\", version = \"$(2)\")";
 	done
 endef
 
@@ -222,11 +222,43 @@ system-install-bioconductor-packages:
 
 .ONESHELL:
 local-install-bioconductor-r3-packages:
-	$(call install_bioconductor_packages,$$D1/opt/r-$$r3_version/bin/R)
+	$(call install_bioconductor_packages,$$D1/opt/r-$$r3_version/bin/R,3.10)
+
+.ONESHELL:
+all-local-install-bioconductor-r3-packages:
+	for version in $$all_r3_versions; do
+		export r3_version=$$version
+		if [ "$$version" = "3.5.3" ]; then
+			$(call install_bioconductor_packages,$$D1/opt/r-$$r3_version/bin/R,3.8)
+		elif [ "$$version" = "3.4.4" ]; then
+			$(call install_bioconductor_packages,$$D1/opt/r-$$r3_version/bin/R,3.6)
+		elif [ "$$version" = "3.3.3" ]; then
+			$(call install_bioconductor_packages,$$D1/opt/r-$$r3_version/bin/R,3.4)
+		elif [ "$$version" = "3.2.5" ]; then
+			$(call install_bioconductor_packages,$$D1/opt/r-$$r3_version/bin/R,3.2)
+		elif [ "$$version" = "3.1.3" ]; then
+			$(call install_bioconductor_packages,$$D1/opt/r-$$r3_version/bin/R,3.0)
+		elif [ "$$version" = "3.0.3" ]; then
+			$(call install_bioconductor_packages,$$D1/opt/r-$$r3_version/bin/R,2.13)
+		fi
+	done
 
 .ONESHELL:
 local-install-bioconductor-r4-packages:
-	$(call install_bioconductor_packages,$$D1/opt/r-$$r4_version/bin/R)
+	$(call install_bioconductor_packages,$$D1/opt/r-$$r4_version/bin/R,$$bioconductor_v)
+
+.ONESHELL:
+all-local-install-bioconductor-r4-packages:
+	for version in $$all_r4_versions; do
+		export r4_version=$$version
+		if [ "$$version" = "4.0.2" ]; then
+			$(call install_bioconductor_packages,$$D1/opt/r-$$r4_version/bin/R,3.11)
+		elif [ "$$version" = "4.0.1" ]; then
+			$(call install_bioconductor_packages,$$D1/opt/r-$$r4_version/bin/R,3.11)
+		elif [ "$$version" = "4.0.0" ]; then
+			$(call install_bioconductor_packages,$$D1/opt/r-$$r4_version/bin/R,3.11)
+		fi
+	done
 
 define test_packages:
 	for package in $(1); do
