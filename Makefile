@@ -345,6 +345,7 @@ all-local-install-pip3-packages:
 		export python3_v=$$version
 		$(call install_python_packages,$$PYTHON3_PACKAGES,$$D1/opt/python-$$python3_v/bin/python3)
 		$(call install_python_packages,$$DEV_PYTHON_PACKAGES,$$D1/opt/python-$$python3_v/bin/python3)
+	done
 
 .ONESHELL:
 system-install-cuda-pip3-packages:
