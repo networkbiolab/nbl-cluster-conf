@@ -326,13 +326,13 @@ define install_python_packages
 endef
 
 .ONESHELL:
+local-install-pip2-packages:
+	$(call install_python_packages,$$PYTHON2_PACKAGES,$$D1/opt/python-$$python2_v/bin/python)
+
+.ONESHELL:
 system-install-pip3-packages:
 	$(call install_python_packages,$$PYTHON3_PACKAGES,python3)
 	$(call install_python_packages,$$DEV_PYTHON_PACKAGES,python3)
-
-.ONESHELL:
-system-install-cuda-pip3-packages:
-	$(call install_python_packages,$$CUDA_PYTHON3_PACKAGES,python3)
 
 .ONESHELL:
 local-install-pip3-packages:
@@ -340,15 +340,19 @@ local-install-pip3-packages:
 	$(call install_python_packages,$$DEV_PYTHON_PACKAGES,$$D1/opt/python-$$python3_v/bin/python3)
 
 .ONESHELL:
-local-install-cuda-pip3-packages:
-	$(call install_python_packages,$$CUDA_PYTHON3_PACKAGES,$$D1/opt/python-$$python3_v/bin/python3)
-
-.ONESHELL:
 all-local-install-pip3-packages:
 	for version in $$all_python3_v; do
 		export python3_v=$$version
 		$(call install_python_packages,$$PYTHON3_PACKAGES,$$D1/opt/python-$$python3_v/bin/python3)
 		$(call install_python_packages,$$DEV_PYTHON_PACKAGES,$$D1/opt/python-$$python3_v/bin/python3)
+
+.ONESHELL:
+system-install-cuda-pip3-packages:
+	$(call install_python_packages,$$CUDA_PYTHON3_PACKAGES,python3)
+
+.ONESHELL:
+local-install-cuda-pip3-packages:
+	$(call install_python_packages,$$CUDA_PYTHON3_PACKAGES,$$D1/opt/python-$$python3_v/bin/python3)
 	done
 
 .ONESHELL:
