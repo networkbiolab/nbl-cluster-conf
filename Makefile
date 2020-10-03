@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 HOST=$(shell hostname)
 
-export D1=/
+export D1=/home
 export r4_version=4.0.2
 export r3_version=3.6.3
 export bioconductor_v=3.11
