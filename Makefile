@@ -4,12 +4,13 @@ HOST=$(shell hostname)
 export D1=/home
 export r4_version=4.0.2
 export r3_version=3.6.3
-export bioconductor_v=3.11
+export bioconductor_r4_v=3.11
+export bioconductor_r3_v=3.10
 export python3_v=3.8.5
 export python2_v=2.7.18
 export perl_v=5.32.0
 
-export all_python3_v=3.7.9 3.6.12 3.5.10 3.4.10
+export all_python3_v=3.4.10 3.5.10 3.6.12 3.7.9
 #3.3.7 3.2.6 3.1.5 3.0.1
 export all_python2_v=2.6.9 2.5.4 2.4.4 2.3.5 2.2.3 2.1.3 2.0.1
 export all_r4_versions=4.0.1 4.0.0
@@ -222,7 +223,7 @@ system-install-bioconductor-packages:
 
 .ONESHELL:
 local-install-bioconductor-r3-packages:
-	$(call install_bioconductor_packages,$$D1/opt/r-$$r3_version/bin/R,3.10)
+	$(call install_bioconductor_packages,$$D1/opt/r-$$r3_version/bin/R,$$bioconductor_r3_v)
 
 .ONESHELL:
 all-local-install-bioconductor-r3-packages:
@@ -245,7 +246,7 @@ all-local-install-bioconductor-r3-packages:
 
 .ONESHELL:
 local-install-bioconductor-r4-packages:
-	$(call install_bioconductor_packages,$$D1/opt/r-$$r4_version/bin/R,$$bioconductor_v)
+	$(call install_bioconductor_packages,$$D1/opt/r-$$r4_version/bin/R,$$bioconductor_r4_v)
 
 .ONESHELL:
 all-local-install-bioconductor-r4-packages:
