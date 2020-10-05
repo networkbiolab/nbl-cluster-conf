@@ -79,7 +79,7 @@ export R_OLD2INSTALL=biom reports d3heatmap
 export BIOCONDUCTOR=BiocVersion cluster clusterExperiment ComplexHeatmap dada2 DESeq DESeq2 edgeR \
 	EnhancedVolcano gam GenomicAlignments GenomicFeatures ggtree GOstats graph \
 	hypergraph kebabs MAST metagenomeSeq microbiome monocle phyloseq scran SIAMCAT \
-	slingshot treeio vsn zinbwave
+	slingshot treeio vsn zinbwave dorothea
 
 .ONESHELL:
 test:
