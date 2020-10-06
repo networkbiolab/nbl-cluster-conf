@@ -252,8 +252,6 @@ local-install-bioconductor-r4-packages:
 all-local-install-bioconductor-r4-packages:
 	for version in $$all_r4_versions; do
 		export r4_version=$$version
-		if [ "$$version" = "4.0.2" ]; then
-			$(call install_bioconductor_packages,$$D1/opt/r-$$r4_version/bin/R,3.11)
 		elif [ "$$version" = "4.0.1" ]; then
 			$(call install_bioconductor_packages,$$D1/opt/r-$$r4_version/bin/R,3.11)
 		elif [ "$$version" = "4.0.0" ]; then
