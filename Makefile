@@ -72,14 +72,14 @@ export R_PACKAGES=apcluster ape Cairo chron clusterSim coin compare compute.es d
 	mvtnorm NLP optparse phangorn pheatmap plotly plotrix PMCMRplus png prabclus \
 	pROC qdapDictionaries qdapRegex quadprog rafalib randomForest RColorBrewer Rcpp \
 	RCurl rgl rmarkdown robustbase ROCR rvcheck segmented seqinr slam survival \
-	tidytree tidyverse trimcluster tsne UpSetR vegan wordcloud xgboost XML
+	tidytree tidyverse trimcluster tsne UpSetR vegan wordcloud xgboost XML WGCNA
 
 export R_OLD2INSTALL=biom reports d3heatmap
 
 export BIOCONDUCTOR=BiocVersion cluster clusterExperiment ComplexHeatmap dada2 DESeq DESeq2 edgeR \
 	EnhancedVolcano gam GenomicAlignments GenomicFeatures ggtree GOstats graph \
 	hypergraph kebabs MAST metagenomeSeq microbiome monocle phyloseq scran SIAMCAT \
-	slingshot treeio vsn zinbwave dorothea
+	slingshot treeio vsn zinbwave dorothea impute
 
 .ONESHELL:
 test:
