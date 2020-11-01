@@ -129,7 +129,7 @@ apt-install:
 		soapdenovo2 sortmerna spades speedtest-cli sqlite sqlite3 sshfs swig synaptic \
 		systemtap tabix testssl.sh tilix trimmomatic trnascan-se \
 		ttf-mscorefonts-installer ubuntu-server unzip vagrant velvet virtualbox vlc \
-		vsearch wakeonlan x11-utils zlib1g zlib1g-dev zlibc iqtree "
+		vsearch wakeonlan x11-utils zlib1g zlib1g-dev zlibc iqtree clang-tidy"
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
 		checkinstall libssl-dev zlib1g-dev libncurses5-dev \
