@@ -26,7 +26,7 @@ export PYTHON3_PACKAGES=pip wheel numpy cython futures \
 	pysundials pythoncyc python-igraph python-libsbml pyyaml rpy2 scanpy scikit-bio \
 	scikit-image scikit-learn seaborn seqmagick snakeviz statsmodels s-tui tzlocal \
 	xgboost xlrd \
-	pysam htseq macs2 deeptools micca htsget
+	pysam htseq macs2 deeptools micca htsget pyega3
 
 # biom-format not supported for python2.7
 export PYTHON2_PACKAGES=pip wheel numpy cython futures \
