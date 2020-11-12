@@ -4,8 +4,6 @@ HOST=$(shell hostname)
 export D1=/home
 export r4_version=4.0.2
 export r3_version=3.6.3
-export bioconductor_r4_v=3.11
-export bioconductor_r3_v=3.10
 export python3_v=3.8.5
 export python2_v=2.7.18
 export perl_v=5.32.0
@@ -132,7 +130,7 @@ apt-install:
 		soapdenovo2 sortmerna spades speedtest-cli sqlite sqlite3 sshfs swig synaptic \
 		systemtap tabix testssl.sh tilix trimmomatic trnascan-se \
 		ttf-mscorefonts-installer ubuntu-server unzip vagrant velvet virtualbox vlc \
-		vsearch wakeonlan x11-utils zlib1g zlib1g-dev zlibc iqtree clang-tidy libpll-dev awscli vcftools git-lfs lolcat cowsay fortune cpanminus"
+		vsearch wakeonlan x11-utils zlib1g zlib1g-dev zlibc iqtree clang-tidy libpll-dev awscli vcftools git-lfs lolcat cowsay fortune cpanminus nmap"
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
 		checkinstall libssl-dev zlib1g-dev libncurses5-dev \
@@ -216,7 +214,7 @@ all-local-install-r4-packages:
 define install_bioconductor_packages
 	$(1) -e "options(Ncpus = 8); install.packages('BiocManager', dependencies = TRUE, repos = 'https://cloud.r-project.org/', update = TRUE, ask = FALSE)"
 	for package in $$BIOCONDUCTOR; do
-		$(1) -e "options(Ncpus = 8); BiocManager::install(\"$$package\", version = \"$(2)\")";
+		$(1) -e "options(Ncpus = 8); BiocManager::install(\"$$package\")";
 	done
 endef
 
@@ -226,7 +224,7 @@ system-install-bioconductor-packages:
 
 .ONESHELL:
 local-install-bioconductor-r3-packages:
-	$(call install_bioconductor_packages,$$D1/opt/r-$$r3_version/bin/R,$$bioconductor_r3_v)
+	$(call install_bioconductor_packages,$$D1/opt/r-$$r3_version/bin/R)
 
 .ONESHELL:
 all-local-install-bioconductor-r3-packages:
