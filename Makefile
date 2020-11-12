@@ -29,10 +29,12 @@ export PYTHON3_PACKAGES=pip wheel numpy cython futures \
 	pysam htseq macs2 deeptools micca htsget pyega3
 
 # biom-format not supported for python2.7
+# funannotate tries to install biopython 1.77; install after biopython.
+# qiime tries to install biom-format
 export PYTHON2_PACKAGES=pip wheel numpy cython futures \
-	bcbio-gff "biopython==1.76" funannotate humann2 keras kneaddata \
+	bcbio-gff "biopython==1.76" humann2 keras kneaddata \
 	markdown2 matplotlib msgpack networkx parmap pybedtools pybigwig pydnase pyfasta \
-	pyyaml qiime xgboost htseq
+	pyyaml xgboost htseq pysam cvxopt
 
 export DEV_PYTHON_PACKAGES=autopep8 pylint pyscaffold sphinx sphinx-autobuild sphinx_rtd_theme testresources twine versioneer
 
