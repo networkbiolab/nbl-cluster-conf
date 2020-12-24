@@ -50,7 +50,7 @@ export PERL_CPANM=App::Cmd::Setup App::cpanoutdated Bio::DB::Taxonomy Bio::Perl 
 	Perl::Unsafe::Signals Scalar::Util Statistics::R SVG Test::Pod::Coverage \
 	Text::CSV Try::Tiny Want XML::Compile::SOAP11 XML::Compile::Transport::SOAPHTTP \
 	XML::Compile::WSDL11 XML::DOM::XPath XML::LibXML XML::Simple \
-	Alien::Build Log::Log4perl YAML PAR::Dist CPAN::DistnameInfo inc::latest Module::Build Set::IntervalTree DBI DB_File URI Archive::Zip Set::IntervalTree PerlIO::gzip Bio::DB::BigFile Set::IntervalTree JSON::XS
+	Alien::Build Log::Log4perl YAML PAR::Dist CPAN::DistnameInfo inc::latest Module::Build Set::IntervalTree DBI DB_File URI Archive::Zip Set::IntervalTree PerlIO::gzip Bio::DB::BigFile Set::IntervalTree JSON::XS Test::Warnings
 
 export PERL_RSAT=Algorithm::Cluster Bio::Das Bio::Perl CGI Class::Std::Fast Data::Dumper \
 	DBD::mysql DB_File DBI Digest::MD5::File Email::Sender \
