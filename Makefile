@@ -24,10 +24,10 @@ export PYTHON3_PACKAGES=pip wheel numpy cython futures \
 	pysundials pythoncyc python-igraph python-libsbml pyyaml rpy2 scanpy scikit-bio \
 	scikit-image scikit-learn seaborn seqmagick snakeviz statsmodels s-tui tzlocal \
 	xgboost xlrd \
-	pysam htseq macs2 deeptools micca htsget pyega3 gtdbtk run-dbcan synapseclient macs3 carveme
+	pysam htseq macs2 deeptools micca htsget pyega3 gtdbtk run-dbcan synapseclient macs3 carveme memote
 
 # biom-format not supported for python2.7
-# funannotate tries to install biopython 1.77; install after biopython.
+# funannotate tries to install biopython 1.77; install after biopython==1.76.
 # qiime tries to install biom-format
 export PYTHON2_PACKAGES=pip wheel numpy cython futures \
 	bcbio-gff "biopython==1.76" humann2 keras kneaddata \
@@ -91,6 +91,7 @@ test:
 # libcurl4-openssl-dev incompatible with libstaden-read-dev
 # gnome-core is removed along with gedit
 # disper, fastx-toolkit, gir1.2-networkmanager-1.0, python-pip, qiime, sra-toolkit, tophat not available ubuntu 20.04
+# cython, pyyaml (python3-yaml) installed with pip2/3
 .ONESHELL:
 apt-install:
 	APTS="ant apache2 apt-file aptitude artemis auditd augustus autoconf bamtools baobab \
