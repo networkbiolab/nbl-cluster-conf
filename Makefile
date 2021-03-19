@@ -24,7 +24,7 @@ export PYTHON3_PACKAGES=pip wheel numpy cython futures \
 	pysundials pythoncyc python-igraph python-libsbml pyyaml rpy2 scanpy scikit-bio \
 	scikit-image scikit-learn seaborn seqmagick snakeviz statsmodels s-tui tzlocal \
 	xgboost xlrd \
-	pysam htseq macs2 deeptools micca htsget pyega3 gtdbtk run-dbcan synapseclient macs3 carveme memote
+	pysam htseq macs2 deeptools micca htsget pyega3 gtdbtk run-dbcan synapseclient macs3 carveme memote upsetplot
 
 # biom-format not supported for python2.7
 # funannotate tries to install biopython 1.77; install after biopython==1.76.
@@ -131,7 +131,7 @@ apt-install:
 		soapdenovo2 sortmerna spades speedtest-cli sqlite sqlite3 sshfs swig synaptic \
 		systemtap tabix testssl.sh tilix trimmomatic trnascan-se \
 		ttf-mscorefonts-installer ubuntu-server unzip vagrant velvet virtualbox vlc \
-		vsearch wakeonlan x11-utils zlib1g zlib1g-dev zlibc iqtree clang-tidy libpll-dev awscli vcftools git-lfs lolcat cowsay fortune cpanminus nmap mariadb-server fail2ban snakemake meryl libbam-dev libsam-dev xclip tcptrack bmon iqtree prottest readseq prokka"
+		vsearch wakeonlan x11-utils zlib1g zlib1g-dev zlibc iqtree clang-tidy libpll-dev awscli vcftools git-lfs lolcat cowsay fortune cpanminus nmap mariadb-server fail2ban snakemake meryl libbam-dev libsam-dev xclip tcptrack bmon iqtree prottest readseq prokka ncbi-tools-x11"
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
 		checkinstall libssl-dev zlib1g-dev libncurses5-dev \
