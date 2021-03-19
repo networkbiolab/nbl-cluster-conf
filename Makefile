@@ -17,12 +17,13 @@ export all_r3_versions=3.5.3 3.4.4 3.3.3 3.2.5 3.1.3 3.0.3
 # use virtual environment for anvio, symfit, libroadrunner, tensorflow-gpu because of incompatibilities
 # use virtual environment for indra because downgrades pysb
 # use virtual environment for synapse because of incompatible keyring package
+# use apt to install pyyaml: python3-yaml
 export PYTHON3_PACKAGES=pip wheel numpy cython futures \
 	anndata2ri biom-format biopython bioservices bokeh checkm-genome cobra cogent3 \
 	cutadapt dask_jobqueue deblur distributed dnaplotlib docopts escher fastai \
 	fastcluster fsspec gprofiler-official humann2 keyrings.alt kneaddata louvain \
 	networkx nose openpyxl pandas pillow pybedtools pygraphviz pygtrie pysb \
-	pysundials pythoncyc python-igraph python-libsbml pyyaml rpy2 scanpy scikit-bio \
+	pysundials pythoncyc python-igraph python-libsbml rpy2 scanpy scikit-bio \
 	scikit-image scikit-learn seaborn seqmagick snakeviz statsmodels s-tui tzlocal \
 	xgboost xlrd \
 	pysam htseq macs2 deeptools micca htsget pyega3 gtdbtk run-dbcan macs3 carveme memote upsetplot
