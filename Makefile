@@ -132,7 +132,7 @@ apt-install:
 		ruby salmon samtools sbmltoolbox smartmontools smem snap snap-aligner \
 		soapdenovo2 sortmerna spades speedtest-cli sqlite sqlite3 sshfs swig synaptic \
 		systemtap tabix testssl.sh tilix trimmomatic trnascan-se \
-		ttf-mscorefonts-installer ubuntu-server unzip vagrant velvet virtualbox vlc \
+		ttf-mscorefonts-installer ubuntu-server unzip vagrant velvet virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso vlc \
 		vsearch wakeonlan x11-utils zlib1g zlib1g-dev zlibc iqtree clang-tidy libpll-dev awscli vcftools git-lfs lolcat cowsay fortune cpanminus nmap mariadb-server fail2ban snakemake meryl libbam-dev libsam-dev xclip tcptrack bmon iqtree prottest readseq prokka ncbi-tools-x11 docker-compose apt-transport-https webp"
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
