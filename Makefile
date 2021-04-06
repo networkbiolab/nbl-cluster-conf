@@ -75,7 +75,7 @@ export R_PACKAGES=apcluster ape Cairo chron clusterSim coin compare compute.es d
 	pROC qdapDictionaries qdapRegex quadprog rafalib randomForest RColorBrewer Rcpp \
 	RCurl rgl rmarkdown robustbase ROCR rvcheck segmented seqinr slam survival \
 	tidytree tidyverse trimcluster tsne UpSetR vegan wordcloud xgboost XML WGCNA \
-	mclust PSCBS R.cache scales cwhmisc fastICA digest caTools gplots ggplot2 gsalib
+	mclust PSCBS R.cache scales cwhmisc fastICA digest caTools gplots ggplot2 gsalib sybil glpkAPI
 
 export R_OLD2INSTALL=biom reports d3heatmap
 
