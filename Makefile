@@ -93,11 +93,11 @@ test:
 # libcurl4-openssl-dev incompatible with libstaden-read-dev
 # gnome-core is removed along with gedit
 # disper, fastx-toolkit, gir1.2-networkmanager-1.0, python-pip, qiime, sra-toolkit, tophat not available ubuntu 20.04
-# cython, pyyaml (python3-yaml) installed with pip2/3
+# cython, biom-format-tools, pyyaml (python3-yaml) installed with pip2/3
 .ONESHELL:
 apt-install:
 	APTS="ant apache2 apt-file aptitude artemis auditd augustus autoconf bamtools baobab \
-		barrnap bcftools bedops bedtools biom-format-tools bioperl bison bowtie bowtie2 \
+		barrnap bcftools bedops bedtools bioperl bison bowtie bowtie2 \
 		bwa capnproto cargo cd-hit chrome-gnome-shell clustalx cmake cufflinks curl \
 		cutadapt cython dejagnu diamond-aligner docker.io doxygen ea-utils emboss \
 		environment-modules expat fastqc fasttree ffmpeg flex freeipmi g++ \
@@ -133,7 +133,7 @@ apt-install:
 		soapdenovo2 sortmerna spades speedtest-cli sqlite sqlite3 sshfs swig synaptic \
 		systemtap tabix testssl.sh tilix trimmomatic trnascan-se \
 		ttf-mscorefonts-installer ubuntu-server unzip vagrant velvet virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso vlc \
-		vsearch wakeonlan x11-utils zlib1g zlib1g-dev zlibc iqtree clang-tidy libpll-dev awscli vcftools git-lfs lolcat cowsay fortune cpanminus nmap mariadb-server fail2ban snakemake meryl libbam-dev libsam-dev xclip tcptrack bmon iqtree prottest readseq prokka ncbi-tools-x11 docker-compose apt-transport-https webp xclip seqtk ruby-bundler ruby2.7-dev jq rbenv"
+		vsearch wakeonlan x11-utils zlib1g zlib1g-dev zlibc iqtree clang-tidy libpll-dev awscli vcftools git-lfs lolcat cowsay fortune cpanminus nmap mariadb-server fail2ban snakemake meryl libbam-dev libsam-dev xclip tcptrack bmon iqtree prottest readseq prokka ncbi-tools-x11 docker-compose apt-transport-https webp xclip seqtk ruby-bundler ruby2.7-dev jq rbenv ruby-railties"
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
 		checkinstall libssl-dev zlib1g-dev libncurses5-dev \
