@@ -17,6 +17,7 @@ export all_r3_versions=3.5.3 3.4.4 3.3.3 3.2.5 3.1.3 3.0.3
 # use virtual environment for anvio, symfit, libroadrunner, tensorflow-gpu because of incompatibilities
 # use virtual environment for indra because downgrades pysb
 # use virtual environment for synapse because of incompatible keyring package
+# use virtual environment for eggnog-mapper because of incompatible seqmagick package
 # use apt to install pyyaml: python3-yaml
 export PYTHON3_PACKAGES=pip wheel numpy cython futures \
 	anndata2ri biom-format biopython bioservices bokeh checkm-genome cobra cogent3 \
