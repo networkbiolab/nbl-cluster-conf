@@ -1,14 +1,14 @@
 SHELL := /bin/bash
 HOST=$(shell hostname)
 
-export D1=/home
+export D1=/
 export r4_version=4.0.5
 export r3_version=3.6.3
-export python3_v=3.8.5
+export python3_v=3.9.5
 export python2_v=2.7.18
 export perl_v=5.32.0
 
-export all_python3_v=3.4.10 3.5.10 3.6.12 3.7.9
+export all_python3_v=3.8.5 3.7.9 3.6.12 3.5.10 3.4.10
 #3.3.7 3.2.6 3.1.5 3.0.1
 export all_python2_v=2.6.9 2.5.4 2.4.4 2.3.5 2.2.3 2.1.3 2.0.1
 export all_r4_versions=4.0.4 4.0.3 4.0.2 4.0.1 4.0.0
@@ -76,7 +76,7 @@ export R_PACKAGES=apcluster ape Cairo chron clusterSim coin compare compute.es d
 	pROC qdapDictionaries qdapRegex quadprog rafalib randomForest RColorBrewer Rcpp \
 	RCurl rgl rmarkdown robustbase ROCR rvcheck segmented seqinr slam survival \
 	tidytree tidyverse trimcluster tsne UpSetR vegan wordcloud xgboost XML WGCNA \
-	mclust PSCBS R.cache scales cwhmisc fastICA digest caTools gplots ggplot2 gsalib sybil glpkAPI CHNOSZ
+	mclust PSCBS R.cache scales cwhmisc fastICA digest caTools gplots ggplot2 gsalib sybil glpkAPI CHNOSZ IRkernel
 
 export R_OLD2INSTALL=biom reports d3heatmap
 
