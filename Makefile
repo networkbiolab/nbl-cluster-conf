@@ -28,8 +28,8 @@ export PYTHON3_PACKAGES=pip wheel numpy cython futures \
 	pysundials pythoncyc python-igraph python-libsbml rpy2 scanpy scikit-bio \
 	scikit-image scikit-learn seaborn seqmagick snakeviz statsmodels s-tui tzlocal \
 	xgboost xlrd \
-	pysam htseq macs2 deeptools micca htsget pyega3 gtdbtk run-dbcan macs3 carveme memote upsetplot pandas-bokeh pyfaidx ncbi-acc-download ncbi-genome-download woltka pubchempy \
-	'glances[action,browser,cloud,cpuinfo,docker,export,folders,gpu,graph,ip,raid,snmp,web,wifi]'
+	pysam htseq macs2 deeptools micca htsget pyega3 gtdbtk run-dbcan macs3 carveme memote upsetplot pandas-bokeh pyfaidx ncbi-acc-download ncbi-genome-download woltka pubchempy odfpy \
+	\'glances\[action,browser,cloud,cpuinfo,docker,export,folders,gpu,graph,ip,raid,snmp,web,wifi\]\'
 
 # biom-format not supported for python2.7
 # funannotate tries to install biopython 1.77; install after biopython==1.76.
@@ -43,7 +43,7 @@ export DEV_PYTHON_PACKAGES=autopep8 pylint pyscaffold sphinx sphinx-autobuild sp
 
 export CUDA_PYTHON3_PACKAGES=cntk cntk-gpu keras pycuda scikit-cuda theano torch torchvision
 
-export JUPYTER_PACKAGES=ipykernel jupyter jupyterlab jupyter_nbextensions_configurator nbopen nbserverproxy rise
+export JUPYTER_PACKAGES=ipykernel jupyter jupyterlab jupyter_nbextensions_configurator nbopen nbserverproxy rise jupyter_contrib_nbextensions
 
 export PERL_PACKAGES=App::cpanminus CPAN
 
@@ -136,7 +136,7 @@ apt-install:
 		soapdenovo2 sortmerna spades speedtest-cli sqlite sqlite3 sshfs swig synaptic \
 		systemtap tabix testssl.sh tilix trimmomatic trnascan-se \
 		ttf-mscorefonts-installer ubuntu-server unzip vagrant velvet virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso vlc \
-		vsearch wakeonlan x11-utils zlib1g zlib1g-dev zlibc iqtree clang-tidy libpll-dev awscli vcftools git-lfs lolcat cowsay fortune cpanminus nmap mariadb-server fail2ban snakemake meryl libbam-dev libsam-dev xclip tcptrack bmon iqtree prottest readseq prokka ncbi-tools-x11 docker-compose apt-transport-https webp xclip seqtk ruby-bundler ruby2.7-dev jq rbenv ruby-railties nnn filezilla gnome-system-tools"
+		vsearch wakeonlan x11-utils zlib1g zlib1g-dev zlibc iqtree clang-tidy libpll-dev awscli vcftools git-lfs lolcat cowsay fortune cpanminus nmap mariadb-server fail2ban snakemake meryl libbam-dev libsam-dev xclip tcptrack bmon iqtree prottest readseq prokka ncbi-tools-x11 docker-compose apt-transport-https webp xclip seqtk ruby-bundler ruby2.7-dev jq rbenv ruby-railties nnn filezilla gnome-system-tools mmseqs2"
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
 		checkinstall libssl-dev zlib1g-dev libncurses5-dev \
