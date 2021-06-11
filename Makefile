@@ -133,7 +133,7 @@ apt-install:
 		python-pip-whl python-tk rar r-base rename repeatmasker-recon rrdtool rubber \
 		ruby salmon samtools sbmltoolbox smartmontools smem snap snap-aligner \
 		soapdenovo2 sortmerna spades speedtest-cli sqlite sqlite3 sshfs swig synaptic \
-		systemtap tabix testssl.sh tilix trimmomatic trnascan-se \
+		systemtap tabix testssl.sh tilix trimmomatic trnascan-se gnome-clocks \
 		ttf-mscorefonts-installer ubuntu-server unzip vagrant velvet virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso vlc \
 		vsearch wakeonlan x11-utils zlib1g zlib1g-dev zlibc iqtree clang-tidy libpll-dev awscli vcftools git-lfs lolcat cowsay fortune cpanminus nmap mariadb-server fail2ban snakemake meryl libbam-dev libsam-dev xclip tcptrack bmon iqtree prottest readseq prokka ncbi-tools-x11 docker-compose apt-transport-https webp xclip seqtk ruby-bundler ruby2.7-dev jq rbenv ruby-railties nnn filezilla gnome-system-tools mmseqs2 libjs-codemirror"
 
