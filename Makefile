@@ -96,6 +96,7 @@ test:
 # gnome-core is removed along with gedit
 # disper, fastx-toolkit, gir1.2-networkmanager-1.0, python-pip, qiime, sra-toolkit, tophat not available ubuntu 20.04
 # cython, biom-format-tools, pyyaml (python3-yaml) installed with pip2/3
+# prokka, mmseqs2 has bugs, so, use github cloned repos
 .ONESHELL:
 apt-install:
 	APTS="ant apache2 apt-file aptitude artemis auditd augustus autoconf bamtools baobab \
@@ -133,9 +134,9 @@ apt-install:
 		python-pip-whl python-tk rar r-base rename repeatmasker-recon rrdtool rubber \
 		ruby salmon samtools sbmltoolbox smartmontools smem snap snap-aligner \
 		soapdenovo2 sortmerna spades speedtest-cli sqlite sqlite3 sshfs swig synaptic \
-		systemtap tabix testssl.sh tilix trimmomatic trnascan-se gnome-clocks moreutils \
+		systemtap tabix testssl.sh tilix trimmomatic trnascan-se gnome-clocks gdebi moreutils \
 		ttf-mscorefonts-installer ubuntu-server unzip vagrant velvet virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso vlc \
-		vsearch wakeonlan x11-utils zlib1g zlib1g-dev zlibc iqtree clang-tidy libpll-dev awscli vcftools git-lfs lolcat cowsay fortune cpanminus nmap mariadb-server fail2ban snakemake meryl libbam-dev libsam-dev xclip tcptrack bmon iqtree prottest readseq prokka ncbi-tools-x11 docker-compose apt-transport-https webp xclip seqtk ruby-bundler ruby2.7-dev jq rbenv ruby-railties nnn filezilla gnome-system-tools mmseqs2 libjs-codemirror"
+		vsearch wakeonlan x11-utils zlib1g zlib1g-dev zlibc iqtree clang-tidy libpll-dev awscli vcftools git-lfs lolcat cowsay fortune cpanminus nmap mariadb-server fail2ban snakemake meryl libbam-dev libsam-dev xclip tcptrack bmon iqtree prottest readseq ncbi-tools-x11 docker-compose apt-transport-https webp xclip seqtk ruby-bundler ruby2.7-dev jq rbenv ruby-railties nnn filezilla gnome-system-tools libjs-codemirror"
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
 		checkinstall libssl-dev zlib1g-dev libncurses5-dev \
