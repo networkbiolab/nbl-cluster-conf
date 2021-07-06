@@ -14,7 +14,7 @@ export all_python2_v=2.6.9 2.5.4 2.4.4 2.3.5 2.2.3 2.1.3 2.0.1
 export all_r4_versions=4.0.4 4.0.3 4.0.2 4.0.1 4.0.0
 export all_r3_versions=3.5.3 3.4.4 3.3.3 3.2.5 3.1.3 3.0.3
 
-# use virtual environment for anvio, symfit, libroadrunner, tensorflow-gpu because of incompatibilities
+# use virtual environment for scanpy, anvio, symfit, libroadrunner, tensorflow-gpu because of incompatibilities
 # use virtual environment for indra because downgrades pysb
 # use virtual environment for synapse because of incompatible keyring package
 # use virtual environment for eggnog-mapper because of incompatible seqmagick package
@@ -25,7 +25,7 @@ export PYTHON3_PACKAGES=pip wheel numpy cython futures \
 	cutadapt dask_jobqueue deblur distributed dnaplotlib docopts escher \
 	fastcluster fsspec gprofiler-official humann2 keyrings.alt kneaddata louvain \
 	networkx nose openpyxl pandas pillow pybedtools pygraphviz pygtrie pysb \
-	pysundials pythoncyc python-igraph python-libsbml rpy2 scanpy scikit-bio \
+	pysundials pythoncyc python-igraph python-libsbml rpy2 scikit-bio \
 	scikit-image scikit-learn seaborn seqmagick snakeviz statsmodels s-tui tzlocal \
 	xgboost xlrd libchebipy black \
 	pysam htseq macs2 deeptools micca htsget pyega3 gtdbtk run-dbcan macs3 carveme memote upsetplot pandas-bokeh pyfaidx ncbi-acc-download ncbi-genome-download woltka pubchempy odfpy \
@@ -40,7 +40,8 @@ export PYTHON2_PACKAGES=pip wheel numpy cython futures \
 
 export DEV_PYTHON_PACKAGES=autopep8 pylint pyscaffold sphinx sphinx-autobuild sphinx_rtd_theme testresources twine versioneer
 
-export CUDA_PYTHON3_PACKAGES=cntk cntk-gpu keras pycuda scikit-cuda theano torch torchvision
+# cntk cntk-gpu only python3.6
+export CUDA_PYTHON3_PACKAGES=keras pycuda scikit-cuda theano torch torchvision
 
 export JUPYTER_PACKAGES=ipykernel jupyter jupyterlab jupyter_nbextensions_configurator nbopen nbserverproxy rise jupyter_contrib_nbextensions
 
@@ -77,7 +78,7 @@ export R_PACKAGES=apcluster ape Cairo chron clusterSim coin compare compute.es d
 	pROC qdapDictionaries qdapRegex quadprog rafalib randomForest RColorBrewer Rcpp \
 	RCurl rgl rmarkdown robustbase ROCR rvcheck segmented seqinr slam survival \
 	tidytree tidyverse trimcluster tsne UpSetR vegan wordcloud xgboost XML WGCNA \
-	mclust PSCBS R.cache scales cwhmisc fastICA digest caTools gplots ggplot2 gsalib sybil glpkAPI CHNOSZ IRkernel
+	mclust PSCBS R.cache scales cwhmisc fastICA digest caTools gplots ggplot2 gsalib sybil glpkAPI CHNOSZ IRkernel castor
 
 export R_OLD2INSTALL=biom reports d3heatmap
 
