@@ -14,20 +14,20 @@ export all_python2_v=2.6.9 2.5.4 2.4.4 2.3.5 2.2.3 2.1.3 2.0.1
 export all_r4_versions=4.0.4 4.0.3 4.0.2 4.0.1 4.0.0
 export all_r3_versions=3.5.3 3.4.4 3.3.3 3.2.5 3.1.3 3.0.3
 
-# use virtual environment for scanpy, anvio, symfit, libroadrunner, tensorflow-gpu because of incompatibilities
+# use virtual environment for anndata2ri scanpy, anvio, symfit, libroadrunner, tensorflow-gpu because of incompatibilities
 # use virtual environment for indra because downgrades pysb
 # use virtual environment for synapse because of incompatible keyring package
 # use virtual environment for eggnog-mapper because of incompatible seqmagick package
 # use virtual environment for fastai because of incompatible torch package
 # use apt to install pyyaml: python3-yaml
 export PYTHON3_PACKAGES=pip wheel numpy cython futures \
-	anndata2ri biom-format biopython bioservices bokeh checkm-genome cobra cogent3 \
+	biom-format biopython bioservices bokeh checkm-genome cobra cogent3 \
 	cutadapt dask_jobqueue deblur distributed dnaplotlib docopts escher \
 	fastcluster fsspec gprofiler-official humann2 keyrings.alt kneaddata louvain \
 	networkx nose openpyxl pandas pillow pybedtools pygraphviz pygtrie pysb \
 	pysundials pythoncyc python-igraph python-libsbml rpy2 scikit-bio \
 	scikit-image scikit-learn seaborn seqmagick snakeviz statsmodels s-tui tzlocal \
-	xgboost xlrd libchebipy black \
+	xgboost xlrd libchebipy black ete3 mpwt \
 	pysam htseq macs2 deeptools micca htsget pyega3 gtdbtk run-dbcan macs3 carveme memote upsetplot pandas-bokeh pyfaidx ncbi-acc-download ncbi-genome-download woltka pubchempy odfpy \
 	\'glances\[action,browser,cloud,cpuinfo,docker,export,folders,gpu,graph,ip,raid,snmp,web,wifi\]\'
 
@@ -78,7 +78,7 @@ export R_PACKAGES=apcluster ape Cairo chron clusterSim coin compare compute.es d
 	pROC qdapDictionaries qdapRegex quadprog rafalib randomForest RColorBrewer Rcpp \
 	RCurl rgl rmarkdown robustbase ROCR rvcheck segmented seqinr slam survival \
 	tidytree tidyverse trimcluster tsne UpSetR vegan wordcloud xgboost XML WGCNA \
-	mclust PSCBS R.cache scales cwhmisc fastICA digest caTools gplots ggplot2 gsalib sybil glpkAPI CHNOSZ IRkernel castor
+	mclust PSCBS R.cache scales cwhmisc fastICA digest caTools gplots ggplot2 gsalib sybil glpkAPI CHNOSZ IRkernel castor cplexAPI
 
 export R_OLD2INSTALL=biom reports d3heatmap
 
@@ -135,7 +135,7 @@ apt-install:
 		python-pip-whl python-tk rar r-base rename repeatmasker-recon rrdtool rubber \
 		ruby salmon samtools sbmltoolbox smartmontools smem snap snap-aligner \
 		soapdenovo2 sortmerna spades speedtest-cli sqlite sqlite3 sshfs swig synaptic \
-		systemtap tabix testssl.sh tilix trimmomatic trnascan-se gnome-clocks gdebi moreutils \
+		systemtap tabix testssl.sh tilix trimmomatic trnascan-se gnome-clocks gdebi moreutils libsbml5-dev \
 		ttf-mscorefonts-installer ubuntu-server unzip vagrant velvet virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso vlc \
 		vsearch wakeonlan x11-utils zlib1g zlib1g-dev zlibc iqtree clang-tidy libpll-dev awscli vcftools git-lfs lolcat cowsay fortune cpanminus nmap mariadb-server fail2ban snakemake meryl libbam-dev libsam-dev xclip tcptrack bmon iqtree prottest readseq ncbi-tools-x11 docker-compose apt-transport-https webp xclip seqtk ruby-bundler ruby2.7-dev jq rbenv ruby-railties nnn filezilla gnome-system-tools libjs-codemirror"
 
