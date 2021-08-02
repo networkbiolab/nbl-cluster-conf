@@ -28,7 +28,7 @@ export PYTHON3_PACKAGES=pip wheel numpy cython futures \
 	pysundials pythoncyc python-igraph python-libsbml rpy2 scikit-bio \
 	scikit-image scikit-learn seaborn seqmagick snakeviz statsmodels s-tui tzlocal \
 	xgboost xlrd libchebipy black ete3 mpwt meneco menetools tabulate bcbio-gff \
-	pysam htseq macs2 deeptools micca htsget pyega3 gtdbtk run-dbcan macs3 carveme memote upsetplot pandas-bokeh pyfaidx ncbi-acc-download ncbi-genome-download woltka pubchempy odfpy \
+	pysam htseq macs2 deeptools micca htsget pyega3 gtdbtk run-dbcan macs3 carveme memote upsetplot pandas-bokeh pyfaidx ncbi-acc-download ncbi-genome-download woltka pubchempy odfpy hiorco \
 	\'glances\[action,browser,cloud,cpuinfo,docker,export,folders,gpu,graph,ip,raid,snmp,web,wifi\]\'
 
 # latest biom-format not supported for python2.7; install before qiime
