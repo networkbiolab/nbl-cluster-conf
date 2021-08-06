@@ -14,22 +14,28 @@ export all_python2_v=2.6.9 2.5.4 2.4.4 2.3.5 2.2.3 2.1.3 2.0.1
 export all_r4_versions=4.0.4 4.0.3 4.0.2 4.0.1 4.0.0
 export all_r3_versions=3.5.3 3.4.4 3.3.3 3.2.5 3.1.3 3.0.3
 
-# use virtual environment for anndata2ri scanpy, anvio, symfit, libroadrunner, tensorflow-gpu because of incompatibilities
+# use virtual environment for anndata2ri, scanpy, anvio, symfit, libroadrunner, tensorflow-gpu because of incompatibilities
 # use virtual environment for indra because downgrades pysb
 # use virtual environment for synapse because of incompatible keyring package
 # use virtual environment for eggnog-mapper because of incompatible seqmagick package
 # use virtual environment for fastai because of incompatible torch package
+# use virtual environment for medaka because many incompatible package versions
 # use apt to install pyyaml: python3-yaml
+PYTHON3_TEST:
+	pip3 install glances[action,browser,cloud,cpuinfo,docker,export,folders,gpu,graph,ip,raid,snmp,web,wifi]
+
 export PYTHON3_PACKAGES=pip wheel numpy cython futures \
-	biom-format biopython bioservices bokeh checkm-genome cobra cogent3 \
-	cutadapt dask_jobqueue deblur distributed dnaplotlib docopts escher \
-	fastcluster fsspec gprofiler-official humann2 keyrings.alt kneaddata louvain \
-	networkx nose openpyxl pandas pillow pybedtools pygraphviz pygtrie pysb \
-	pysundials pythoncyc python-igraph python-libsbml rpy2 scikit-bio \
-	scikit-image scikit-learn seaborn seqmagick snakeviz statsmodels s-tui tzlocal \
-	xgboost xlrd libchebipy black ete3 mpwt meneco menetools tabulate bcbio-gff \
-	pysam htseq macs2 deeptools micca htsget pyega3 gtdbtk run-dbcan macs3 carveme memote upsetplot pandas-bokeh pyfaidx ncbi-acc-download ncbi-genome-download woltka pubchempy odfpy hiorco \
-	\'glances\[action,browser,cloud,cpuinfo,docker,export,folders,gpu,graph,ip,raid,snmp,web,wifi\]\'
+	bcbio-gff biom-format biopython bioservices black bokeh carveme checkm-genome \
+	cobra cogent3 cutadapt dask_jobqueue deblur deeptools distributed dnaplotlib \
+	docopts escher ete3 fastcluster fsspec gprofiler-official gtdbtk hiorco htseq \
+	htsget humann2 keyrings.alt kneaddata libchebipy louvain macs2 macs3 megalodon \
+	memote meneco menetools micca mpwt ncbi-acc-download ncbi-genome-download \
+	networkx nose odfpy openpyxl pandas pandas-bokeh pillow pubchempy pybedtools \
+	pyega3 pyfaidx pygraphviz pygtrie pysam pysb pysundials pythoncyc python-igraph \
+	python-libsbml rpy2 run-dbcan scikit-bio scikit-image scikit-learn seaborn \
+	seqmagick snakeviz statsmodels s-tui tabulate tzlocal upsetplot woltka xgboost \
+	xlrd \
+	glances[action,browser,cloud,cpuinfo,docker,export,folders,gpu,graph,ip,raid,snmp,web,wifi]
 
 # latest biom-format not supported for python2.7; install before qiime
 # funannotate tries to install biopython 1.77; install after biopython==1.76.
@@ -47,15 +53,17 @@ export JUPYTER_PACKAGES=ipykernel jupyter jupyterlab jupyter_nbextensions_config
 
 export PERL_PACKAGES=App::cpanminus CPAN
 
-export PERL_CPANM=App::Cmd::Setup App::cpanoutdated Bio::DB::Taxonomy Bio::Perl Bio::Roary \
-	Bit::Vector CGI::Session CGI::Session::Driver::db_file Data::Dumper DBD::Pg \
-	DBD::SQLite experimental File::Slurp File::Spec forks forks::shared GD \
-	Getopt::Long Hash::Merge HTML::Template Inline::C JSON List::Util Logger::Simple \
-	LWP::Simple Mail::Mailer Math::CDF Parallel::ForkManager PDF::API2 \
-	Perl::Unsafe::Signals Scalar::Util Statistics::R SVG Test::Pod::Coverage \
-	Text::CSV Try::Tiny Want XML::Compile::SOAP11 XML::Compile::Transport::SOAPHTTP \
-	XML::Compile::WSDL11 XML::DOM::XPath XML::LibXML XML::Simple \
-	Alien::Build Log::Log4perl YAML PAR::Dist CPAN::DistnameInfo inc::latest Module::Build Set::IntervalTree DBI DB_File URI Archive::Zip Set::IntervalTree PerlIO::gzip Bio::DB::BigFile Set::IntervalTree JSON::XS Test::Warnings Bio::SearchIO::hmmer3
+export PERL_CPANM=Alien::Build App::Cmd::Setup App::cpanoutdated Archive::Zip Bio::DB::BigFile \
+	Bio::DB::Taxonomy Bio::Perl Bio::Roary Bio::SearchIO::hmmer3 Bit::Vector \
+	CGI::Session CGI::Session::Driver::db_file CPAN::DistnameInfo Data::Dumper \
+	DBD::Pg DBD::SQLite DB_File DBI experimental File::Slurp File::Spec forks \
+	forks::shared GD Getopt::Long Hash::Merge HTML::Template inc::latest Inline::C \
+	JSON JSON::XS List::Util Logger::Simple Log::Log4perl LWP::Simple Mail::Mailer \
+	Math::CDF Module::Build Parallel::ForkManager PAR::Dist PDF::API2 PerlIO::gzip \
+	Perl::Unsafe::Signals Scalar::Util Set::IntervalTree Statistics::R SVG \
+	Test::Pod::Coverage Test::Warnings Text::CSV Try::Tiny URI Want \
+	XML::Compile::SOAP11 XML::Compile::Transport::SOAPHTTP XML::Compile::WSDL11 \
+	XML::DOM::XPath XML::LibXML XML::Simple YAML
 
 export PERL_RSAT=Algorithm::Cluster Bio::Das Bio::Perl CGI Class::Std::Fast Data::Dumper \
 	DBD::mysql DB_File DBI Digest::MD5::File Email::Sender \
@@ -93,7 +101,7 @@ test:
 	echo $$(which pip3)
 	echo $(HOST)
 
-# nvtop incompatible with latest nvidia packages
+# nvtop incompatible with latest nvidia packages, so, use github cloned repo
 # libcurl4-openssl-dev incompatible with libstaden-read-dev
 # gnome-core is removed along with gedit
 # disper, fastx-toolkit, gir1.2-networkmanager-1.0, python-pip, qiime, sra-toolkit, tophat, meryl not available ubuntu 20.04
@@ -101,44 +109,51 @@ test:
 # prokka, mmseqs2 has bugs, so, use github cloned repos
 .ONESHELL:
 apt-install:
-	APTS="ant apache2 apt-file aptitude artemis auditd augustus autoconf bamtools baobab \
-		barrnap bcftools bedops bedtools bioperl bison bowtie bowtie2 \
-		bwa capnproto cargo cd-hit chrome-gnome-shell clustalx cmake cufflinks curl \
-		cutadapt cython dejagnu diamond-aligner docker.io doxygen ea-utils emboss \
-		environment-modules expat fastqc fasttree ffmpeg flex freeipmi g++ \
-		ganglia-monitor ganglia-webfrontend gcc gettext gfortran ghostscript gimp \
-		gir1.2-clutter-1.0 gir1.2-gtop-2.0 gmetad gnome-devel gnome-shell-extensions \
+	APTS="ant apache2 apt-file aptitude apt-transport-https artemis auditd augustus \
+		autoconf awscli bamtools baobab barrnap bcftools bedops bedtools bioperl bison \
+		bmon bowtie bowtie2 bwa capnproto cargo cd-hit chrome-gnome-shell clang-tidy \
+		clustalx cmake cowsay cpanminus cufflinks curl cutadapt cython dejagnu \
+		diamond-aligner docker-compose docker.io doxygen ea-utils emboss \
+		environment-modules expat fail2ban fast5 fastqc fasttree ffmpeg filezilla flex \
+		fortune freeipmi g++ ganglia-monitor ganglia-webfrontend gcc gdebi gettext \
+		gfortran ghostscript gimp gir1.2-clutter-1.0 gir1.2-gtop-2.0 git-lfs gmetad \
+		gnome-clocks gnome-devel gnome-shell-extensions gnome-system-tools \
 		gnome-themes-standard gnome-tweak-tool golang-go gparted gperf gradle gzip \
 		hddtemp help2man hhsuite hisat2 hmmer htop hwloc idba infernal inkscape intltool \
-		julia junit kallisto kate kmc kompare kraken lammps lftp libapache2-mod-php7.4 \
-		libargtable2-dev libatlas-base-dev libblas-dev libboost-all-dev \
-		libcanberra-gtk3-module libcanberra-gtk-module libcereal-dev libcerf-dev \
-		libdist-zilla-perl libdivsufsort-dev libdrm-dev libeigen3-dev libfile-slurp-perl \
-		libfreeipmi-dev libgdal-dev libgd-dev libgirepository1.0-dev libglfw3-dev \
-		libglu1-mesa-dev libgmp-dev libgoogle-perftools-dev libgraphviz-dev libgsl-dev \
-		libgtk2.0-dev libhdf5-serial-dev libhmsbeagle-dev libhpdf-dev libhts-dev \
-		libhttp-parser-dev libhwloc-dev libibmad-dev libidn11-dev libipmimonitoring-dev \
-		libjansson-dev libjemalloc2 libjemalloc-dev libjson-perl libjwt-dev libkrb5-dev \
-		liblapack-dev liblapacke liblmdb-dev liblpsolve55-dev liblua50-dev \
+		iqtree jq julia junit kallisto kate kmc kompare kraken lammps lftp \
+		libapache2-mod-php7.4 libargtable2-dev libatlas-base-dev libbam-dev libblas-dev \
+		libboost-all-dev libcanberra-gtk3-module libcanberra-gtk-module libcereal-dev \
+		libcerf-dev libdist-zilla-perl libdivsufsort-dev libdrm-dev libeigen3-dev \
+		libfast5-dev libfile-slurp-perl libfreeipmi-dev libgdal-dev libgd-dev \
+		libgirepository1.0-dev libglfw3-dev libglu1-mesa-dev libgmp-dev \
+		libgoogle-perftools-dev libgraphviz-dev libgsl-dev libgtk2.0-dev \
+		libhdf5-serial-dev libhmsbeagle-dev libhpdf-dev libhts-dev libhttp-parser-dev \
+		libhwloc-dev libibmad-dev libidn11-dev libipmimonitoring-dev libjansson-dev \
+		libjemalloc2 libjemalloc-dev libjs-codemirror libjson-perl libjwt-dev \
+		libkrb5-dev liblapack-dev liblapacke liblmdb-dev liblpsolve55-dev liblua50-dev \
 		liblua5.1-0-dev liblua5.2-dev liblua5.3-dev liblwp-protocol-https-perl \
 		libmagick++-dev libmetis-dev libmpfr-dev libmunge-dev libnlopt-dev \
-		libopenblas-dev libopenmpi-dev libpam0g-dev libpciaccess-dev libpmix-dev \
-		libreoffice librrd-dev libsndfile1-dev libsparsehash-dev libstaden-read-dev \
-		libsundials-dev libtbb-dev libtext-csv-perl libtool libudunits2-dev libwww-perl \
-		libxm4 libxslt1-dev libyaml-dev llvm-dev lm-sensors mafft mailutils man2html \
-		mash maven mcl mesa-common-dev mira-assembler mlocate mrbayes nagios4 nasm \
-		ncbi-blast+ net-tools nfs-common nfs-kernel-server nginx nodejs npm numactl \
-		nvidia-cuda-dev nvidia-cuda-doc nvidia-cuda-gdb nvidia-cuda-toolkit ocamlbuild \
-		opam openjdk-11-jdk-headless openjdk-8-jdk openjdk-8-jre openssh-server pandoc \
+		libopenblas-dev libopenmpi-dev libpam0g-dev libpciaccess-dev libpll-dev \
+		libpmix-dev libreoffice librrd-dev libsam-dev libsbml5-dev libsndfile1-dev \
+		libsparsehash-dev libstaden-read-dev libsundials-dev libtbb-dev libtext-csv-perl \
+		libtool libudunits2-dev libwww-perl libxm4 libxslt1-dev libyaml-dev llvm-dev \
+		lm-sensors lolcat mafft mailutils man2html mariadb-server mash maven mcl \
+		mesa-common-dev minimap minimap2 mira-assembler mlocate moreutils mrbayes \
+		nagios4 nanopolish nasm ncbi-blast+ ncbi-tools-x11 net-tools nfs-common \
+		nfs-kernel-server nginx nmap nnn nodejs npm numactl nvidia-cuda-dev \
+		nvidia-cuda-doc nvidia-cuda-gdb nvidia-cuda-toolkit ocamlbuild opam \
+		openjdk-11-jdk-headless openjdk-8-jdk openjdk-8-jre openssh-server pandoc \
 		parallel pdfshuffler pdsh php7.4 php7.4-cli php7.4-common php7.4-curl php7.4-gd \
 		php7.4-gmp php7.4-intl php7.4-mbstring php7.4-mysql php7.4-xml php7.4-xmlrpc \
-		php7.4-zip postfix prodigal python3-opencv python3-pip python3-tk python3-venv \
-		python-pip-whl python-tk rar r-base rename repeatmasker-recon rrdtool rubber \
-		ruby salmon samtools sbmltoolbox smartmontools smem snap snap-aligner nanopolish \
-		soapdenovo2 sortmerna spades speedtest-cli sqlite sqlite3 sshfs swig synaptic minimap minimap2 fast5 libfast5-dev \
-		systemtap tabix testssl.sh tilix trimmomatic trnascan-se gnome-clocks gdebi moreutils libsbml5-dev \
-		ttf-mscorefonts-installer ubuntu-server unzip vagrant velvet virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso vlc \
-		vsearch wakeonlan x11-utils zlib1g zlib1g-dev zlibc iqtree clang-tidy libpll-dev awscli vcftools git-lfs lolcat cowsay fortune cpanminus nmap mariadb-server fail2ban snakemake libbam-dev libsam-dev xclip tcptrack bmon iqtree prottest readseq ncbi-tools-x11 docker-compose apt-transport-https webp xclip seqtk ruby-bundler ruby2.7-dev jq rbenv ruby-railties nnn filezilla gnome-system-tools libjs-codemirror"
+		php7.4-zip postfix prodigal prottest python3-opencv python3-pip python3-tk \
+		python3-venv python-pip-whl python-tk rar r-base rbenv readseq rename \
+		repeatmasker-recon rrdtool rubber ruby ruby2.7-dev ruby-bundler ruby-railties \
+		salmon samtools sbmltoolbox seqtk smartmontools smem snakemake snap snap-aligner \
+		soapdenovo2 sortmerna spades speedtest-cli sqlite sqlite3 sshfs swig synaptic \
+		systemtap tabix tcptrack testssl.sh tilix trimmomatic trnascan-se \
+		ttf-mscorefonts-installer ubuntu-server unzip vagrant vcftools velvet virtualbox \
+		virtualbox-ext-pack virtualbox-guest-additions-iso vlc vsearch wakeonlan webp \
+		x11-utils xclip zlib1g zlib1g-dev zlibc"
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
 		checkinstall libssl-dev zlib1g-dev libncurses5-dev \
@@ -329,7 +344,7 @@ local-install-perl-packages:
 
 define install_python_packages
 	for package in $(1); do
-		$(2) -m pip install $$package --upgrade;
+		$(2) -m pip install "$$package" --upgrade;
 	done
 endef
 
