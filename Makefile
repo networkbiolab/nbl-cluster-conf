@@ -134,7 +134,7 @@ apt-install:
 		php7.4-gmp php7.4-intl php7.4-mbstring php7.4-mysql php7.4-xml php7.4-xmlrpc \
 		php7.4-zip postfix prodigal python3-opencv python3-pip python3-tk python3-venv \
 		python-pip-whl python-tk rar r-base rename repeatmasker-recon rrdtool rubber \
-		ruby salmon samtools sbmltoolbox smartmontools smem snap snap-aligner \
+		ruby salmon samtools sbmltoolbox smartmontools smem snap snap-aligner nanopolish \
 		soapdenovo2 sortmerna spades speedtest-cli sqlite sqlite3 sshfs swig synaptic minimap minimap2 fast5 libfast5-dev \
 		systemtap tabix testssl.sh tilix trimmomatic trnascan-se gnome-clocks gdebi moreutils libsbml5-dev \
 		ttf-mscorefonts-installer ubuntu-server unzip vagrant velvet virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso vlc \
