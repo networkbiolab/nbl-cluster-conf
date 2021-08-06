@@ -101,12 +101,11 @@ test:
 	echo $$(which pip3)
 	echo $(HOST)
 
+# prokka, mmseqs2 has bugs, so, use github cloned repos
 # nvtop incompatible with latest nvidia packages, so, use github cloned repo
 # libcurl4-openssl-dev incompatible with libstaden-read-dev
 # gnome-core is removed along with gedit
-# disper, fastx-toolkit, gir1.2-networkmanager-1.0, python-pip, qiime, sra-toolkit, tophat, meryl not available ubuntu 20.04
 # cython, biom-format-tools, pyyaml (python3-yaml) installed with pip2/3
-# prokka, mmseqs2 has bugs, so, use github cloned repos
 .ONESHELL:
 apt-install:
 	APTS="ant apache2 apt-file aptitude apt-transport-https artemis auditd augustus \
@@ -147,7 +146,7 @@ apt-install:
 		php7.4-gmp php7.4-intl php7.4-mbstring php7.4-mysql php7.4-xml php7.4-xmlrpc \
 		php7.4-zip postfix prodigal prottest python3-opencv python3-pip python3-tk \
 		python3-venv python-pip-whl python-tk rar r-base rbenv readseq rename \
-		repeatmasker-recon rrdtool rubber ruby ruby2.7-dev ruby-bundler ruby-railties \
+		repeatmasker-recon rrdtool rubber ruby2.7 ruby2.7-dev ruby2.7-doc ruby-bundler ruby-railties \
 		salmon samtools sbmltoolbox seqtk smartmontools smem snakemake snap snap-aligner \
 		soapdenovo2 sortmerna spades speedtest-cli sqlite sqlite3 sshfs swig synaptic \
 		systemtap tabix tcptrack testssl.sh tilix trimmomatic trnascan-se \
@@ -180,6 +179,18 @@ apt-install:
 	apt-get -y autoremove
 	apt-get -y autoclean
 	apt-get -y clean
+
+# nagios4, php7.4, ruby2.7 are newer version available only ubuntu 20.04
+# disper, fastx-toolkit, gir1.2-networkmanager-1.0, python-pip, qiime, sra-toolkit, tophat, meryl not available ubuntu 20.04
+.ONESHELL:
+apt-install-18.04:
+	APTS="libapache2-mod-php7.2 nagios3 php7.2 php7.2-cli php7.2-common php7.2-curl php7.2-gd \
+		php7.2-gmp php7.2-intl php7.2-mbstring php7.2-mysql php7.2-xml php7.2-xmlrpc \
+		php7.2-zip ruby2.5 ruby2.5-dev ruby2.5-doc disper fastx-toolkit gir1.2-networkmanager-1.0 python-pip qiime sra-toolkit tophat meryl"
+
+	for apt in $$APTS; do
+		printf "\\n %s\\n" "Installing $${apt}";
+		apt-get -y install $$apt; done
 
 latex-install:
 	apt-get -y install texstudio texlive-full
