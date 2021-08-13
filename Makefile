@@ -102,6 +102,7 @@ test:
 	echo $(HOST)
 
 # prokka, mmseqs2 has bugs, so, use github cloned repos
+# install diamond-aligner from github because old version without ultra-sensitive option
 # nvtop incompatible with latest nvidia packages, so, use github cloned repo
 # libcurl4-openssl-dev incompatible with libstaden-read-dev
 # gnome-core is removed along with gedit
@@ -112,7 +113,7 @@ apt-install:
 		autoconf awscli bamtools baobab barrnap bcftools bedops bedtools bioperl bison \
 		bmon bowtie bowtie2 bwa capnproto cargo cd-hit chrome-gnome-shell clang-tidy \
 		clustalx cmake cowsay cpanminus cufflinks curl cutadapt cython dejagnu \
-		diamond-aligner docker-compose docker.io doxygen ea-utils emboss \
+		docker-compose docker.io doxygen ea-utils emboss \
 		environment-modules expat fail2ban fast5 fastqc fasttree ffmpeg filezilla flex \
 		fortune freeipmi g++ ganglia-monitor ganglia-webfrontend gcc gdebi gettext \
 		gfortran ghostscript gimp gir1.2-clutter-1.0 gir1.2-gtop-2.0 git-lfs gmetad \
@@ -545,7 +546,7 @@ slurm-install:
 .ONESHELL:
 slurm-conf:
 	systemctl stop munge
-	systemctl stop slurmd
+	#systemctl stop slurmd
 
 	if [[ "$(HOST)" == "nbl1" ]] ; then
 		systemctl stop slurmctld
@@ -571,31 +572,31 @@ slurm-conf:
 	chown -R slurm:slurm /var/run/slurm-llnl/
 	chown -R slurm:slurm /var/log/slurm-llnl/
 
-	cp slurm.conf gres.conf /etc/slurm-llnl/
+	#cp slurm.conf gres.conf /etc/slurm-llnl/
 
 	if [[ "$(HOST)" == "nbl1" ]] ; then
 		dd if=/dev/urandom bs=1 count=1024 > ./munge.key
 	fi
 
-	rsync -avu -P munge.key /etc/munge/munge.key
-	chown munge:munge /etc/munge/munge.key
-	chmod 400 /etc/munge/munge.key
-	chmod 711 /var/lib/munge/
-	chmod 755 /var/run/munge/
+	#rsync -avu -P munge.key /etc/munge/munge.key
+	#chown munge:munge /etc/munge/munge.key
+	#chmod 400 /etc/munge/munge.key
+	#chmod 711 /var/lib/munge/
+	#chmod 755 /var/run/munge/
 
 	systemctl restart munge
 	service munge status
 
-	systemctl restart slurmd
-	service slurmd status
+	#systemctl restart slurmd
+	#service slurmd status
 
-	if [[ "$(HOST)" == "nbl1" ]] ; then
-		systemctl restart slurmctld
-		service slurmctld status
-	else
-		systemctl stop slurmctld
-		service slurmctld status
-	fi
+	#if [[ "$(HOST)" == "nbl1" ]] ; then
+	#	systemctl restart slurmctld
+	#	service slurmctld status
+	#else
+	#	systemctl stop slurmctld
+	#	service slurmctld status
+	#fi
 
 scala-install:
 	echo "deb https://dl.bintray.com/sbt/debian /" | sudo tee -a /etc/apt/sources.list.d/sbt.list
