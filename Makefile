@@ -106,7 +106,7 @@ test:
 # nvtop incompatible with latest nvidia packages, so, use github cloned repo
 # libcurl4-openssl-dev incompatible with libstaden-read-dev
 # gnome-core is removed along with gedit
-# cython, biom-format-tools, pyyaml (python3-yaml) installed with pip2/3
+# cython, biom-format-tools, snakemake (because of psutils from apt) installed with pip2/3
 .ONESHELL:
 apt-install:
 	APTS="ant apache2 apt-file aptitude apt-transport-https artemis auditd augustus \
@@ -148,7 +148,7 @@ apt-install:
 		php7.4-zip postfix prodigal prottest python3-opencv python3-pip python3-tk \
 		python3-venv python-pip-whl python-tk rar r-base rbenv readseq rename \
 		repeatmasker-recon rrdtool rubber ruby2.7 ruby2.7-dev ruby2.7-doc ruby-bundler ruby-railties \
-		salmon samtools sbmltoolbox seqtk smartmontools smem snakemake snap snap-aligner \
+		salmon samtools sbmltoolbox seqtk smartmontools smem snap snap-aligner \
 		soapdenovo2 sortmerna spades speedtest-cli sqlite sqlite3 sshfs swig synaptic \
 		systemtap tabix tcptrack testssl.sh tilix trimmomatic trnascan-se \
 		ttf-mscorefonts-installer ubuntu-server unzip vagrant vcftools velvet virtualbox \
