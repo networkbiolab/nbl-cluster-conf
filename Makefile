@@ -153,7 +153,8 @@ apt-install:
 		systemtap tabix tcptrack testssl.sh tilix trimmomatic trnascan-se \
 		ttf-mscorefonts-installer ubuntu-server unzip vagrant vcftools velvet virtualbox \
 		virtualbox-ext-pack virtualbox-guest-additions-iso vlc vsearch wakeonlan webp \
-		x11-utils xclip zlib1g zlib1g-dev zlibc"
+		x11-utils xclip zlib1g zlib1g-dev zlibc \
+		nethogs"
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
 		checkinstall libssl-dev zlib1g-dev libncurses5-dev \
