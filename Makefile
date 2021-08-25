@@ -103,10 +103,11 @@ test:
 
 # prokka, mmseqs2 has bugs, so, use github cloned repos
 # install diamond-aligner from github because old version without ultra-sensitive option
-# nvtop incompatible with latest nvidia packages, so, use github cloned repo
+# nvtop incompatible with latest nvidia packages, so, use a github cloned repo
 # libcurl4-openssl-dev incompatible with libstaden-read-dev
+# nagios4 configuration files incompatible with apache2
 # gnome-core is removed along with gedit
-# cython, biom-format-tools, snakemake (because of psutils from apt) installed with pip2/3
+# install cython, biom-format-tools, snakemake (because of psutils from apt) installed with pip2/3
 .ONESHELL:
 apt-install:
 	APTS="ant apache2 apt-file aptitude apt-transport-https artemis auditd augustus \
@@ -139,7 +140,7 @@ apt-install:
 		libtool libudunits2-dev libwww-perl libxm4 libxslt1-dev libyaml-dev llvm-dev \
 		lm-sensors lolcat mafft mailutils man2html mariadb-server mash maven mcl \
 		mesa-common-dev minimap minimap2 mira-assembler mlocate moreutils mrbayes \
-		nagios4 nanopolish nasm ncbi-blast+ ncbi-tools-x11 net-tools nfs-common \
+		nanopolish nasm ncbi-blast+ ncbi-tools-x11 net-tools nfs-common \
 		nfs-kernel-server nginx nmap nnn nodejs npm numactl nvidia-cuda-dev \
 		nvidia-cuda-doc nvidia-cuda-gdb nvidia-cuda-toolkit ocamlbuild opam \
 		openjdk-11-jdk-headless openjdk-8-jdk openjdk-8-jre openssh-server pandoc \
