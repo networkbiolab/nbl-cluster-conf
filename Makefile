@@ -34,7 +34,7 @@ export PYTHON3_PACKAGES=pip wheel numpy cython futures \
 	pyega3 pyfaidx pygraphviz pygtrie pysam pysb pysundials pythoncyc python-igraph \
 	python-libsbml rpy2 run-dbcan scikit-bio scikit-image scikit-learn seaborn \
 	seqmagick snakeviz statsmodels s-tui tabulate tzlocal upsetplot woltka xgboost \
-	xlrd coiled swifter snakemake xmlschema \
+	xlrd coiled swifter snakemake xmlschema nglview ssbio \
 	glances[action,browser,cloud,cpuinfo,docker,export,folders,gpu,graph,ip,raid,snmp,web,wifi]
 
 # latest biom-format not supported for python2.7; install before qiime
@@ -107,6 +107,7 @@ test:
 # libcurl4-openssl-dev incompatible with libstaden-read-dev
 # nagios4 configuration files incompatible with apache2
 # gnome-core is removed along with gedit
+# nginx clashes with apache2 for port 80, 443
 # install cython, biom-format-tools, snakemake (because of psutils from apt) installed with pip2/3
 .ONESHELL:
 apt-install:
@@ -141,7 +142,7 @@ apt-install:
 		lm-sensors lolcat mafft mailutils man2html mariadb-server mash maven mcl \
 		mesa-common-dev minimap minimap2 mira-assembler mlocate moreutils mrbayes \
 		nanopolish nasm ncbi-blast+ ncbi-tools-x11 net-tools nfs-common \
-		nfs-kernel-server nginx nmap nnn nodejs npm numactl nvidia-cuda-dev \
+		nfs-kernel-server nmap nnn nodejs npm numactl nvidia-cuda-dev \
 		nvidia-cuda-doc nvidia-cuda-gdb nvidia-cuda-toolkit ocamlbuild opam \
 		openjdk-11-jdk-headless openjdk-8-jdk openjdk-8-jre openssh-server pandoc \
 		parallel pdfshuffler pdsh php7.4 php7.4-cli php7.4-common php7.4-curl php7.4-gd \
@@ -155,7 +156,7 @@ apt-install:
 		ttf-mscorefonts-installer ubuntu-server unzip vagrant vcftools velvet virtualbox \
 		virtualbox-ext-pack virtualbox-guest-additions-iso vlc vsearch wakeonlan webp \
 		x11-utils xclip zlib1g zlib1g-dev zlibc \
-		nethogs"
+		nethogs hostapd"
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
 		checkinstall libssl-dev zlib1g-dev libncurses5-dev \
@@ -432,6 +433,9 @@ define jupyter
 	# install and enable rise
 	$(2) install rise --py --sys-prefix
 	$(2) enable rise --py --sys-prefix
+
+	# enable nglview
+	$(2) enable nglview --py --sys-prefix
 endef
 
 .ONESHELL:
