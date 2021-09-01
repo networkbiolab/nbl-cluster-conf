@@ -180,9 +180,9 @@ apt-install:
 		apt-get -y install $$apt; done
 
 	apt-get -y remove xul-ext-ubufox gedit
-	apt-get -y autoremove
-	apt-get -y autoclean
-	apt-get -y clean
+# 	apt-get -y autoremove
+# 	apt-get -y autoclean
+# 	apt-get -y clean
 
 # nagios4, php7.4, ruby2.7 are newer version available only ubuntu 20.04
 # disper, fastx-toolkit, gir1.2-networkmanager-1.0, python-pip, qiime, sra-toolkit, tophat, meryl not available ubuntu 20.04
