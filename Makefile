@@ -34,7 +34,7 @@ export PYTHON3_PACKAGES=pip wheel numpy cython futures \
 	pyega3 pyfaidx pygraphviz pygtrie pysam pysb pysundials pythoncyc python-igraph \
 	python-libsbml rpy2 run-dbcan scikit-bio scikit-image scikit-learn seaborn \
 	seqmagick snakeviz statsmodels s-tui tabulate tzlocal upsetplot woltka xgboost \
-	xlrd coiled swifter snakemake xmlschema nglview ssbio \
+	xlrd coiled swifter snakemake xmlschema nglview ssbio dash jupyter-dash \
 	glances[action,browser,cloud,cpuinfo,docker,export,folders,gpu,graph,ip,raid,snmp,web,wifi]
 
 # latest biom-format not supported for python2.7; install before qiime
