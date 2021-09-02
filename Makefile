@@ -37,12 +37,12 @@ export PYTHON3_PACKAGES=pip wheel numpy cython futures \
 	xlrd coiled swifter snakemake xmlschema nglview ssbio dash jupyter-dash \
 	glances[action,browser,cloud,cpuinfo,docker,export,folders,gpu,graph,ip,raid,snmp,web,wifi]
 
-# latest biom-format not supported for python2.7; install before qiime
-# funannotate tries to install biopython 1.77; install after biopython==1.76.
+# latest biom-format not supported for python2.7; also, install it before qiime
+# funannotate installs latest biopython 1.77; install it after biopython==1.76.
 export PYTHON2_PACKAGES=pip wheel numpy cython futures \
 	bcbio-gff "biopython==1.76" humann2 keras kneaddata \
 	markdown2 matplotlib msgpack networkx parmap pybedtools pybigwig pydnase pyfasta \
-	pyyaml xgboost htseq pysam cvxopt "biom-format==2.1.4" qiiime
+	xgboost htseq pysam cvxopt "biom-format==2.1.4" qiiime "cogent==1.5.3"
 
 export DEV_PYTHON_PACKAGES=autopep8 pylint pyscaffold sphinx sphinx-autobuild sphinx_rtd_theme testresources twine versioneer
 
