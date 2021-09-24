@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 HOST=$(shell hostname)
 
-export D1=/
+export D1=
 export r4_version=4.0.5
 export r3_version=3.6.3
 export python3_v=3.9.5
@@ -9,8 +9,9 @@ export python2_v=2.7.18
 export perl_v=5.32.0
 
 export all_python3_v=3.8.5 3.7.9 3.6.12 3.5.10 3.4.10
-#3.3.7 3.2.6 3.1.5 3.0.1
-export all_python2_v=2.6.9 2.5.4 2.4.4 2.3.5 2.2.3 2.1.3 2.0.1
+#3.3.7 3.2.6 3.1.5 3.0.1 too old to download
+export all_python2_v=2.6.9
+#2.5.4 2.4.4 2.3.5 2.2.3 2.1.3 2.0.1 too old to download
 export all_r4_versions=4.0.4 4.0.3 4.0.2 4.0.1 4.0.0
 export all_r3_versions=3.5.3 3.4.4 3.3.3 3.2.5 3.1.3 3.0.3
 
@@ -21,8 +22,6 @@ export all_r3_versions=3.5.3 3.4.4 3.3.3 3.2.5 3.1.3 3.0.3
 # use virtual environment for fastai because of incompatible torch package
 # use virtual environment for medaka because many incompatible package versions
 # use apt to install pyyaml: python3-yaml
-PYTHON3_TEST:
-	pip3 install glances[action,browser,cloud,cpuinfo,docker,export,folders,gpu,graph,ip,raid,snmp,web,wifi]
 
 export PYTHON3_PACKAGES=pip wheel numpy cython futures \
 	bcbio-gff biom-format biopython bioservices black bokeh carveme checkm-genome \
@@ -35,7 +34,7 @@ export PYTHON3_PACKAGES=pip wheel numpy cython futures \
 	python-libsbml rpy2 run-dbcan scikit-bio scikit-image scikit-learn seaborn \
 	seqmagick snakeviz statsmodels s-tui tabulate tzlocal upsetplot woltka xgboost \
 	xlrd coiled swifter snakemake xmlschema nglview ssbio dash jupyter-dash \
-	glances[action,browser,cloud,cpuinfo,docker,export,folders,gpu,graph,ip,raid,snmp,web,wifi]
+	glances[action,browser,cloud,cpuinfo,docker,export,folders,gpu,graph,ip,raid,snmp,web,wifi] matplotlib_venn
 
 # latest biom-format not supported for python2.7; also, install it before qiime
 # funannotate installs latest biopython 1.77; install it after biopython==1.76.
@@ -156,7 +155,7 @@ apt-install:
 		ttf-mscorefonts-installer ubuntu-server unzip vagrant vcftools velvet virtualbox \
 		virtualbox-ext-pack virtualbox-guest-additions-iso vlc vsearch wakeonlan webp \
 		x11-utils xclip zlib1g zlib1g-dev zlibc \
-		nethogs hostapd"
+		nethogs hostapd cwltool apt-rdepends lefse"
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
 		checkinstall libssl-dev zlib1g-dev libncurses5-dev \
@@ -464,7 +463,11 @@ define compile_python
 endef
 
 .ONESHELL:
-compile-python2:
+compile-python:
+	$(call compile_python,$(version))
+
+.ONESHELL:
+compile-latest-python2:
 	$(call compile_python,$$python2_v)
 
 .ONESHELL:
@@ -476,7 +479,7 @@ all-compile-python2:
 	done
 
 .ONESHELL:
-compile-python3:
+compile-latest-python3:
 	$(call compile_python,$$python3_v)
 
 .ONESHELL:
