@@ -183,6 +183,12 @@ apt-install:
 # 	apt-get -y autoclean
 # 	apt-get -y clean
 
+	systemctl --user mask tracker-writeback.service
+	systemctl --user mask tracker-store.service
+	systemctl --user mask tracker-miner-fs.service
+	systemctl --user mask tracker-extract.service
+	tracker reset --hard
+
 # nagios4, php7.4, ruby2.7 are newer version available only ubuntu 20.04
 # disper, fastx-toolkit, gir1.2-networkmanager-1.0, python-pip, qiime, sra-toolkit, tophat, meryl not available ubuntu 20.04
 .ONESHELL:
