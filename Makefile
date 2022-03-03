@@ -444,6 +444,9 @@ endef
 .ONESHELL:
 system-install-jupyter-packages:
 	$(call install_python_packages,$$JUPYTER_PACKAGES,python3)
+
+.ONESHELL:
+configure-jupyter-user:
 	$(call jupyter,python3,jupyter-nbextension)
 
 .ONESHELL:
