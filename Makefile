@@ -145,8 +145,8 @@ apt-install:
 		lm-sensors lolcat mafft mailutils man2html mariadb-server mash maven mcl \
 		mesa-common-dev minimap minimap2 mira-assembler mlocate moreutils mrbayes \
 		nanopolish nasm ncbi-blast+ ncbi-tools-x11 net-tools nfs-common \
-		nfs-kernel-server nmap nnn nodejs npm numactl nvidia-cuda-dev \
-		nvidia-cuda-doc nvidia-cuda-gdb nvidia-cuda-toolkit ocamlbuild opam \
+		nfs-kernel-server nmap nnn nodejs npm numactl \
+		ocamlbuild opam \
 		openjdk-11-jdk-headless openjdk-8-jdk openjdk-8-jre openssh-server pandoc \
 		parallel pdfshuffler pdsh php7.4 php7.4-cli php7.4-common php7.4-curl php7.4-gd \
 		php7.4-gmp php7.4-intl php7.4-mbstring php7.4-mysql php7.4-xml php7.4-xmlrpc \
@@ -186,6 +186,13 @@ apt-install:
 # 	apt-get -y autoremove
 # 	apt-get -y autoclean
 # 	apt-get -y clean
+
+.ONESHELL:
+apt-install-cuda:
+	APTS="nvidia-driver-510 nvidia-utils-510 nvidia-cuda-toolkit nvidia-cuda-toolkit-gcc"
+	for apt in $$APTS; do
+		printf "\\n %s\\n" "Installing $${apt}";
+		apt-get -y install $$apt; done
 
 # nagios4, php7.4, ruby2.7 newer versions available only on ubuntu 20.04
 # disper, fastx-toolkit, gir1.2-networkmanager-1.0, python-pip, qiime, sra-toolkit, tophat, meryl not available on ubuntu 20.04
@@ -434,11 +441,11 @@ define jupyter
 	$(1) -m nbopen.install_xdg
 
 	# install and enable rise
-	$(2) install rise --py --sys-prefix
-	$(2) enable rise --py --sys-prefix
+	sudo $(2) install rise --py --sys-prefix
+	sudo $(2) enable rise --py --sys-prefix
 
 	# enable nglview
-	$(2) enable nglview --py --sys-prefix
+	sudo $(2) enable nglview --py --sys-prefix
 endef
 
 .ONESHELL:
