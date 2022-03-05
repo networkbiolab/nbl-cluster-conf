@@ -1,18 +1,19 @@
 SHELL := /bin/bash
 HOST=$(shell hostname)
 
-export D1=
-export r4_version=4.0.5
+# edit to change the location of opt directory
+export D1=/
+export r4_version=4.1.2
 export r3_version=3.6.3
-export python3_v=3.9.5
+export python3_v=3.10.2
 export python2_v=2.7.18
-export perl_v=5.32.0
+export perl_v=5.34.0
 
-export all_python3_v=3.8.5 3.7.9 3.6.12 3.5.10 3.4.10
+export all_python3_v=3.9.10 3.8.12 3.7.12 3.6.15 3.5.10 3.4.10
 #3.3.7 3.2.6 3.1.5 3.0.1 too old to download
 export all_python2_v=2.6.9
 #2.5.4 2.4.4 2.3.5 2.2.3 2.1.3 2.0.1 too old to download
-export all_r4_versions=4.0.4 4.0.3 4.0.2 4.0.1 4.0.0
+export all_r4_versions=4.0.5
 export all_r3_versions=3.5.3 3.4.4 3.3.3 3.2.5 3.1.3 3.0.3
 
 # use virtual environment for anndata2ri, scanpy, anvio, symfit, libroadrunner, tensorflow-gpu because of incompatibilities
@@ -33,11 +34,12 @@ export PYTHON3_PACKAGES=pip wheel numpy cython futures \
 	pyega3 pyfaidx pygraphviz pygtrie pysam pysb pysundials pythoncyc python-igraph \
 	python-libsbml rpy2 run-dbcan scikit-bio scikit-image scikit-learn seaborn \
 	seqmagick snakeviz statsmodels s-tui tabulate tzlocal upsetplot woltka xgboost \
-	xlrd coiled swifter snakemake xmlschema nglview ssbio dash jupyter-dash click cytoolz ipdb \
+	xlrd coiled swifter snakemake xmlschema nglview ssbio dash jupyter-dash click cytoolz ipdb gurobi \
 	glances[action,browser,cloud,cpuinfo,docker,export,folders,gpu,graph,ip,raid,snmp,web,wifi] matplotlib_venn
 
 # latest biom-format not supported for python2.7; also, install it before qiime
-# funannotate installs latest biopython 1.77; install it after biopython==1.76.
+# funannotate try to install latest biopython 1.77, but not available for python2; install it after biopython==1.76
+
 export PYTHON2_PACKAGES=pip wheel numpy cython futures \
 	bcbio-gff "biopython==1.76" humann2 keras kneaddata \
 	markdown2 matplotlib msgpack networkx parmap pybedtools pybigwig pydnase pyfasta \
@@ -45,7 +47,8 @@ export PYTHON2_PACKAGES=pip wheel numpy cython futures \
 
 export DEV_PYTHON_PACKAGES=autopep8 pylint pyscaffold sphinx sphinx-autobuild sphinx_rtd_theme testresources twine versioneer
 
-# cntk cntk-gpu only python3.6
+# cntk cntk-gpu avaiblable only for python3.6
+
 export CUDA_PYTHON3_PACKAGES=keras pycuda scikit-cuda theano torch torchvision
 
 export JUPYTER_PACKAGES=ipykernel jupyter jupyterlab jupyter_nbextensions_configurator nbopen nbserverproxy rise jupyter_contrib_nbextensions
@@ -106,8 +109,9 @@ test:
 # libcurl4-openssl-dev incompatible with libstaden-read-dev
 # nagios4 configuration files incompatible with apache2
 # gnome-core is removed along with gedit
-# nginx clashes with apache2 for port 80, 443
-# install cython, biom-format-tools, snakemake (because of psutils from apt) installed with pip2/3
+# nginx clashes with apache2 for ports 80 and 443
+# install cython, biom-format-tools, snakemake (because of psutils from apt) with pip2/3
+
 .ONESHELL:
 apt-install:
 	APTS="ant apache2 apt-file aptitude apt-transport-https artemis auditd augustus \
@@ -141,8 +145,8 @@ apt-install:
 		lm-sensors lolcat mafft mailutils man2html mariadb-server mash maven mcl \
 		mesa-common-dev minimap minimap2 mira-assembler mlocate moreutils mrbayes \
 		nanopolish nasm ncbi-blast+ ncbi-tools-x11 net-tools nfs-common \
-		nfs-kernel-server nmap nnn nodejs npm numactl nvidia-cuda-dev \
-		nvidia-cuda-doc nvidia-cuda-gdb nvidia-cuda-toolkit ocamlbuild opam \
+		nfs-kernel-server nmap nnn nodejs npm numactl \
+		ocamlbuild opam \
 		openjdk-11-jdk-headless openjdk-8-jdk openjdk-8-jre openssh-server pandoc \
 		parallel pdfshuffler pdsh php7.4 php7.4-cli php7.4-common php7.4-curl php7.4-gd \
 		php7.4-gmp php7.4-intl php7.4-mbstring php7.4-mysql php7.4-xml php7.4-xmlrpc \
@@ -188,6 +192,13 @@ apt-install:
 	systemctl --user mask tracker-miner-fs.service
 	systemctl --user mask tracker-extract.service
 	tracker reset --hard
+
+.ONESHELL:
+apt-install-cuda:
+	APTS="nvidia-driver-510 nvidia-utils-510 nvidia-cuda-toolkit nvidia-cuda-toolkit-gcc"
+	for apt in $$APTS; do
+		printf "\\n %s\\n" "Installing $${apt}";
+		apt-get -y install $$apt; done
 
 # nagios4, php7.4, ruby2.7 are newer version available only ubuntu 20.04
 # disper, fastx-toolkit, gir1.2-networkmanager-1.0, python-pip, qiime, sra-toolkit, tophat, meryl not available ubuntu 20.04
@@ -436,16 +447,19 @@ define jupyter
 	$(1) -m nbopen.install_xdg
 
 	# install and enable rise
-	$(2) install rise --py --sys-prefix
-	$(2) enable rise --py --sys-prefix
+	sudo $(2) install rise --py --sys-prefix
+	sudo $(2) enable rise --py --sys-prefix
 
 	# enable nglview
-	$(2) enable nglview --py --sys-prefix
+	sudo $(2) enable nglview --py --sys-prefix
 endef
 
 .ONESHELL:
 system-install-jupyter-packages:
 	$(call install_python_packages,$$JUPYTER_PACKAGES,python3)
+
+.ONESHELL:
+configure-jupyter-user:
 	$(call jupyter,python3,jupyter-nbextension)
 
 .ONESHELL:
@@ -470,6 +484,7 @@ endef
 
 .ONESHELL:
 compile-python:
+	echo "Example: export version=3.6.12 && make compile-python"
 	$(call compile_python,$(version))
 
 .ONESHELL:
@@ -509,6 +524,11 @@ define compile_r
 	make install
 	rm -rf $$D1/opt/R-$(2)
 endef
+
+.ONESHELL:
+compile-r:
+	echo "Example: export version=4.0.5 && make compile-r"
+	$(call compile_r,R,$(version))
 
 .ONESHELL:
 compile-r4-cran:
@@ -552,21 +572,23 @@ endef
 compile-perl:
 	$(call compile_perl,$$perl_v)
 
+# Remove if going to compile and use SLURM from source (avoid manual creation of users)
 .ONESHELL:
-slurm-install:
+slurm-uninstall:
 	apt-get -y remove --purge munge slurm-wlm slurmdbd
 	apt-get -y autoremove
+
+.ONESHELL:
+slurm-install:
+	make slurm-uninstall
 	apt-get -y install munge slurm-wlm slurmdbd
 
 .ONESHELL:
 slurm-conf:
 	systemctl stop munge
-	#systemctl stop slurmd
-
-	if [[ "$(HOST)" == "nbl1" ]] ; then
-		systemctl stop slurmctld
-		systemctl stop slurmdbd
-	fi
+	systemctl stop slurmdbd
+	systemctl stop slurmd
+	systemctl stop slurmctld
 
 	rm -rf /var/lib/slurm-llnl /var/run/slurm-llnl /var/log/slurm-llnl
 
@@ -587,31 +609,17 @@ slurm-conf:
 	chown -R slurm:slurm /var/run/slurm-llnl/
 	chown -R slurm:slurm /var/log/slurm-llnl/
 
-	#cp slurm.conf gres.conf /etc/slurm-llnl/
-
-	if [[ "$(HOST)" == "nbl1" ]] ; then
-		dd if=/dev/urandom bs=1 count=1024 > ./munge.key
-	fi
-
-	#rsync -avu -P munge.key /etc/munge/munge.key
-	#chown munge:munge /etc/munge/munge.key
-	#chmod 400 /etc/munge/munge.key
-	#chmod 711 /var/lib/munge/
-	#chmod 755 /var/run/munge/
-
 	systemctl restart munge
 	service munge status
 
-	#systemctl restart slurmd
-	#service slurmd status
+	systemctl restart slurmdbd
+	service slurmdbd status
 
-	#if [[ "$(HOST)" == "nbl1" ]] ; then
-	#	systemctl restart slurmctld
-	#	service slurmctld status
-	#else
-	#	systemctl stop slurmctld
-	#	service slurmctld status
-	#fi
+	systemctl restart slurmd
+	service slurmd status
+
+	systemctl restart slurmctld
+	service slurmctld status
 
 scala-install:
 	echo "deb https://dl.bintray.com/sbt/debian /" | sudo tee -a /etc/apt/sources.list.d/sbt.list
