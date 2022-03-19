@@ -111,6 +111,7 @@ test:
 # gnome-core is removed along with gedit
 # nginx clashes with apache2 for ports 80 and 443
 # install cython, biom-format-tools, snakemake (because of psutils from apt) with pip2/3
+# install npm nodejs with standalone https://nodejs.org/en/download/
 
 .ONESHELL:
 apt-install:
@@ -145,7 +146,7 @@ apt-install:
 		lm-sensors lolcat mafft mailutils man2html mariadb-server mash maven mcl \
 		mesa-common-dev minimap minimap2 mira-assembler mlocate moreutils mrbayes \
 		nanopolish nasm ncbi-blast+ ncbi-tools-x11 net-tools nfs-common \
-		nfs-kernel-server nmap nnn nodejs npm numactl \
+		nfs-kernel-server nmap nnn numactl \
 		ocamlbuild opam \
 		openjdk-11-jdk-headless openjdk-8-jdk openjdk-8-jre openssh-server pandoc \
 		parallel pdfshuffler pdsh php7.4 php7.4-cli php7.4-common php7.4-curl php7.4-gd \
