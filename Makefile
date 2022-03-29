@@ -147,7 +147,7 @@ apt-install:
 		mesa-common-dev minimap minimap2 mira-assembler mlocate moreutils mrbayes \
 		nanopolish nasm ncbi-blast+ ncbi-tools-x11 net-tools nfs-common \
 		nfs-kernel-server nmap nnn numactl \
-		ocamlbuild opam \
+		ocamlbuild opam konsole \
 		openjdk-11-jdk-headless openjdk-8-jdk openjdk-8-jre openssh-server pandoc \
 		parallel pdfshuffler pdsh php7.4 php7.4-cli php7.4-common php7.4-curl php7.4-gd \
 		php7.4-gmp php7.4-intl php7.4-mbstring php7.4-mysql php7.4-xml php7.4-xmlrpc \
