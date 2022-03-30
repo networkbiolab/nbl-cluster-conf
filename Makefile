@@ -448,14 +448,17 @@ all-local-remove-pip3-packages:
 define jupyter
 	# install python kernel
 	$(1) -m ipykernel install --user
-	$(1) -m nbopen.install_xdg
+	#$(1) -m nbopen.install_xdg #not as sudo
 
 	# install and enable rise
 	sudo $(2) install rise --py --sys-prefix
 	sudo $(2) enable rise --py --sys-prefix
 
 	# enable nglview
-	sudo $(2) enable nglview --py --sys-prefix
+	#sudo $(2) enable nglview --py --sys-prefix
+
+	# enable widgetsnbextension
+	sudo $(2) nbextension enable --py widgetsnbextension --sys-prefix
 endef
 
 .ONESHELL:
