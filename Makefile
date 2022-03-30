@@ -51,7 +51,7 @@ export DEV_PYTHON_PACKAGES=autopep8 pylint pyscaffold sphinx sphinx-autobuild sp
 
 export CUDA_PYTHON3_PACKAGES=keras pycuda scikit-cuda theano torch torchvision
 
-export JUPYTER_PACKAGES=ipykernel jupyter jupyterlab jupyter_nbextensions_configurator nbopen nbserverproxy rise jupyter_contrib_nbextensions prompt_toolkit
+export JUPYTER_PACKAGES=prompt_toolkit ipykernel jupyter jupyterlab jupyter_nbextensions_configurator nbopen nbserverproxy rise jupyter_contrib_nbextensions
 
 export PERL_PACKAGES=App::cpanminus CPAN
 
