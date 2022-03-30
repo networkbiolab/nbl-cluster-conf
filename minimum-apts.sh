@@ -1,3 +1,4 @@
+apt-get update
 apt-get -y install net-tools
 apt-get -y install openssh-client
 apt-get -y install openssh-server

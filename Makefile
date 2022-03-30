@@ -103,7 +103,7 @@ test:
 	echo $$(which pip3)
 	echo $(HOST)
 
-# prokka, mmseqs2 has bugs, so, use github cloned repos
+# prokka, mmseqs2 have bugs, so, use github cloned repos
 # install diamond-aligner from github because old version without ultra-sensitive option
 # nvtop incompatible with latest nvidia packages, so, use a github cloned repo
 # libcurl4-openssl-dev incompatible with libstaden-read-dev
@@ -112,6 +112,7 @@ test:
 # nginx clashes with apache2 for ports 80 and 443
 # install cython, biom-format-tools, snakemake (because of psutils from apt) with pip2/3
 # install npm nodejs with standalone https://nodejs.org/en/download/
+# ea-utils installs nodejs
 
 .ONESHELL:
 apt-install:
@@ -119,7 +120,7 @@ apt-install:
 		autoconf awscli bamtools baobab barrnap bcftools bedops bedtools bioperl bison \
 		bmon bowtie bowtie2 bwa capnproto cargo cd-hit chrome-gnome-shell clang-tidy \
 		clustalx cmake cowsay cpanminus cufflinks curl cutadapt cython dejagnu \
-		docker-compose docker.io doxygen ea-utils emboss \
+		docker-compose docker.io doxygen emboss \
 		environment-modules expat fail2ban fast5 fastqc fasttree ffmpeg filezilla flex \
 		fortune freeipmi g++ ganglia-monitor ganglia-webfrontend gcc gdebi gettext \
 		gfortran ghostscript gimp gir1.2-clutter-1.0 gir1.2-gtop-2.0 git-lfs gmetad \
@@ -194,6 +195,11 @@ apt-install:
 	systemctl --user mask tracker-extract.service
 	tracker reset --hard
 
+	systemctl disable cups-browsed
+
+apt-install-latex:
+	apt-get -y install texstudio texlive-full
+
 .ONESHELL:
 apt-install-cuda:
 	APTS="nvidia-driver-510 nvidia-utils-510 nvidia-cuda-toolkit nvidia-cuda-toolkit-gcc"
@@ -204,7 +210,7 @@ apt-install-cuda:
 # nagios4, php7.4, ruby2.7 are newer version available only ubuntu 20.04
 # disper, fastx-toolkit, gir1.2-networkmanager-1.0, python-pip, qiime, sra-toolkit, tophat, meryl not available ubuntu 20.04
 .ONESHELL:
-apt-install-18.04:
+only-1804-apt-install:
 	APTS="libapache2-mod-php7.2 nagios3 php7.2 php7.2-cli php7.2-common php7.2-curl php7.2-gd \
 		php7.2-gmp php7.2-intl php7.2-mbstring php7.2-mysql php7.2-xml php7.2-xmlrpc \
 		php7.2-zip ruby2.5 ruby2.5-dev ruby2.5-doc disper fastx-toolkit gir1.2-networkmanager-1.0 python-pip qiime sra-toolkit tophat meryl"
@@ -213,17 +219,14 @@ apt-install-18.04:
 		printf "\\n %s\\n" "Installing $${apt}";
 		apt-get -y install $$apt; done
 
-latex-install:
-	apt-get -y install texstudio texlive-full
-
 # only ubuntu 18.04
-cuda-download:
+only-1804-cuda-download:
 	cd $$D1/opt/ubuntu-software
 	wget --continue https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin
 	wget --continue https://developer.download.nvidia.com/compute/cuda/10.2/Prod/local_installers/cuda-repo-ubuntu1804-10-2-local-10.2.89-440.33.01_1.0-1_amd64.deb
 
 # only ubuntu 18.4
-cuda-install:
+only-1804-cuda-install:
 	cd $$D1/opt/ubuntu-software
 
 	apt-get -y install linux-headers-$(uname -r)
