@@ -195,6 +195,7 @@ apt-install:
 	systemctl --user mask tracker-extract.service
 	tracker reset --hard
 
+	systemctl stop cups-browsed
 	systemctl disable cups-browsed
 
 apt-install-latex:
