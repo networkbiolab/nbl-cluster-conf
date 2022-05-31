@@ -35,7 +35,7 @@ export PYTHON3_PACKAGES=pip wheel numpy cython futures \
 	python-libsbml rpy2 run-dbcan scikit-bio scikit-image scikit-learn seaborn \
 	seqmagick snakeviz statsmodels s-tui tabulate tzlocal upsetplot woltka xgboost versioneer \
 	xlrd coiled swifter snakemake xmlschema nglview ssbio dash jupyter-dash click cytoolz ipdb gurobipy ipyparallel yapf \
-	glances[action,browser,cloud,cpuinfo,docker,export,folders,gpu,graph,ip,raid,snmp,web,wifi] matplotlib_venn
+	glances[action,browser,cloud,cpuinfo,docker,export,folders,gpu,graph,ip,raid,snmp,web,wifi] matplotlib_venn pathos dill
 
 # latest biom-format not supported for python2.7; also, install it before qiime
 # funannotate try to install latest biopython 1.77, but not available for python2; install it after biopython==1.76
