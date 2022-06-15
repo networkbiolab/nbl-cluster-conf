@@ -22,12 +22,13 @@ export all_r3_versions=3.5.3 3.4.4 3.3.3 3.2.5 3.1.3 3.0.3
 # use virtual environment for eggnog-mapper because of incompatible seqmagick package
 # use virtual environment for fastai because of incompatible torch package
 # use virtual environment for medaka because many incompatible package versions
+# use local modifications for escher
 # use apt to install pyyaml: python3-yaml
 
 export PYTHON3_PACKAGES=pip wheel numpy cython futures \
 	bcbio-gff biom-format biopython bioservices black bokeh carveme checkm-genome \
 	cobra cogent3 cutadapt dask_jobqueue deblur deeptools distributed dnaplotlib \
-	docopts escher ete3 fastcluster fsspec gprofiler-official gtdbtk hiorco htseq \
+	docopts ete3 fastcluster fsspec gprofiler-official gtdbtk hiorco htseq \
 	htsget humann2 keyrings.alt kneaddata libchebipy louvain macs2 macs3 megalodon \
 	memote meneco menetools micca mpwt ncbi-acc-download ncbi-genome-download \
 	networkx nose odfpy openpyxl pandas pandas-bokeh pillow pubchempy pybedtools \
