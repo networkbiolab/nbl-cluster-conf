@@ -11,12 +11,14 @@ export python2_v=2.7.18
 export all_python2_v=2.6.9
 #2.5.6 2.4.6 2.3.7 2.2.3 2.1.3 2.0.1 too old to download
 
-# latest update ??
-export r4_version=4.1.2
-export all_r4_versions=4.0.5
+# latest update Sept 15th, 2022
+export r4_version=4.2.1
+export all_r4_versions=4.1.3 4.0.5
 export r3_version=3.6.3
 export all_r3_versions=3.5.3 3.4.4 3.3.3 3.2.5 3.1.3 3.0.3
-export perl_v=5.34.0
+
+# latest update Sept 15th, 2022
+export perl_v=5.36.0
 
 # use virtual environment for anndata2ri, scanpy, anvio, symfit, libroadrunner, tensorflow-gpu because of incompatibilities
 # use virtual environment for indra because downgrades pysb
