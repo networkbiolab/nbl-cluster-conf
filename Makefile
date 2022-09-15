@@ -3,18 +3,20 @@ HOST=$(shell hostname)
 
 # edit to change the location of opt directory
 export D1=/
-export r4_version=4.1.2
-export r3_version=3.6.3
-export python3_v=3.10.2
-export python2_v=2.7.18
-export perl_v=5.34.0
-
-export all_python3_v=3.9.10 3.8.12 3.7.12 3.6.15 3.5.10 3.4.10
+# latest update Sept 15th, 2022
+export python3_v=3.11.0
+export all_python3_v=3.10.7 3.9.14 3.8.14 3.7.14 3.6.15 3.5.10 3.4.10
 #3.3.7 3.2.6 3.1.5 3.0.1 too old to download
+export python2_v=2.7.18
 export all_python2_v=2.6.9
-#2.5.4 2.4.4 2.3.5 2.2.3 2.1.3 2.0.1 too old to download
+#2.5.6 2.4.6 2.3.7 2.2.3 2.1.3 2.0.1 too old to download
+
+# latest update ??
+export r4_version=4.1.2
 export all_r4_versions=4.0.5
+export r3_version=3.6.3
 export all_r3_versions=3.5.3 3.4.4 3.3.3 3.2.5 3.1.3 3.0.3
+export perl_v=5.34.0
 
 # use virtual environment for anndata2ri, scanpy, anvio, symfit, libroadrunner, tensorflow-gpu because of incompatibilities
 # use virtual environment for indra because downgrades pysb
@@ -485,7 +487,7 @@ define compile_python
 	cd $$D1/opt/Python-$(1)
 	#if [ -f Makefile ]; then make clean; fi
 	if [ -d $$D1/opt/python-$(1) ]; then rm -rf $$D1/opt/python-$(1); fi
-	./configure --prefix=$$D1/opt/python-$(1) --with-ensurepip=install
+	./configure --prefix=$$D1/opt/python-$(1) --with-ensurepip=install --with-pymalloc
 	make
 	make install
 	rm -rf $$D1/opt/Python-$(1)
