@@ -133,7 +133,7 @@ apt-install:
 		gnome-themes-standard gnome-tweak-tool golang-go gparted gperf gradle gzip \
 		hddtemp help2man hhsuite hisat2 hmmer htop hwloc idba infernal inkscape intltool \
 		iqtree jq julia junit kallisto kate kmc kompare kraken lammps lftp \
-		libapache2-mod-php7.4 libargtable2-dev libatlas-base-dev libbam-dev libblas-dev \
+		libapache2-mod-php8.1 libargtable2-dev libatlas-base-dev libbam-dev libblas-dev \
 		libboost-all-dev libcanberra-gtk3-module libcanberra-gtk-module libcereal-dev \
 		libcerf-dev libdist-zilla-perl libdivsufsort-dev libdrm-dev libeigen3-dev \
 		libfast5-dev libfile-slurp-perl libfreeipmi-dev libgdal-dev libgd-dev \
@@ -155,9 +155,9 @@ apt-install:
 		nfs-kernel-server nmap nnn numactl qtbase5-dev \
 		ocamlbuild opam konsole libcloudproviders-dev \
 		openjdk-11-jdk-headless openjdk-8-jdk openjdk-8-jre openssh-server pandoc \
-		parallel pdfshuffler pdsh php7.4 php7.4-cli php7.4-common php7.4-curl php7.4-gd \
-		php7.4-gmp php7.4-intl php7.4-mbstring php7.4-mysql php7.4-xml php7.4-xmlrpc \
-		php7.4-zip postfix prodigal prottest python3-opencv python3-pip python3-tk \
+		parallel pdfshuffler pdsh php8.1 php8.1-cli php8.1-common php8.1-curl php8.1-gd \
+		php8.1-gmp php8.1-intl php8.1-mbstring php8.1-mysql php8.1-xml php8.1-xmlrpc \
+		php8.1-zip postfix prodigal prottest python3-opencv python3-pip python3-tk \
 		python3-venv python-pip-whl python-tk rar r-base rbenv readseq rename \
 		repeatmasker-recon rrdtool rubber ruby2.7 ruby2.7-dev ruby2.7-doc ruby-bundler ruby-railties \
 		salmon samtools sbmltoolbox seqtk smartmontools smem snap snap-aligner \
@@ -169,7 +169,7 @@ apt-install:
 		nethogs hostapd cwltool apt-rdepends lefse hashdeep libharfbuzz-dev libfribidi-dev libcurl4-openssl-dev"
 
 	PYTHON3_DEPS="python3-pip python3-tk python3-h5py build-essential \
-		checkinstall libssl-dev zlib1g-dev libncurses5-dev \
+		checkinstall libssl-dev zlib1g-dev libncurses5-dev libffi-dev \
 		libncursesw5-dev libreadline-dev libsqlite3-dev libgdbm-dev \
 		libdb5.3-dev libbz2-dev libexpat1-dev liblzma-dev tk-dev uuid-dev"
 
@@ -181,27 +181,29 @@ apt-install:
 
 	for apt in $$APTS; do
 		printf "\\n %s\\n" "Installing $${apt}";
-		apt-get -y install $$apt; done
+		NEEDRESTART_MODE=a apt-get -y install $$apt --reinstall; done
 	for apt in $$PYTHON3_DEPS; do
 		printf "\\n %s\\n" "Installing $${apt}";
-		apt-get -y install $$apt; done
+		NEEDRESTART_MODE=a apt-get -y install $$apt; done
 	for apt in $$R_DEPS; do
 		printf "\\n %s\\n" "Installing $${apt}";
-		apt-get -y install $$apt; done
+		NEEDRESTART_MODE=a apt-get -y install $$apt; done
 
 	apt-get -y remove xul-ext-ubufox gedit
 # 	apt-get -y autoremove
 # 	apt-get -y autoclean
 # 	apt-get -y clean
 
-	systemctl --user mask tracker-writeback.service
-	systemctl --user mask tracker-store.service
-	systemctl --user mask tracker-miner-fs.service
-	systemctl --user mask tracker-extract.service
-	tracker reset --hard
-
 	systemctl stop cups-browsed
 	systemctl disable cups-browsed
+
+deactivate-tracker:
+	systemctl --user mask tracker-writeback-3.service
+	systemctl --user mask tracker-store.service
+	systemctl --user mask tracker-miner-fs.service
+	systemctl --user mask tracker-extract-3.service
+	tracker3 reset --filesystem --rss
+	tracker3 daemon --terminate
 
 apt-install-latex:
 	apt-get -y install texstudio texlive-full
@@ -622,15 +624,23 @@ slurm-conf:
 	chown -R slurm:slurm /var/run/slurm-llnl/
 	chown -R slurm:slurm /var/log/slurm-llnl/
 
+.ONESHELL:
+check-slurm-munge:
 	systemctl restart munge
 	service munge status
 
+.ONESHELL:
+check-slurm-slurmdbd:
 	systemctl restart slurmdbd
 	service slurmdbd status
 
+.ONESHELL:
+check-slurm-slurmd:
 	systemctl restart slurmd
 	service slurmd status
 
+.ONESHELL:
+check-slurm-slurmctld:
 	systemctl restart slurmctld
 	service slurmctld status
 
