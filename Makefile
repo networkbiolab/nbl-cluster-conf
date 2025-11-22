@@ -485,10 +485,10 @@ local-install-jupyter-packages:
 define compile_python
 	mkdir -p $$D1/opt/ubuntu-software
 
-	wget https://www.python.org/ftp/python/$(1)/Python-$(1).tgz -O $$D1/opt/ubuntu-software/Python-$(1).tgz
+	wget https://www.python.org/ftp/python/$(1)/Python-$(1)$(2).tgz -O $$D1/opt/ubuntu-software/Python-$(1).tgz
 	if [ -d $$D1/opt/Python-$(1) ]; then rm -rf $$D1/opt/Python-$(1); fi
 	tar xvzf $$D1/opt/ubuntu-software/Python-$(1).tgz -C $$D1/opt
-	cd $$D1/opt/Python-$(1)
+	cd $$D1/opt/Python-$(1)$(2)
 	#if [ -f Makefile ]; then make clean; fi
 	if [ -d $$D1/opt/python-$(1) ]; then rm -rf $$D1/opt/python-$(1); fi
 	./configure --prefix=$$D1/opt/python-$(1) --with-ensurepip=install --with-pymalloc
@@ -500,7 +500,7 @@ endef
 .ONESHELL:
 compile-python:
 	echo "Example: export version=3.6.12 && make compile-python"
-	$(call compile_python,$(version))
+	$(call compile_python,$(version),$(alpha))
 
 .ONESHELL:
 compile-latest-python2:
@@ -528,7 +528,7 @@ all-compile-python3:
 define compile_r
 	mkdir -p $$D1/opt/ubuntu-software
 
-	wget https://cran.r-project.org/src/base/$(1)/R-$(2).tar.gz -O $$D1/opt/ubuntu-software/R-$(2).tgz
+	wget https://cran.r-project.org/src/base/$(1)-4/R-$(2).tar.gz -O $$D1/opt/ubuntu-software/R-$(2).tgz
 	if [ -d $$D1/opt/R-$(2) ]; then rm -rf $$D1/opt/R-$(2); fi
 	tar xvzf $$D1/opt/ubuntu-software/R-$(2).tgz -C $$D1/opt
 	cd $$D1/opt/R-$(2)
@@ -608,6 +608,7 @@ slurm-conf:
 	rm -rf /var/lib/slurm-llnl /var/run/slurm-llnl /var/log/slurm-llnl
 
 	mkdir -p /var/spool/slurmd
+	mkdir -p /var/spool/slurmctld
 	mkdir -p /var/lib/slurm-llnl
 	mkdir -p /var/lib/slurm-llnl/slurmd
 	mkdir -p /var/lib/slurm-llnl/slurmctld
@@ -615,11 +616,13 @@ slurm-conf:
 	mkdir -p /var/log/slurm-llnl
 
 	chmod -R 755 /var/spool/slurmd
+	chmod -R 755 /var/spool/slurmctld
 	chmod -R 755 /var/lib/slurm-llnl/
 	chmod -R 755 /var/run/slurm-llnl/
 	chmod -R 755 /var/log/slurm-llnl/
 
 	chown -R slurm:slurm /var/spool/slurmd
+	chown -R slurm:slurm /var/spool/slurmctld
 	chown -R slurm:slurm /var/lib/slurm-llnl/
 	chown -R slurm:slurm /var/run/slurm-llnl/
 	chown -R slurm:slurm /var/log/slurm-llnl/
